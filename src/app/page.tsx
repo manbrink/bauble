@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Home() {
   const imageUrl = process.env.SPLASH_IMAGE_URL;
 
@@ -36,15 +38,15 @@ export default function Home() {
                 Bauble
               </h1>
               <p className="mt-4 text-center text-xl opacity-85">
-                Magic the Gathering deck builder.
+                Minimalist Magic the Gathering deck builder.
               </p>
               <div className="mt-8 flex justify-center">
-                <a
-                  href="#"
+                <Link
+                  href="decks/new"
                   className="font-bold py-2 px-4 rounded underline opacity-80 hover:opacity-100 transition-opacity duration-1000"
                 >
                   Try it
-                </a>
+                </Link>
               </div>
             </div>
           </main>
@@ -58,11 +60,11 @@ export default function Home() {
             Bauble LLC is not affiliated with, endorsed, sponsored, or
             specifically approved by Wizards of the Coast LLC. Bauble LLC may
             use the trademarks and other intellectual property of Wizards of the
-            Coast LLC, which is permitted under Wizards' Fan Content Policy.
-            MAGIC: THE GATHERING® is a trademark of Wizards of the Coast. For
-            more information about Wizards of the Coast or any of Wizards'
-            trademarks or other intellectual property, please visit their
-            website at https://company.wizards.com/.
+            Coast LLC, which is permitted under Wizards&apos; Fan Content
+            Policy. MAGIC: THE GATHERING® is a trademark of Wizards of the
+            Coast. For more information about Wizards of the Coast or any of
+            Wizards&apos; trademarks or other intellectual property, please
+            visit their website at https://company.wizards.com/.
             <br />© 2023 Bauble LLC - Terms of Service - Privacy Policy
           </p>
         </footer>

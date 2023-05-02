@@ -5,7 +5,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Bauble",
-  description: "Magic the Gathering deck builder.",
+  description: "Minimalist Magic the Gathering deck builder.",
 };
 
 export default function RootLayout({
