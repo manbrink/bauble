@@ -1,6 +1,5 @@
 export default function Home() {
-  const imageUrl =
-    "https://cards.scryfall.io/art_crop/front/4/5/45bbbf9b-8fee-4c32-a513-02dac6ac8a39.jpg?1669300401";
+  const imageUrl = process.env.SPLASH_IMAGE_URL;
 
   return (
     <>
@@ -50,6 +49,23 @@ export default function Home() {
             </div>
           </main>
         </div>
+        <footer className="absolute bottom-0 left-0 w-full px-8 py-4 bg-opacity-75">
+          <p className="text-xs text-gray-600 text-center">
+            Wizards of the Coast, Magic: The Gathering, and their logos are
+            trademarks of Wizards of the Coast LLC in the United States and
+            other countries. © 1993-2023 Wizards. All Rights Reserved.
+            <br />
+            Bauble LLC is not affiliated with, endorsed, sponsored, or
+            specifically approved by Wizards of the Coast LLC. Bauble LLC may
+            use the trademarks and other intellectual property of Wizards of the
+            Coast LLC, which is permitted under Wizards' Fan Content Policy.
+            MAGIC: THE GATHERING® is a trademark of Wizards of the Coast. For
+            more information about Wizards of the Coast or any of Wizards'
+            trademarks or other intellectual property, please visit their
+            website at https://company.wizards.com/.
+            <br />© 2023 Bauble LLC - Terms of Service - Privacy Policy
+          </p>
+        </footer>
       </div>
     </>
   );
