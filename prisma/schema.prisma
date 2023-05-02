@@ -11,42 +11,43 @@ datasource db {
 }
 
 model Deck {
-  id          Int        @id @default(autoincrement())
-  name        String
-  description String
-  primarySorting String
+  id               Int           @id @default(autoincrement())
+  name             String
+  description      String
+  primarySorting   String
   secondarySorting String
-
-  featuredCard  Card?      @relation("FeaturedCard", fields: [featuredCardId], references: [id])
-  featuredCardId Int?      @unique
-
-  deckCards   DeckCard[]
+  deckCards        DeckCard[]
+  featuredCard     FeaturedCard?
 }
 
 model Card {
-  id          Int        @id @default(autoincrement())
-  name        String
-  manaCost    String
-  cmc         Int
-  typeLine    String
-  oracleText  String?
-  colors      String[]
-  scryfallId String     @unique
+  id                Int           @id @default(autoincrement())
+  name              String
+  manaCost          String?
+  cmc               Int?
+  typeLine          String?
+  flavorText        String?
+  colors            String[]
+  scryfallId        String        @unique
   scryfallBorderCropUrl String?
   scryfallArtCropUrl String?
-
-  featuredIn  Deck?      @relation("FeaturedCard")
-
-  deckCards   DeckCard[]
+  deckCards         DeckCard[]
+  featuredInDecks   FeaturedCard[]
 }
 
 model DeckCard {
   deckId   Int
   cardId   Int
   quantity Int
-
   deck     Deck   @relation(fields: [deckId], references: [id])
   card     Card   @relation(fields: [cardId], references: [id])
+  @@id([deckId, cardId])
+}
 
+model FeaturedCard {
+  deckId Int @unique
+  cardId Int
+  deck   Deck @relation(fields: [deckId], references: [id])
+  card   Card @relation(fields: [cardId], references: [id])
   @@id([deckId, cardId])
 }

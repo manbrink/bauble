@@ -33,9 +33,11 @@ const DeckForm = () => {
             id="format"
             className="w-full px-3 py-2 border border-gray-300 rounded"
           >
-            <option value="invasion">Invasion</option>
-            <option value="odyssey">Odyssey</option>
-            <option value="apocalypse">Apocalypse</option>
+            <option value="invasion">Commander (EDH)</option>
+            <option value="odyssey">Legacy</option>
+            <option value="apocalypse">Modern</option>
+            <option value="apocalypse">Standard</option>
+            <option value="apocalypse">Casual</option>
           </select>
         </div>
 

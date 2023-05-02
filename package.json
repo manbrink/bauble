@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "importCards": "ts-node scripts/importCards.ts"
+    "importCards": "node scripts/importCards.js"
   },
   "dependencies": {
     "@prisma/client": "^4.13.0",
