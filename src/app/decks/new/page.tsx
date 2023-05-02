@@ -1,8 +1,11 @@
 const DeckForm = () => {
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-2xl mb-4">Deck Information</h1>
-      <form>
+    <div className="container mx-auto px-4 py-8 flex justify-center">
+      <form className="w-full max-w-lg">
+        <h1 className="text-2xl mb-4">Deck Information</h1>
+        <h1 className="text-1xl mb-4 opacity-80">
+          Enter some basic deck information.
+        </h1>
         <div className="mb-4">
           <label htmlFor="name" className="block text-sm mb-2">
             Name
@@ -80,7 +83,10 @@ const DeckForm = () => {
           />
         </div>
 
-        <button type="submit" className="text-white px-4 py-2 rounded">
+        <button
+          type="submit"
+          className="text-white bg-gray-700 px-4 py-2 rounded opacity-70"
+        >
           Create
         </button>
       </form>
