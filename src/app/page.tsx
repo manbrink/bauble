@@ -1,7 +1,7 @@
 import Link from "next/link";
 import NavBar from "./components/navBar";
 
-export default function Home() {
+export default function HomePage() {
   const imageUrl = process.env.SPLASH_IMAGE_URL;
 
   return (
