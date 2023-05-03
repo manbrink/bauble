@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
@@ -13,6 +14,8 @@ interface Card {
 }
 
 const DeckForm = () => {
+  const router = useRouter();
+
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -32,8 +35,28 @@ const DeckForm = () => {
       primarySorting: Yup.string().required("Required"),
       secondarySorting: Yup.string().required("Required"),
     }),
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: async (values) => {
+      try {
+        const response = await fetch("/api/decks/new", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ ...values }),
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to submit form data");
+        }
+
+        const responseData = await response.json();
+
+        router.push("/decks");
+
+        console.log("Form submitted successfully:", responseData);
+      } catch (error) {
+        console.error("Error submitting form:", error);
+      }
     },
   });
 
