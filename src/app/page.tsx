@@ -1,4 +1,5 @@
 import Link from "next/link";
+import NavBar from "./components/navBar";
 
 export default function Home() {
   const imageUrl = process.env.SPLASH_IMAGE_URL;
@@ -14,24 +15,7 @@ export default function Home() {
         <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-black to-transparent"></div>
         <div className="absolute inset-0 bg-black bg-opacity-50"></div>
         <div className="relative">
-          <nav className="p-4">
-            <div className="container mx-auto px-4">
-              <div className="flex justify-end items-center space-x-4">
-                <a
-                  href="#"
-                  className="text-white font-bold py-2 px-4 rounded opacity-80 hover:opacity-100 transition-opacity duration-1000"
-                >
-                  Register
-                </a>
-                <a
-                  href="#"
-                  className="text-white font-bold py-2 px-4 rounded opacity-80 hover:opacity-100 transition-opacity duration-1000"
-                >
-                  Log in
-                </a>
-              </div>
-            </div>
-          </nav>
+          <NavBar />
           <main className="flex flex-col items-center justify-between max-h-screen p-24">
             <div>
               <h1 className="text-white text-6xl font-bold text-center opacity-85">
