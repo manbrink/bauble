@@ -67,7 +67,7 @@ const CardSearchInput = ({ handleCardChange }: Props) => {
       <input
         type="text"
         id="featured-card"
-        className="text-gray-700 w-full px-3 py-2 border border-gray-300 rounded"
+        className="text-gray-dark w-full px-3 py-2 border border-gray-300 rounded"
         value={searchTerm}
         onChange={(e) => {
           setSearchTerm(e.target.value);

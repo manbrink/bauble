@@ -68,18 +68,18 @@ const DeckForm = () => {
   return (
     <div className="container mx-auto px-4 py-8 flex justify-center">
       <form className="w-full max-w-lg" onSubmit={formik.handleSubmit}>
-        <h1 className="text-gray-300 text-2xl mb-4">Deck Information</h1>
-        <h1 className="text-gray-300 text-1xl mb-4 opacity-80">
+        <h1 className="text-white text-2xl mb-4">Deck Information</h1>
+        <h1 className="text-white text-1xl mb-4 opacity-80">
           Enter some general deck information.
         </h1>
         <div className="mb-4">
-          <label htmlFor="name" className="text-gray-300 block text-sm mb-2">
+          <label htmlFor="name" className="text-white block text-sm mb-2">
             Name
           </label>
           <input
             type="text"
             id="name"
-            className="text-gray-700 bg-gray-300 w-full px-3 py-2 border border-gray-300 rounded"
+            className="text-gray-dark bg-white w-full px-3 py-2 border border-white rounded"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.name}
@@ -89,7 +89,7 @@ const DeckForm = () => {
         <div className="mb-4">
           <label
             htmlFor="featured-card"
-            className="text-gray-300 block text-sm mb-2"
+            className="text-white block text-sm mb-2"
           >
             Featured Card
           </label>
@@ -99,14 +99,14 @@ const DeckForm = () => {
         <div className="mb-4">
           <label
             htmlFor="description"
-            className="text-gray-300 block text-sm mb-2"
+            className="text-white block text-sm mb-2"
           >
             Description
           </label>
           <textarea
             id="description"
             rows={4}
-            className="text-gray-700 bg-gray-300 w-full px-3 py-2 border border-gray-300 rounded"
+            className="text-gray-dark bg-white w-full px-3 py-2 border border-white rounded"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.description}
@@ -114,12 +114,12 @@ const DeckForm = () => {
         </div>
 
         <div className="mb-4">
-          <label htmlFor="format" className="text-gray-300 block text-sm mb-2">
+          <label htmlFor="format" className="text-white block text-sm mb-2">
             Format
           </label>
           <select
             id="format"
-            className="text-gray-700 bg-gray-300 w-full px-3 py-2 border border-gray-300 rounded"
+            className="text-gray-dark bg-white w-full px-3 py-2 border border-white rounded"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.format}
@@ -143,13 +143,13 @@ const DeckForm = () => {
         <div className="mb-4">
           <label
             htmlFor="primary-sorting"
-            className="text-gray-300 block text-sm mb-2"
+            className="text-white block text-sm mb-2"
           >
             Default Primary Sorting
           </label>
           <select
             id="primary-sorting"
-            className="text-gray-700 bg-gray-300 w-full px-3 py-2 border border-gray-300 rounded"
+            className="text-gray-dark bg-white w-full px-3 py-2 border border-white rounded"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.primarySorting}
@@ -163,13 +163,13 @@ const DeckForm = () => {
         <div className="mb-4">
           <label
             htmlFor="secondary-sorting"
-            className="text-gray-300 block text-sm mb-2"
+            className="text-white block text-sm mb-2"
           >
             Default Secondary Sorting
           </label>
           <select
             id="secondary-sorting"
-            className="text-gray-700 bg-gray-300 w-full px-3 py-2 border border-gray-300 rounded"
+            className="text-gray-dark bg-white w-full px-3 py-2 border border-white rounded"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.secondarySorting}

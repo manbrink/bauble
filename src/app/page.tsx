@@ -12,20 +12,20 @@ export default function Home() {
         }}
       >
         <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-black to-transparent"></div>
-        <div className="absolute inset-0 bg-black bg-opacity-60"></div>
+        <div className="absolute inset-0 bg-black bg-opacity-50"></div>
         <div className="relative">
           <nav className="p-4">
             <div className="container mx-auto">
               <div className="flex justify-end space-x-4">
                 <a
                   href="#"
-                  className="text-gray-300 font-bold py-2 px-4 rounded opacity-80 hover:opacity-100 transition-opacity duration-1000"
+                  className="text-white font-bold py-2 px-4 rounded opacity-80 hover:opacity-100 transition-opacity duration-1000"
                 >
                   Register
                 </a>
                 <a
                   href="#"
-                  className="text-gray-300 font-bold py-2 px-4 rounded opacity-80 hover:opacity-100 transition-opacity duration-1000"
+                  className="text-white font-bold py-2 px-4 rounded opacity-80 hover:opacity-100 transition-opacity duration-1000"
                 >
                   Log in
                 </a>
@@ -34,16 +34,16 @@ export default function Home() {
           </nav>
           <main className="flex flex-col items-center justify-between max-h-screen p-24">
             <div>
-              <h1 className="text-gray-300 text-6xl font-bold text-center opacity-85">
+              <h1 className="text-white text-6xl font-bold text-center opacity-85">
                 Bauble
               </h1>
-              <p className="text-gray-300 mt-4 text-center text-xl opacity-85">
+              <p className="text-white mt-4 text-center text-xl opacity-85">
                 Minimalist Magic the Gathering deck builder.
               </p>
               <div className="mt-8 flex justify-center">
                 <Link
                   href="decks/new"
-                  className="text-gray-300 font-bold py-2 px-4 rounded underline opacity-80 hover:opacity-100 transition-opacity duration-1000"
+                  className="text-white font-bold py-2 px-4 rounded underline opacity-80 hover:opacity-100 transition-opacity duration-1000"
                 >
                   Try it
                 </Link>
@@ -52,7 +52,7 @@ export default function Home() {
           </main>
         </div>
         <footer className="absolute bottom-0 left-0 w-full px-8 py-4 bg-opacity-75">
-          <p className="text-xs text-gray-600 text-center">
+          <p className="text-xs text-white text-center opacity-40">
             Wizards of the Coast, Magic: The Gathering, and their logos are
             trademarks of Wizards of the Coast LLC in the United States and
             other countries. © 1993-2023 Wizards. All Rights Reserved.

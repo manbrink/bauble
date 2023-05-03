@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 
 export default function DeckBuilder() {
@@ -31,13 +33,13 @@ export default function DeckBuilder() {
               <div className="flex space-x-4">
                 <a
                   href="#"
-                  className="text-gray-300 font-bold py-2 px-4 rounded opacity-80 hover:opacity-100 transition-opacity duration-1000"
+                  className="text-white font-bold py-2 px-4 rounded opacity-80 hover:opacity-100 transition-opacity duration-1000"
                 >
                   Register
                 </a>
                 <a
                   href="#"
-                  className="text-gray-300 font-bold py-2 px-4 rounded opacity-80 hover:opacity-100 transition-opacity duration-1000"
+                  className="text-white font-bold py-2 px-4 rounded opacity-80 hover:opacity-100 transition-opacity duration-1000"
                 >
                   Log in
                 </a>
