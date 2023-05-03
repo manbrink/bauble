@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import withQueryClientProvider from "../components/withQueryClientProvider";
 
 import Image from "next/image";
+import Link from "next/link";
 
 interface DeckListProps {
   search: string;
@@ -72,26 +73,28 @@ const DeckList = ({ search }: DeckListProps) => {
         <div className="grid grid-cols-4 gap-1">
           {data.data.map((deck: Deck) => (
             <div key={deck.id} className="p-4">
-              <div className="bg-white rounded shadow-lg">
-                <div className="relative" style={{ height: "250px" }}>
-                  <div className="absolute inset-0">
-                    <Image
-                      src={deck.featuredCard.card.scryfallArtCropUrl}
-                      alt={deck.name}
-                      fill={true}
-                      style={{ objectFit: "cover" }}
-                      sizes="(max-width: 105px) 100vw, (max-width: 105px) 50vw, 33vw"
-                      className="rounded"
-                    />
+              <Link href={`/decks/${deck.id}`}>
+                <div className="bg-white rounded shadow-lg">
+                  <div className="relative" style={{ height: "250px" }}>
+                    <div className="absolute inset-0">
+                      <Image
+                        src={deck.featuredCard.card.scryfallArtCropUrl}
+                        alt={deck.name}
+                        fill={true}
+                        style={{ objectFit: "cover" }}
+                        sizes="(max-width: 105px) 100vw, (max-width: 105px) 50vw, 33vw"
+                        className="rounded-t"
+                      />
+                    </div>
+                  </div>
+                  <div className="p-4">
+                    <h2 className="text-l text-gray-dark">{deck.name}</h2>
+                    <p className="text-sm text-gray-dark opacity-70">
+                      {formatMap[deck.format as keyof typeof formatMap]}
+                    </p>
                   </div>
                 </div>
-                <div className="p-4">
-                  <h2 className="text-xl font-bold">{deck.name}</h2>
-                  <p className="text-sm text-gray-500">
-                    {formatMap[deck.format as keyof typeof formatMap]}
-                  </p>
-                </div>
-              </div>
+              </Link>
             </div>
           ))}
         </div>
