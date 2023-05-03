@@ -25,3 +25,27 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+/* CardSearchInput.css */
+.card-search-input {
+  position: relative;
+}
+
+.card-search-results {
+  position: absolute;
+  z-index: 100;
+  background: white;
+  border: 1px solid #ccc;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.card-search-result {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.card-search-result:hover {
+  background: #f5f5f5;
+}

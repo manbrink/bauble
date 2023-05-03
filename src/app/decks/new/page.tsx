@@ -1,3 +1,5 @@
+import CardSearchInput from "@/app/components/cardSearchInput";
+
 const DeckForm = () => {
   return (
     <div className="container mx-auto px-4 py-8 flex justify-center">
@@ -76,11 +78,7 @@ const DeckForm = () => {
           <label htmlFor="featured-card" className="block text-sm mb-2">
             Featured Card
           </label>
-          <input
-            type="text"
-            id="featured-card"
-            className="w-full px-3 py-2 border border-gray-300 rounded"
-          />
+          <CardSearchInput />
         </div>
 
         <button
