@@ -1,6 +1,37 @@
+"use client";
+
+import { useFormik } from "formik";
+import * as Yup from "yup";
+
 import CardSearchInput from "@/app/components/cardSearchInput";
 
+const handleFeaturedCardChange = (event: any) => {};
+
 const DeckForm = () => {
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      featuredCard: "",
+      featuredCardId: "",
+      description: "",
+      format: "",
+      primarySorting: "",
+      secondarySorting: "converted-cost",
+    },
+    validationSchema: Yup.object({
+      name: Yup.string().required("Required"),
+      featuredCard: Yup.string().required("Required"),
+      featuredCardId: Yup.string(),
+      description: Yup.string(),
+      format: Yup.string().required("Required"),
+      primarySorting: Yup.string().required("Required"),
+      secondarySorting: Yup.string().required("Required"),
+    }),
+    onSubmit: (values) => {
+      console.log(values);
+    },
+  });
+
   return (
     <div className="container mx-auto px-4 py-8 flex justify-center">
       <form className="w-full max-w-lg">
@@ -16,6 +47,9 @@ const DeckForm = () => {
             type="text"
             id="name"
             className="text-gray-700 w-full px-3 py-2 border border-gray-300 rounded"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.name}
           />
         </div>
 
@@ -34,6 +68,9 @@ const DeckForm = () => {
             id="description"
             rows={4}
             className="text-gray-700 w-full px-3 py-2 border border-gray-300 rounded"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.description}
           ></textarea>
         </div>
 
@@ -44,12 +81,23 @@ const DeckForm = () => {
           <select
             id="format"
             className="text-gray-700 w-full px-3 py-2 border border-gray-300 rounded"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.format}
           >
-            <option value="invasion">Commander (EDH)</option>
-            <option value="odyssey">Legacy</option>
-            <option value="apocalypse">Modern</option>
-            <option value="apocalypse">Standard</option>
-            <option value="apocalypse">Casual</option>
+            <option value="" disabled>
+              -- select a format --
+            </option>
+            <option value="commander">Commander (EDH)</option>
+            <option value="duel-commander">Duel Commander</option>
+            <option value="vintage">Vintage</option>
+            <option value="legacy">Legacy</option>
+            <option value="modern">Modern</option>
+            <option value="pre-modern">Pre-Modern</option>
+            <option value="pioneer">Pioneer</option>
+            <option value="standard">Standard</option>
+            <option value="pauper">Pauper</option>
+            <option value="casual">Casual</option>
           </select>
         </div>
 
@@ -60,6 +108,9 @@ const DeckForm = () => {
           <select
             id="primary-sorting"
             className="text-gray-700 w-full px-3 py-2 border border-gray-300 rounded"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.primarySorting}
           >
             <option value="type">Type</option>
             <option value="color">Color</option>
@@ -74,6 +125,9 @@ const DeckForm = () => {
           <select
             id="secondary-sorting"
             className="text-gray-700 w-full px-3 py-2 border border-gray-300 rounded"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.secondarySorting}
           >
             <option value="type">Type</option>
             <option value="color">Color</option>
@@ -83,7 +137,7 @@ const DeckForm = () => {
 
         <button
           type="submit"
-          className="text-white bg-gray-700 px-4 py-2 rounded opacity-70"
+          className="text-white bg-gray-600 px-4 py-2 rounded opacity-80"
         >
           Create
         </button>

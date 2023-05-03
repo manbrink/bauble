@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import withQueryClientProvider from "./withQueryClientProvider";
 
@@ -35,12 +35,27 @@ async function getData(searchTerm: string) {
 
 const CardSearchInput = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [internalSearchTerm, setInternalSearchTerm] = useState("");
+  const [showResults, setShowResults] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setInternalSearchTerm(searchTerm);
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, [searchTerm]);
 
   const { isLoading, isError, data } = useQuery({
-    queryKey: ["cards", searchTerm],
-    queryFn: () => getData(searchTerm),
-    enabled: searchTerm !== "",
+    queryKey: ["cards", internalSearchTerm],
+    queryFn: () => getData(internalSearchTerm),
+    enabled: internalSearchTerm !== "",
   });
+
+  const handleCardClick = (card: Card) => {
+    setSearchTerm(`${card.name}, ${card.setName}`);
+    setShowResults(false);
+  };
 
   return (
     <div className="relative">
@@ -49,15 +64,19 @@ const CardSearchInput = () => {
         id="featured-card"
         className="text-gray-700 w-full px-3 py-2 border border-gray-300 rounded"
         value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
+        onChange={(e) => {
+          setSearchTerm(e.target.value);
+          setShowResults(true);
+        }}
         placeholder="Search for cards"
       />
-      {data && (
+      {data && showResults && (
         <div className="absolute z-10 bg-gray-600 w-full max-h-[500px] overflow-y-auto">
           {data.data.map((card: Card) => (
             <div
               key={card.id}
               className="p-2 cursor-pointer flex items-center hover:bg-gray-700 transition-colors duration-800"
+              onClick={() => handleCardClick(card)}
             >
               <div className="relative w-[105px] h-[140px] overflow-hidden">
                 <Image
