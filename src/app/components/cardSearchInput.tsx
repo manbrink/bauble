@@ -67,7 +67,7 @@ const CardSearchInput = ({ handleCardChange }: Props) => {
       <input
         type="text"
         id="featured-card"
-        className="text-gray-dark w-full px-3 py-2 border border-gray-300 rounded"
+        className="text-gray-dark w-full px-3 py-2 border border-white rounded"
         value={searchTerm}
         onChange={(e) => {
           setSearchTerm(e.target.value);
@@ -76,11 +76,11 @@ const CardSearchInput = ({ handleCardChange }: Props) => {
         placeholder="Search for cards"
       />
       {data && showResults && (
-        <div className="absolute z-10 bg-gray-600 w-full max-h-[500px] overflow-y-auto">
+        <div className="absolute z-10 bg-white w-full max-h-[500px] overflow-y-auto">
           {data.data.map((card: Card) => (
             <div
               key={card.id}
-              className="p-2 cursor-pointer flex items-center hover:bg-gray-700 transition-colors duration-800"
+              className="p-2 cursor-pointer flex items-center hover:bg-gray-medium transition-colors duration-800"
               onClick={() => handleCardClick(card)}
             >
               <div className="relative w-[105px] h-[140px] overflow-hidden">

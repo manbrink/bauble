@@ -4,26 +4,33 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import withQueryClientProvider from "../components/withQueryClientProvider";
 
+import Image from "next/image";
+
 interface Deck {
   id: number;
   name: string;
   description: string;
   format: string;
-  featuredCard: string;
+  featuredCard: {
+    card: {
+      scryfallArtCropUrl: string;
+    };
+  };
 }
 
 async function getData(searchTerm: string) {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/decks/${encodeURIComponent(
-      searchTerm
-    )}`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
+  let url = `${process.env.NEXT_PUBLIC_API_URL}/api/decks`;
+
+  if (searchTerm) {
+    url += `/${encodeURIComponent(searchTerm)}`;
+  }
+
+  const res = await fetch(url, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 
   if (!res.ok) {
     throw new Error(res.statusText);
@@ -38,21 +45,17 @@ const Decks = () => {
   const { isLoading, isError, data } = useQuery({
     queryKey: ["decks", search],
     queryFn: () => getData(search),
-    enabled: search !== "",
+    retry: 5,
   });
-
-  if (data) {
-    console.log(data);
-  }
 
   return (
     <>
       <div className="absolute inset-x-0 bottom-0 h-48"></div>
       <div className="relative">
         <nav className="p-4">
-          <div className="container mx-auto">
+          <div className="container mx-auto px-4">
             <div className="flex justify-between items-center">
-              <div className="relative w-full max-w-md mx-auto">
+              <div className="relative w-full max-w-md">
                 <input
                   type="text"
                   className="w-full bg-neutral-dark text-white border-b border-white pl-10 py-2 pr-4 focus:outline-none"
@@ -92,7 +95,34 @@ const Decks = () => {
           </div>
         </nav>
 
-        <main className="flex flex-col items-center justify-between max-h-screen p-24"></main>
+        <main className="container mx-auto">
+          {data && (
+            <div className="flex flex-wrap">
+              {data.data.map((deck: Deck) => (
+                <div key={deck.id} className="w-1/4 p-4">
+                  <div className="bg-white rounded shadow-lg">
+                    <div className="relative" style={{ height: "250px" }}>
+                      <div className="absolute inset-0">
+                        <Image
+                          src={deck.featuredCard.card.scryfallArtCropUrl}
+                          alt={deck.name}
+                          fill={true}
+                          style={{ objectFit: "cover" }}
+                          sizes="(max-width: 105px) 100vw, (max-width: 105px) 50vw, 33vw"
+                          className="rounded"
+                        />
+                      </div>
+                    </div>
+                    <div className="p-4">
+                      <h2 className="text-xl font-bold">{deck.name}</h2>
+                      <p className="text-sm text-gray-500">{deck.format}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </main>
       </div>
     </>
   );

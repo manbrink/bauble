@@ -3,24 +3,9 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-export async function GET(
-  request: Request,
-  {
-    params,
-  }: {
-    params: { searchTerm: string };
-  }
-) {
+export async function GET(request: Request) {
   try {
-    const searchTerm = params.searchTerm;
-
-    const data = await prisma.deck.findMany({
-      where: {
-        name: {
-          contains: searchTerm,
-          mode: "insensitive",
-        },
-      },
+    const findManyOptions = {
       select: {
         id: true,
         name: true,
@@ -36,7 +21,9 @@ export async function GET(
           },
         },
       },
-    });
+    };
+
+    const data = await prisma.deck.findMany(findManyOptions);
 
     return NextResponse.json({ data });
   } catch (error) {
