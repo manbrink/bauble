@@ -16,10 +16,20 @@ export async function GET(
 
     const data = await prisma.deck.findMany({
       where: {
-        name: {
-          contains: searchTerm,
-          mode: "insensitive",
-        },
+        OR: [
+          {
+            name: {
+              contains: searchTerm,
+              mode: "insensitive",
+            },
+          },
+          {
+            format: {
+              contains: searchTerm,
+              mode: "insensitive",
+            },
+          },
+        ],
       },
       select: {
         id: true,

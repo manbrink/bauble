@@ -128,7 +128,7 @@ const DeckForm = () => {
               -- select a format --
             </option>
             <option value="commander">Commander (EDH)</option>
-            <option value="duel-commander">Duel Commander</option>
+            <option value="duel">Duel Commander</option>
             <option value="vintage">Vintage</option>
             <option value="legacy">Legacy</option>
             <option value="modern">Modern</option>

@@ -18,6 +18,25 @@ interface Deck {
   };
 }
 
+let formatMap = {
+  standard: "Standard",
+  historic: "Historic",
+  pioneer: "Pioneer",
+  modern: "Modern",
+  legacy: "Legacy",
+  vintage: "Vintage",
+  pauper: "Pauper",
+  commander: "Commander (EDH)",
+  brawl: "Brawl",
+  penny: "Penny Dreadful",
+  duel: "Duel Commander",
+  oldschool: "Old School",
+  premodern: "Premodern",
+  frontier: "Frontier",
+  future: "Future",
+  casual: "Casual",
+};
+
 async function getData(searchTerm: string) {
   let url = `${process.env.NEXT_PUBLIC_API_URL}/api/decks`;
 
@@ -115,7 +134,9 @@ const Decks = () => {
                     </div>
                     <div className="p-4">
                       <h2 className="text-xl font-bold">{deck.name}</h2>
-                      <p className="text-sm text-gray-500">{deck.format}</p>
+                      <p className="text-sm text-gray-500">
+                        {formatMap[deck.format as keyof typeof formatMap]}
+                      </p>
                     </div>
                   </div>
                 </div>
