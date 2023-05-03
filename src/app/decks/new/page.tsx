@@ -5,7 +5,12 @@ import * as Yup from "yup";
 
 import CardSearchInput from "@/app/components/cardSearchInput";
 
-const handleFeaturedCardChange = (event: any) => {};
+interface Card {
+  id: string;
+  name: string;
+  setName: string;
+  scryfallBorderCropUrl: string;
+}
 
 const DeckForm = () => {
   const formik = useFormik({
@@ -15,7 +20,7 @@ const DeckForm = () => {
       featuredCardId: "",
       description: "",
       format: "",
-      primarySorting: "",
+      primarySorting: "type",
       secondarySorting: "converted-cost",
     },
     validationSchema: Yup.object({
@@ -32,9 +37,14 @@ const DeckForm = () => {
     },
   });
 
+  const handleFeaturedCardChange = (card: Card) => {
+    formik.setFieldValue("featuredCard", `${card.name} (${card.setName})`);
+    formik.setFieldValue("featuredCardId", card.id);
+  };
+
   return (
     <div className="container mx-auto px-4 py-8 flex justify-center">
-      <form className="w-full max-w-lg">
+      <form className="w-full max-w-lg" onSubmit={formik.handleSubmit}>
         <h1 className="text-2xl mb-4">Deck Information</h1>
         <h1 className="text-1xl mb-4 opacity-80">
           Enter some general deck information.
@@ -57,7 +67,7 @@ const DeckForm = () => {
           <label htmlFor="featured-card" className="block text-sm mb-2">
             Featured Card
           </label>
-          <CardSearchInput />
+          <CardSearchInput handleCardChange={handleFeaturedCardChange} />
         </div>
 
         <div className="mb-4">

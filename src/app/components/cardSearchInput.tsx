@@ -13,6 +13,10 @@ interface Card {
   scryfallBorderCropUrl: string;
 }
 
+interface Props {
+  handleCardChange: (card: Card) => void;
+}
+
 async function getData(searchTerm: string) {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/cards/${encodeURIComponent(
@@ -33,7 +37,7 @@ async function getData(searchTerm: string) {
   return res.json();
 }
 
-const CardSearchInput = () => {
+const CardSearchInput = ({ handleCardChange }: Props) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [internalSearchTerm, setInternalSearchTerm] = useState("");
   const [showResults, setShowResults] = useState(false);
@@ -53,8 +57,9 @@ const CardSearchInput = () => {
   });
 
   const handleCardClick = (card: Card) => {
-    setSearchTerm(`${card.name}, ${card.setName}`);
+    setSearchTerm(`${card.name} (${card.setName})`);
     setShowResults(false);
+    handleCardChange(card);
   };
 
   return (
