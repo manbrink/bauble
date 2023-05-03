@@ -6,7 +6,7 @@ const DeckForm = () => {
       <form className="w-full max-w-lg">
         <h1 className="text-2xl mb-4">Deck Information</h1>
         <h1 className="text-1xl mb-4 opacity-80">
-          Enter some basic deck information.
+          Enter some general deck information.
         </h1>
         <div className="mb-4">
           <label htmlFor="name" className="block text-sm mb-2">

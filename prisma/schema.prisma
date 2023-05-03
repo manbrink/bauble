@@ -23,6 +23,7 @@ model Deck {
 model Card {
   id                Int           @id @default(autoincrement())
   name              String
+  setName           String
   manaCost          String?
   cmc               Int?
   typeLine          String?

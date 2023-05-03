@@ -9,6 +9,7 @@ import Image from "next/image";
 interface Card {
   id: string;
   name: string;
+  setName: string;
   scryfallBorderCropUrl: string;
 }
 
@@ -68,7 +69,9 @@ const CardSearchInput = () => {
                   width={60}
                 />
               </div>
-              <div className="card-name ml-2">{card.name}</div>
+              <div className="card-name ml-2">
+                {card.name}, {card.setName}
+              </div>
             </div>
           ))}
         </div>
