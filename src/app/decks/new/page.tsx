@@ -15,7 +15,7 @@ const DeckForm = () => {
           <input
             type="text"
             id="name"
-            className="w-full px-3 py-2 border border-gray-300 rounded"
+            className="text-gray-700 w-full px-3 py-2 border border-gray-300 rounded"
           />
         </div>
 
@@ -26,7 +26,7 @@ const DeckForm = () => {
           <textarea
             id="description"
             rows={4}
-            className="w-full px-3 py-2 border border-gray-300 rounded"
+            className="text-gray-700 w-full px-3 py-2 border border-gray-300 rounded"
           ></textarea>
         </div>
 
@@ -36,7 +36,7 @@ const DeckForm = () => {
           </label>
           <select
             id="format"
-            className="w-full px-3 py-2 border border-gray-300 rounded"
+            className="text-gray-700 w-full px-3 py-2 border border-gray-300 rounded"
           >
             <option value="invasion">Commander (EDH)</option>
             <option value="odyssey">Legacy</option>
@@ -52,7 +52,7 @@ const DeckForm = () => {
           </label>
           <select
             id="primary-sorting"
-            className="w-full px-3 py-2 border border-gray-300 rounded"
+            className="text-gray-700 w-full px-3 py-2 border border-gray-300 rounded"
           >
             <option value="type">Type</option>
             <option value="color">Color</option>
@@ -66,7 +66,7 @@ const DeckForm = () => {
           </label>
           <select
             id="secondary-sorting"
-            className="w-full px-3 py-2 border border-gray-300 rounded"
+            className="text-gray-700 w-full px-3 py-2 border border-gray-300 rounded"
           >
             <option value="type">Type</option>
             <option value="color">Color</option>
