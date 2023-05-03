@@ -19,13 +19,13 @@ export default function Home() {
               <div className="flex justify-end space-x-4">
                 <a
                   href="#"
-                  className="font-bold py-2 px-4 rounded opacity-80 hover:opacity-100 transition-opacity duration-1000"
+                  className="text-gray-300 font-bold py-2 px-4 rounded opacity-80 hover:opacity-100 transition-opacity duration-1000"
                 >
                   Register
                 </a>
                 <a
                   href="#"
-                  className="font-bold py-2 px-4 rounded opacity-80 hover:opacity-100 transition-opacity duration-1000"
+                  className="text-gray-300 font-bold py-2 px-4 rounded opacity-80 hover:opacity-100 transition-opacity duration-1000"
                 >
                   Log in
                 </a>
@@ -34,16 +34,16 @@ export default function Home() {
           </nav>
           <main className="flex flex-col items-center justify-between max-h-screen p-24">
             <div>
-              <h1 className="text-6xl font-bold text-center opacity-85">
+              <h1 className="text-gray-300 text-6xl font-bold text-center opacity-85">
                 Bauble
               </h1>
-              <p className="mt-4 text-center text-xl opacity-85">
+              <p className="text-gray-300 mt-4 text-center text-xl opacity-85">
                 Minimalist Magic the Gathering deck builder.
               </p>
               <div className="mt-8 flex justify-center">
                 <Link
                   href="decks/new"
-                  className="font-bold py-2 px-4 rounded underline opacity-80 hover:opacity-100 transition-opacity duration-1000"
+                  className="text-gray-300 font-bold py-2 px-4 rounded underline opacity-80 hover:opacity-100 transition-opacity duration-1000"
                 >
                   Try it
                 </Link>
