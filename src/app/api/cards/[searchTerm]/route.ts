@@ -14,8 +14,6 @@ export async function GET(
   try {
     const searchTerm = params.searchTerm;
 
-    console.log("searchTerm", searchTerm);
-
     const data = await prisma.card.findMany({
       where: {
         name: {

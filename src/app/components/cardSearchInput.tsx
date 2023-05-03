@@ -42,10 +42,6 @@ const CardSearchInput = () => {
     enabled: searchTerm !== "",
   });
 
-  if (data) {
-    console.log(data);
-  }
-
   return (
     <div className="relative">
       <input
@@ -57,23 +53,23 @@ const CardSearchInput = () => {
         placeholder="Search for cards"
       />
       {data && (
-        <div className="absolute z-10 bg-gray-400 w-full max-h-[500px] overflow-y-auto">
+        <div className="absolute z-10 bg-gray-600 w-full max-h-[500px] overflow-y-auto">
           {data.data.map((card: Card) => (
             <div
               key={card.id}
-              className="p-2 cursor-pointer flex items-center hover:bg-black"
+              className="p-2 cursor-pointer flex items-center hover:bg-gray-700 transition-colors duration-800"
             >
-              <div className="image-container">
+              <div className="relative w-[105px] h-[140px] overflow-hidden">
                 <Image
                   src={card.scryfallBorderCropUrl}
                   alt={card.name}
-                  height={80}
-                  width={60}
+                  fill={true}
+                  sizes="(max-width: 105px) 100vw, (max-width: 105px) 50vw, 33vw"
                 />
               </div>
               <div className="ml-2">
                 <div>{card.name}</div>
-                <div className="text-sm text-gray-700">{card.setName}</div>
+                <div className="text-sm opacity-70">{card.setName}</div>
               </div>
             </div>
           ))}
