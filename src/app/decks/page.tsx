@@ -1,8 +1,50 @@
 "use client";
 
-import Link from "next/link";
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import withQueryClientProvider from "../components/withQueryClientProvider";
 
-export default function DeckBuilder() {
+interface Deck {
+  id: number;
+  name: string;
+  description: string;
+  format: string;
+  featuredCard: string;
+}
+
+async function getData(searchTerm: string) {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/decks/${encodeURIComponent(
+      searchTerm
+    )}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+
+  if (!res.ok) {
+    throw new Error(res.statusText);
+  }
+
+  return res.json();
+}
+
+const Decks = () => {
+  const [search, setSearch] = useState("");
+
+  const { isLoading, isError, data } = useQuery({
+    queryKey: ["decks", search],
+    queryFn: () => getData(search),
+    enabled: search !== "",
+  });
+
+  if (data) {
+    console.log(data);
+  }
+
   return (
     <>
       <div className="absolute inset-x-0 bottom-0 h-48"></div>
@@ -13,12 +55,14 @@ export default function DeckBuilder() {
               <div className="relative w-full max-w-md mx-auto">
                 <input
                   type="text"
-                  className="w-full bg-gray-300 text-gray-600 border border-gray-600 rounded pl-10 py-2 pr-4 focus:outline-none focus:border-blue-500"
+                  className="w-full bg-neutral-dark text-white border-b border-white pl-10 py-2 pr-4 focus:outline-none"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
                 />
-                <span className="absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-500">
+                <span className="absolute top-1/2 left-3 transform -translate-y-1/2">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5"
+                    className="h-5 w-5 text-white"
                     viewBox="0 0 20 20"
                     fill="currentColor"
                   >
@@ -52,4 +96,6 @@ export default function DeckBuilder() {
       </div>
     </>
   );
-}
+};
+
+export default withQueryClientProvider(Decks);
