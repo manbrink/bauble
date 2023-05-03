@@ -20,6 +20,13 @@ const DeckForm = () => {
         </div>
 
         <div className="mb-4">
+          <label htmlFor="featured-card" className="block text-sm mb-2">
+            Featured Card
+          </label>
+          <CardSearchInput />
+        </div>
+
+        <div className="mb-4">
           <label htmlFor="description" className="block text-sm mb-2">
             Description
           </label>
@@ -72,13 +79,6 @@ const DeckForm = () => {
             <option value="color">Color</option>
             <option value="converted-cost">Converted Cost</option>
           </select>
-        </div>
-
-        <div className="mb-4">
-          <label htmlFor="featured-card" className="block text-sm mb-2">
-            Featured Card
-          </label>
-          <CardSearchInput />
         </div>
 
         <button

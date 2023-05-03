@@ -44,7 +44,7 @@ const CardSearchInput = () => {
   // if (data) console.log(data);
 
   return (
-    <div className="card-search-input">
+    <div className="relative">
       <input
         type="text"
         id="featured-card"
@@ -54,15 +54,18 @@ const CardSearchInput = () => {
         placeholder="Search for cards"
       />
       {data && (
-        <div className="card-search-results">
+        <div className="absolute z-10 bg-slate-700 w-full max-h-[500px] overflow-y-auto">
           {data.data.map((card: Card) => (
-            <div key={card.id} className="card-search-result flex items-center">
+            <div
+              key={card.id}
+              className="p-2 cursor-pointer flex items-center hover:bg-black"
+            >
               <div className="image-container">
                 <Image
                   src={card.scryfallBorderCropUrl}
                   alt={card.name}
-                  height={70}
-                  width={50}
+                  height={80}
+                  width={60}
                 />
               </div>
               <div className="card-name ml-2">{card.name}</div>
