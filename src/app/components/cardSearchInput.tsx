@@ -42,7 +42,9 @@ const CardSearchInput = () => {
     enabled: searchTerm !== "",
   });
 
-  // if (data) console.log(data);
+  if (data) {
+    console.log(data);
+  }
 
   return (
     <div className="relative">
@@ -55,7 +57,7 @@ const CardSearchInput = () => {
         placeholder="Search for cards"
       />
       {data && (
-        <div className="absolute z-10 bg-slate-700 w-full max-h-[500px] overflow-y-auto">
+        <div className="absolute z-10 bg-gray-400 w-full max-h-[500px] overflow-y-auto">
           {data.data.map((card: Card) => (
             <div
               key={card.id}
@@ -69,8 +71,9 @@ const CardSearchInput = () => {
                   width={60}
                 />
               </div>
-              <div className="card-name ml-2">
-                {card.name}, {card.setName}
+              <div className="ml-2">
+                <div>{card.name}</div>
+                <div className="text-sm text-gray-700">{card.setName}</div>
               </div>
             </div>
           ))}

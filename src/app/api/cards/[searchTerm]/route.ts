@@ -26,6 +26,7 @@ export async function GET(
       select: {
         id: true,
         name: true,
+        setName: true,
         scryfallBorderCropUrl: true,
       },
       take: 10,

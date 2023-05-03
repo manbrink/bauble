@@ -19,8 +19,8 @@ function extractCardData(cardObj) {
     flavorText: cardObj.flavor_text || null,
     colors: cardObj.colors,
     scryfallId: cardObj.id,
-    scryfallBorderCropUrl: cardObj.image_uris?.border_crop || null,
-    scryfallArtCropUrl: cardObj.image_uris?.art_crop || null,
+    scryfallBorderCropUrl: cardObj.image_uris?.border_crop,
+    scryfallArtCropUrl: cardObj.image_uris?.art_crop,
   };
 }
 
@@ -33,16 +33,20 @@ async function importCards() {
     await prisma.card.deleteMany(); // Delete all existing cards
 
     const cardObjects = await readJsonFile(path.join(__dirname, "cards.json"));
+    let numCards = cardObjects.length;
     let counter = 0;
 
     for (const cardObj of cardObjects) {
-      const cardData = extractCardData(cardObj);
-
-      await saveCard(cardData);
       counter++;
 
-      if (counter % 1000 === 0) {
-        console.log(`Imported ${counter} of ${cardObjects.length} cards.`);
+      if (cardObj.image_uris?.border_crop && cardObj.image_uris?.art_crop) {
+        const cardData = extractCardData(cardObj);
+
+        await saveCard(cardData);
+
+        if (counter % 1000 === 0) {
+          console.log(`Imported ${counter} of ${numCards} cards.`);
+        }
       }
     }
 
