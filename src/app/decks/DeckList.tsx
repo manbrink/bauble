@@ -77,9 +77,9 @@ const DeckList = ({ search }: DeckListProps) => {
                       <Image
                         src={deck.featuredCardScryfallArtCropUrl}
                         alt={deck.name}
+                        sizes="(max-width: 1000px) 100vw, (max-width: 1000px) 50vw, 33vw"
                         fill={true}
                         style={{ objectFit: "cover" }}
-                        sizes="(max-width: 105px) 100vw, (max-width: 105px) 50vw, 33vw"
                         className="rounded-t"
                       />
                     </div>

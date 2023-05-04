@@ -79,6 +79,7 @@ export default async function DeckDetail({
             fill={true}
             style={{ objectFit: "cover", objectPosition: "top" }}
             className="rounded-t"
+            priority={true}
           />
           <div className="absolute inset-x-0 bottom-0 h-96 bg-gradient-to-r from-neutral-darkest to-transparent"></div>
         </div>
