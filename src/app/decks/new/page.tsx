@@ -6,14 +6,6 @@ import * as Yup from "yup";
 
 import CardSearchInput from "@/app/components/cardSearchInput";
 
-interface Card {
-  id: string;
-  name: string;
-  setName: string;
-  scryfallBorderCropUrl: string;
-  scryfallArtCropUrl: string;
-}
-
 const DeckForm = () => {
   const router = useRouter();
 
@@ -31,14 +23,12 @@ const DeckForm = () => {
       name: Yup.string().required("Required"),
       featuredCard: Yup.string().required("Required"),
       featuredCardScryfallArtCropUrl: Yup.string().required("Required"),
-      description: Yup.string(),
+      description: Yup.string().length(1000, "Must be 1000 characters or less"),
       format: Yup.string().required("Required"),
       primarySorting: Yup.string().required("Required"),
       secondarySorting: Yup.string().required("Required"),
     }),
     onSubmit: async (values) => {
-      console.log(values);
-
       try {
         const response = await fetch("/api/decks/new", {
           method: "POST",
@@ -63,14 +53,6 @@ const DeckForm = () => {
     },
   });
 
-  const handleFeaturedCardChange = (card: Card) => {
-    formik.setFieldValue("featuredCard", `${card.name} (${card.setName})`);
-    formik.setFieldValue(
-      "featuredCardScryfallArtCropUrl",
-      card.scryfallArtCropUrl
-    );
-  };
-
   return (
     <div className="container mx-auto px-4 py-8 flex justify-center">
       <form className="w-full max-w-lg" onSubmit={formik.handleSubmit}>
@@ -90,6 +72,9 @@ const DeckForm = () => {
             onBlur={formik.handleBlur}
             value={formik.values.name}
           />
+          {formik.touched.name && formik.errors.name ? (
+            <div className="text-red">{formik.errors.name}</div>
+          ) : null}
         </div>
 
         <div className="mb-4">
@@ -99,7 +84,7 @@ const DeckForm = () => {
           >
             Featured Card
           </label>
-          <CardSearchInput handleCardChange={handleFeaturedCardChange} />
+          <CardSearchInput formik={formik} />
         </div>
 
         <div className="mb-4">
@@ -117,6 +102,9 @@ const DeckForm = () => {
             onBlur={formik.handleBlur}
             value={formik.values.description}
           ></textarea>
+          {formik.touched.description && formik.errors.description ? (
+            <div className="text-red">{formik.errors.description}</div>
+          ) : null}
         </div>
 
         <div className="mb-4">

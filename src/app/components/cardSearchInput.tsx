@@ -15,7 +15,7 @@ interface Card {
 }
 
 interface Props {
-  handleCardChange: (card: Card) => void;
+  formik: any;
 }
 
 async function getData(searchTerm: string) {
@@ -39,18 +39,17 @@ async function getData(searchTerm: string) {
   return res.json();
 }
 
-const CardSearchInput = ({ handleCardChange }: Props) => {
-  const [searchTerm, setSearchTerm] = useState("");
+const CardSearchInput = ({ formik }: Props) => {
   const [internalSearchTerm, setInternalSearchTerm] = useState("");
   const [showResults, setShowResults] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setInternalSearchTerm(searchTerm);
+      setInternalSearchTerm(formik.values.featuredCard);
     }, 300);
 
     return () => clearTimeout(timer);
-  }, [searchTerm]);
+  }, [formik.values.featuredCard]);
 
   const { isLoading, isError, data } = useQuery({
     queryKey: ["cards", internalSearchTerm],
@@ -59,24 +58,35 @@ const CardSearchInput = ({ handleCardChange }: Props) => {
   });
 
   const handleCardClick = (card: Card) => {
-    setSearchTerm(`${card.name} (${card.setName})`);
+    formik.setFieldValue("featuredCard", `${card.name} (${card.setName})`);
+
+    formik.setFieldValue(
+      "featuredCardScryfallArtCropUrl",
+      card.scryfallArtCropUrl
+    );
+
     setShowResults(false);
-    handleCardChange(card);
   };
 
   return (
     <div className="relative">
       <input
         type="text"
-        id="featured-card"
+        id="featuredCard"
+        name="featuredCard"
         className="text-gray-dark w-full px-3 py-2 border border-white rounded"
-        value={searchTerm}
+        value={formik.values.featuredCard}
         onChange={(e) => {
-          setSearchTerm(e.target.value);
           setShowResults(true);
+          formik.handleChange(e);
         }}
+        onBlur={formik.handleBlur}
         placeholder="Search for cards"
       />
+      {formik.touched.featuredCard && formik.errors.featuredCard ? (
+        <div className="text-red">{formik.errors.featuredCard}</div>
+      ) : null}
+
       {data && showResults && (
         <div className="absolute z-10 bg-white w-full max-h-[500px] overflow-y-auto">
           {data.data.map((card: Card) => (
