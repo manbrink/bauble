@@ -28,6 +28,7 @@ async function getData(searchTerm: string) {
       headers: {
         "Content-Type": "application/json",
       },
+      cache: "no-store",
     }
   );
 

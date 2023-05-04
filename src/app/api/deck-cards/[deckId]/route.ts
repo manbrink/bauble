@@ -14,22 +14,29 @@ export async function GET(
   try {
     const deckId = params.deckId;
 
-    const deckData = await prisma.deck.findMany({
+    const cardData = await prisma.deckCard.findMany({
       where: {
-        id: Number(deckId),
+        deckId: Number(deckId),
       },
       select: {
-        id: true,
-        name: true,
-        description: true,
-        format: true,
-        primarySorting: true,
-        secondarySorting: true,
-        featuredCardScryfallArtCropUrl: true,
+        quantity: true,
+        card: {
+          select: {
+            name: true,
+            setName: true,
+            manaCost: true,
+            cmc: true,
+            typeLine: true,
+            flavorText: true,
+            colors: true,
+            scryfallBorderCropUrl: true,
+            scryfallArtCropUrl: true,
+          },
+        },
       },
     });
 
-    return NextResponse.json(deckData);
+    return NextResponse.json(cardData);
   } catch (error) {
     console.log(error);
 

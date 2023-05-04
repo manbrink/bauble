@@ -28,5 +28,7 @@ export async function POST(request: Request) {
         details: error ? error.message : "",
       })
     );
+  } finally {
+    await prisma.$disconnect();
   }
 }

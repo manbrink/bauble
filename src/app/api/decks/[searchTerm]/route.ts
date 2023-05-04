@@ -45,5 +45,7 @@ export async function GET(
     console.log(error);
 
     return NextResponse.json({ error: error }, { status: 500 });
+  } finally {
+    await prisma.$disconnect();
   }
 }

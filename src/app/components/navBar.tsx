@@ -1,6 +1,6 @@
 export default function NavBar() {
   return (
-    <nav className="p-4">
+    <nav className="absolute top-0 right-0 p-4 z-50">
       <div className="container mx-auto px-4">
         <div className="flex justify-end items-center space-x-4">
           <a

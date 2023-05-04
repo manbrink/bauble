@@ -8,9 +8,38 @@ interface DeckDetailProps {
   };
 }
 
-async function getData(deckId: number) {
+interface Card {
+  quantity: number;
+  card: {
+    name: string;
+    setName: string;
+    manaCost: string;
+    cmc: number;
+    typeLine: string;
+    flavorText: string;
+    colors: string[];
+    scryfallBorderCropUrl: string;
+    scryfallArtCropUrl: string;
+  };
+}
+
+async function getDeckData(deckId: number) {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/decks/detail/${deckId}`
+    `${process.env.NEXT_PUBLIC_API_URL}/api/decks/detail/${deckId}`,
+    { cache: "no-store" }
+  );
+
+  if (!res.ok) {
+    throw new Error(res.statusText);
+  }
+
+  return res.json();
+}
+
+async function getCardData(deckId: number) {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/deck-cards/${deckId}`,
+    { cache: "no-store" }
   );
 
   if (!res.ok) {
@@ -23,35 +52,60 @@ async function getData(deckId: number) {
 export default async function DeckDetail({
   params: { deckId },
 }: DeckDetailProps) {
-  const data = await getData(deckId);
-
-  console.log(data);
+  const deckData = await getDeckData(deckId);
+  const cardData = await getCardData(deckId);
 
   return (
     <>
-      <div className="relative" style={{ height: "400px" }}>
-        <div className="absolute inset-0">
-          <Image
-            src={data && data[0].featuredCardScryfallArtCropUrl}
-            alt={"deck"}
-            fill={true}
-            style={{ objectFit: "cover" }}
-            sizes="(max-width: 105px) 100vw, (max-width: 105px) 50vw, 33vw"
-            className="rounded-t"
-          />
-          <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-black to-transparent"></div>
-        </div>
+      <NavBar />
 
-        <div className="absolute inset-0 bg-black bg-opacity-50"></div>
-        <NavBar />
-        <div className="absolute bottom-0 left-0 grid grid-cols-1 gap-2 p-4 text-white">
-          <div className="text-3xl">{data && data[0].name}</div>
-          <div className="text-2xl opacity-80">{data && data[0].format}</div>
+      <div className="relative bg-black h-96">
+        <div className="absolute left-0 w-1/4 text-white p-4 space-y-2">
+          <div className="text-3xl">{deckData && deckData[0].name}</div>
+          <div className="text-2xl opacity-80">
+            {deckData && deckData[0].format}
+          </div>
           <div className="text-1xl opacity-70">
-            {data && data[0].description}
+            {deckData && deckData[0].description}
           </div>
         </div>
+
+        <div className="absolute right-0 inset-y-0 w-3/4">
+          <Image
+            src={deckData && deckData[0].featuredCardScryfallArtCropUrl}
+            alt={"deck"}
+            fill={true}
+            style={{ objectFit: "cover", objectPosition: "top" }}
+            className="rounded-t"
+          />
+          <div className="absolute inset-x-0 bottom-0 h-96 bg-gradient-to-r from-black to-transparent"></div>
+        </div>
       </div>
+
+      <main className="container mx-auto">
+        {cardData ? (
+          <div className="grid grid-cols-5 gap-1">
+            {cardData.map((card: Card) => (
+              <div key={card.card.name} className="p-4">
+                <div className="relative">
+                  <Image
+                    src={card.card.scryfallBorderCropUrl}
+                    alt={card.card.name}
+                    width={225}
+                    height={300}
+                    className="rounded-t"
+                  />
+                  <div className="absolute top-0 left-0 bg-black text-white px-2 py-1 rounded opacity-70">
+                    {card.quantity}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="text-white text-3xl">No cards found</div>
+        )}
+      </main>
     </>
   );
 }
