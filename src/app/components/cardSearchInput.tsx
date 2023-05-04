@@ -11,6 +11,7 @@ interface Card {
   name: string;
   setName: string;
   scryfallBorderCropUrl: string;
+  scryfallArtCropUrl: string;
 }
 
 interface Props {

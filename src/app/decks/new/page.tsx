@@ -11,6 +11,7 @@ interface Card {
   name: string;
   setName: string;
   scryfallBorderCropUrl: string;
+  scryfallArtCropUrl: string;
 }
 
 const DeckForm = () => {
@@ -20,7 +21,7 @@ const DeckForm = () => {
     initialValues: {
       name: "",
       featuredCard: "",
-      featuredCardId: "",
+      featuredCardScryfallArtCropUrl: "",
       description: "",
       format: "",
       primarySorting: "type",
@@ -29,13 +30,15 @@ const DeckForm = () => {
     validationSchema: Yup.object({
       name: Yup.string().required("Required"),
       featuredCard: Yup.string().required("Required"),
-      featuredCardId: Yup.string(),
+      featuredCardScryfallArtCropUrl: Yup.string().required("Required"),
       description: Yup.string(),
       format: Yup.string().required("Required"),
       primarySorting: Yup.string().required("Required"),
       secondarySorting: Yup.string().required("Required"),
     }),
     onSubmit: async (values) => {
+      console.log(values);
+
       try {
         const response = await fetch("/api/decks/new", {
           method: "POST",
@@ -62,7 +65,10 @@ const DeckForm = () => {
 
   const handleFeaturedCardChange = (card: Card) => {
     formik.setFieldValue("featuredCard", `${card.name} (${card.setName})`);
-    formik.setFieldValue("featuredCardId", card.id);
+    formik.setFieldValue(
+      "featuredCardScryfallArtCropUrl",
+      card.scryfallArtCropUrl
+    );
   };
 
   return (

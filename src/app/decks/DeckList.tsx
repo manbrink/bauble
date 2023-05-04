@@ -13,11 +13,7 @@ interface Deck {
   name: string;
   description: string;
   format: string;
-  featuredCard: {
-    card: {
-      scryfallArtCropUrl: string;
-    };
-  };
+  featuredCardScryfallArtCropUrl: string;
 }
 
 let formatMap = {
@@ -78,7 +74,7 @@ const DeckList = ({ search }: DeckListProps) => {
                   <div className="relative" style={{ height: "250px" }}>
                     <div className="absolute inset-0">
                       <Image
-                        src={deck.featuredCard.card.scryfallArtCropUrl}
+                        src={deck.featuredCardScryfallArtCropUrl}
                         alt={deck.name}
                         fill={true}
                         style={{ objectFit: "cover" }}

@@ -8,30 +8,28 @@ export async function GET(
   {
     params,
   }: {
-    params: { searchTerm: string };
+    params: { deckId: string };
   }
 ) {
   try {
-    const searchTerm = params.searchTerm;
+    const deckId = params.deckId;
 
-    const data = await prisma.card.findMany({
+    const deckData = await prisma.deck.findMany({
       where: {
-        name: {
-          contains: searchTerm,
-          mode: "insensitive",
-        },
+        id: Number(deckId),
       },
       select: {
         id: true,
         name: true,
-        setName: true,
-        scryfallBorderCropUrl: true,
-        scryfallArtCropUrl: true,
+        description: true,
+        format: true,
+        primarySorting: true,
+        secondarySorting: true,
+        featuredCardScryfallArtCropUrl: true,
       },
-      take: 10,
     });
 
-    return NextResponse.json({ data });
+    return NextResponse.json(deckData);
   } catch (error) {
     console.log(error);
 

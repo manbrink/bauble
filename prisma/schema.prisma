@@ -17,8 +17,8 @@ model Deck {
   format           String
   primarySorting   String
   secondarySorting String
+  featuredCardScryfallArtCropUrl String?
   deckCards        DeckCard[]
-  featuredCard     FeaturedCard?
 }
 
 model Card {
@@ -34,7 +34,6 @@ model Card {
   scryfallBorderCropUrl String?
   scryfallArtCropUrl String?
   deckCards         DeckCard[]
-  featuredInDecks   FeaturedCard[]
 }
 
 model DeckCard {
@@ -43,13 +42,5 @@ model DeckCard {
   quantity Int
   deck     Deck   @relation(fields: [deckId], references: [id])
   card     Card   @relation(fields: [cardId], references: [id])
-  @@id([deckId, cardId])
-}
-
-model FeaturedCard {
-  deckId Int @unique
-  cardId Int
-  deck   Deck @relation(fields: [deckId], references: [id])
-  card   Card @relation(fields: [cardId], references: [id])
   @@id([deckId, cardId])
 }

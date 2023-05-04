@@ -36,15 +36,7 @@ export async function GET(
         name: true,
         description: true,
         format: true,
-        featuredCard: {
-          select: {
-            card: {
-              select: {
-                scryfallArtCropUrl: true,
-              },
-            },
-          },
-        },
+        featuredCardScryfallArtCropUrl: true,
       },
     });
 

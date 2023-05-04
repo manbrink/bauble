@@ -14,17 +14,11 @@ export async function POST(request: Request) {
         format: res.format,
         primarySorting: res.primarySorting,
         secondarySorting: res.secondarySorting,
+        featuredCardScryfallArtCropUrl: res.featuredCardScryfallArtCropUrl,
       },
     });
 
-    const featuredCard = await prisma.featuredCard.create({
-      data: {
-        deckId: createdDeck.id,
-        cardId: res.featuredCardId,
-      },
-    });
-
-    return NextResponse.json({ createdDeck, featuredCard });
+    return NextResponse.json({ createdDeck });
   } catch (error: any) {
     console.log(error);
 

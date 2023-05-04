@@ -11,15 +11,7 @@ export async function GET(request: Request) {
         name: true,
         description: true,
         format: true,
-        featuredCard: {
-          select: {
-            card: {
-              select: {
-                scryfallArtCropUrl: true,
-              },
-            },
-          },
-        },
+        featuredCardScryfallArtCropUrl: true,
       },
     };
 
