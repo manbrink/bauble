@@ -25,6 +25,7 @@ module.exports = {
       },
       neutral: {
         dark: "#262626",
+        darkest: "#0A0A0A",
       },
     },
   },
