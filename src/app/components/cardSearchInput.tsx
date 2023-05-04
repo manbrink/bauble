@@ -68,6 +68,12 @@ const CardSearchInput = ({ formik }: Props) => {
     setShowResults(false);
   };
 
+  const handleFeaturedCardChange = (e: any) => {
+    formik.setFieldValue("featuredCardScryfallArtCropUrl", null); // Reset featuredCardScryfallArtCropUrl when featuredCard changes
+    setShowResults(true);
+    formik.handleChange(e);
+  };
+
   return (
     <div className="relative">
       <input
@@ -76,15 +82,18 @@ const CardSearchInput = ({ formik }: Props) => {
         name="featuredCard"
         className="text-gray-dark w-full px-3 py-2 border border-white rounded"
         value={formik.values.featuredCard}
-        onChange={(e) => {
-          setShowResults(true);
-          formik.handleChange(e);
-        }}
+        onChange={handleFeaturedCardChange}
         onBlur={formik.handleBlur}
         placeholder="Search for cards"
       />
       {formik.touched.featuredCard && formik.errors.featuredCard ? (
         <div className="text-red">{formik.errors.featuredCard}</div>
+      ) : null}
+      {formik.touched.featuredCard &&
+      formik.errors.featuredCardScryfallArtCropUrl ? (
+        <div className="text-red">
+          {formik.errors.featuredCardScryfallArtCropUrl}
+        </div>
       ) : null}
 
       {data && showResults && (

@@ -22,7 +22,9 @@ const DeckForm = () => {
     validationSchema: Yup.object({
       name: Yup.string().required("Required"),
       featuredCard: Yup.string().required("Required"),
-      featuredCardScryfallArtCropUrl: Yup.string().required("Required"),
+      featuredCardScryfallArtCropUrl: Yup.string().required(
+        "Please choose a valid card"
+      ),
       description: Yup.string().length(1000, "Must be 1000 characters or less"),
       format: Yup.string().required("Required"),
       primarySorting: Yup.string().required("Required"),
@@ -132,6 +134,9 @@ const DeckForm = () => {
             <option value="pauper">Pauper</option>
             <option value="casual">Casual</option>
           </select>
+          {formik.touched.format && formik.errors.format ? (
+            <div className="text-red">{formik.errors.format}</div>
+          ) : null}
         </div>
 
         <div className="mb-4">
