@@ -18,16 +18,16 @@ export default function HomePage() {
           <NavBar />
           <main className="flex flex-col items-center justify-between max-h-screen p-24">
             <div>
-              <h1 className="text-white text-6xl font-bold text-center opacity-85">
+              <h1 className="text-white-normal text-6xl font-bold text-center opacity-85">
                 Bauble
               </h1>
-              <p className="text-white mt-4 text-center text-xl opacity-85">
+              <p className="text-white-normal mt-4 text-center text-xl opacity-85">
                 Minimalist Magic the Gathering deck builder.
               </p>
               <div className="mt-8 flex justify-center">
                 <Link
                   href="decks/new"
-                  className="text-white font-bold py-2 px-4 rounded underline opacity-80 hover:opacity-100 transition-opacity duration-1000"
+                  className="text-white-normal font-bold py-2 px-4 rounded underline hover:text-white-bright transition-text duration-1000"
                 >
                   Try it
                 </Link>
@@ -36,7 +36,7 @@ export default function HomePage() {
           </main>
         </div>
         <footer className="absolute bottom-0 left-0 w-full px-8 py-4 bg-opacity-75">
-          <p className="text-xs text-white text-center opacity-40">
+          <p className="text-xs text-white-normal text-center opacity-40">
             Wizards of the Coast, Magic: The Gathering, and their logos are
             trademarks of Wizards of the Coast LLC in the United States and
             other countries. © 1993-2023 Wizards. All Rights Reserved.

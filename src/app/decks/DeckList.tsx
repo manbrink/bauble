@@ -71,7 +71,7 @@ const DeckList = ({ search }: DeckListProps) => {
           {data.data.map((deck: Deck) => (
             <div key={deck.id} className="p-4">
               <Link href={`/decks/${deck.id}`}>
-                <div className="bg-white rounded shadow-lg">
+                <div className="bg-white-normal rounded shadow-lg">
                   <div className="relative" style={{ height: "250px" }}>
                     <div className="absolute inset-0">
                       <Image

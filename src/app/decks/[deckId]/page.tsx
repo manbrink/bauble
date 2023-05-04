@@ -60,14 +60,14 @@ export default async function DeckDetail({
       <NavBar />
 
       <div className="relative bg-neutral-darkest h-96">
-        <div className="absolute left-0 w-1/4 text-white p-4 space-y-2">
-          <div className="text-white text-3xl">
+        <div className="absolute left-0 w-1/4 text-white-normal p-4 space-y-2">
+          <div className="text-white-normal text-3xl">
             {deckData && deckData[0].name}
           </div>
-          <div className="text-white text-xl opacity-80">
+          <div className="text-white-normal text-xl opacity-80">
             {deckData && deckData[0].format}
           </div>
-          <div className="text-white text-l opacity-70">
+          <div className="text-white-normal text-l opacity-70">
             {deckData && deckData[0].description}
           </div>
         </div>
@@ -98,7 +98,7 @@ export default async function DeckDetail({
                     height={300}
                     className="rounded-t"
                   />
-                  <div className="absolute top-0 left-0 bg-black text-white px-2 py-1 rounded opacity-70">
+                  <div className="absolute top-0 left-0 bg-black text-white-normal px-2 py-1 rounded opacity-70">
                     {card.quantity}
                   </div>
                 </div>
@@ -106,7 +106,7 @@ export default async function DeckDetail({
             ))}
           </div>
         ) : (
-          <div className="text-white text-3xl">No cards found</div>
+          <div className="text-white-normal text-3xl">No cards found</div>
         )}
       </main>
     </>

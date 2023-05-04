@@ -14,7 +14,10 @@ module.exports = {
       },
     },
     colors: {
-      white: "#d1d5db",
+      white: {
+        normal: "#d1d5db",
+        bright: "#ffffff",
+      },
       black: "#000",
       gray: {
         medium: "#9CA3AF",

@@ -58,18 +58,21 @@ const DeckForm = () => {
   return (
     <div className="container mx-auto px-4 py-8 flex justify-center">
       <form className="w-full max-w-lg" onSubmit={formik.handleSubmit}>
-        <h1 className="text-white text-2xl mb-4">Deck Information</h1>
-        <h1 className="text-white text-1xl mb-4 opacity-80">
+        <h1 className="text-white-normal text-2xl mb-4">Deck Information</h1>
+        <h1 className="text-white-normal text-1xl mb-4 opacity-80">
           Enter some general deck information.
         </h1>
         <div className="mb-4">
-          <label htmlFor="name" className="text-white block text-sm mb-2">
+          <label
+            htmlFor="name"
+            className="text-white-normal block text-sm mb-2"
+          >
             Name
           </label>
           <input
             type="text"
             id="name"
-            className="text-gray-dark bg-white w-full px-3 py-2 border border-white rounded"
+            className="text-gray-dark bg-white-normal w-full px-3 py-2 border border-white rounded"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.name}
@@ -82,7 +85,7 @@ const DeckForm = () => {
         <div className="mb-4">
           <label
             htmlFor="featured-card"
-            className="text-white block text-sm mb-2"
+            className="text-white-normal block text-sm mb-2"
           >
             Featured Card
           </label>
@@ -92,14 +95,14 @@ const DeckForm = () => {
         <div className="mb-4">
           <label
             htmlFor="description"
-            className="text-white block text-sm mb-2"
+            className="text-white-normal block text-sm mb-2"
           >
             Description
           </label>
           <textarea
             id="description"
             rows={4}
-            className="text-gray-dark bg-white w-full px-3 py-2 border border-white rounded"
+            className="text-gray-dark bg-white-normal w-full px-3 py-2 border border-white rounded"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.description}
@@ -110,12 +113,15 @@ const DeckForm = () => {
         </div>
 
         <div className="mb-4">
-          <label htmlFor="format" className="text-white block text-sm mb-2">
+          <label
+            htmlFor="format"
+            className="text-white-normal block text-sm mb-2"
+          >
             Format
           </label>
           <select
             id="format"
-            className="text-gray-dark bg-white w-full px-3 py-2 border border-white rounded"
+            className="text-gray-dark bg-white-normal w-full px-3 py-2 border border-white rounded"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.format}
@@ -142,13 +148,13 @@ const DeckForm = () => {
         <div className="mb-4">
           <label
             htmlFor="primary-sorting"
-            className="text-white block text-sm mb-2"
+            className="text-white-normal block text-sm mb-2"
           >
             Default Primary Sorting
           </label>
           <select
             id="primary-sorting"
-            className="text-gray-dark bg-white w-full px-3 py-2 border border-white rounded"
+            className="text-gray-dark bg-white-normal w-full px-3 py-2 border border-white rounded"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.primarySorting}
@@ -162,13 +168,13 @@ const DeckForm = () => {
         <div className="mb-4">
           <label
             htmlFor="secondary-sorting"
-            className="text-white block text-sm mb-2"
+            className="text-white-normal block text-sm mb-2"
           >
             Default Secondary Sorting
           </label>
           <select
             id="secondary-sorting"
-            className="text-gray-dark bg-white w-full px-3 py-2 border border-white rounded"
+            className="text-gray-dark bg-white-normal w-full px-3 py-2 border border-white rounded"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.secondarySorting}
@@ -181,7 +187,7 @@ const DeckForm = () => {
 
         <button
           type="submit"
-          className="text-white bg-gray-600 px-4 py-2 rounded opacity-80"
+          className="text-white-normal bg-neutral-darkest px-4 py-2 rounded hover:bg-black hover:text-white-bright transition-colors duration-1000"
         >
           Create
         </button>

@@ -5,13 +5,13 @@ export default function NavBar() {
         <div className="flex justify-end items-center space-x-4">
           <a
             href="#"
-            className="text-white font-bold py-2 px-4 rounded opacity-80 hover:opacity-100 transition-opacity duration-1000"
+            className="text-white-normal font-bold py-2 px-4 rounded hover:text-white-bright transition-text duration-1000"
           >
             Register
           </a>
           <a
             href="#"
-            className="text-white font-bold py-2 px-4 rounded opacity-80 hover:opacity-100 transition-opacity duration-1000"
+            className="text-white-normal font-bold py-2 px-4 rounded hover:text-white-bright transition-text duration-1000"
           >
             Log in
           </a>
