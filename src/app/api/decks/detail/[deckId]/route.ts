@@ -23,13 +23,13 @@ export async function GET(
         name: true,
         description: true,
         format: true,
-        primarySorting: true,
-        secondarySorting: true,
+        groupBy: true,
+        sortBy: true,
         featuredCardScryfallArtCropUrl: true,
       },
     });
 
-    return NextResponse.json(deckData);
+    return NextResponse.json(deckData[0]);
   } catch (error) {
     console.log(error);
 

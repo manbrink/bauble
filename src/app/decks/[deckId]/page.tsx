@@ -10,7 +10,7 @@ interface DeckDetailProps {
   };
 }
 
-interface Card {
+interface DeckCard {
   quantity: number;
   card: {
     name: string;
@@ -24,6 +24,12 @@ interface Card {
     scryfallArtCropUrl: string;
   };
 }
+
+const cardTypeMap = {
+  typeLine: "Type",
+  cmc: "Converted Cost",
+  color: "Color",
+};
 
 async function getDeckData(deckId: number) {
   const res = await fetch(
@@ -51,6 +57,58 @@ async function getCardData(deckId: number) {
   return res.json();
 }
 
+const sortCardData = (cardData: DeckCard[], sortBy: string) => {
+  return cardData.sort((a: DeckCard, b: DeckCard) => {
+    if (sortBy === "name") {
+      return a.card.name.localeCompare(b.card.name);
+    } else if (sortBy === "cmc") {
+      return a.card.cmc - b.card.cmc;
+    } else if (sortBy === "type") {
+      return a.card.typeLine.localeCompare(b.card.typeLine);
+    } else if (sortBy === "color") {
+      return a.card.colors.length - b.card.colors.length;
+    } else {
+      return 0;
+    }
+  });
+};
+
+const renderCardStacks = (
+  cardData: DeckCard[],
+  groupBy: string,
+  sortBy: string
+) => {
+  const groupedCardData = cardData.reduce((acc: any, curr: any) => {
+    let key = "";
+
+    if (groupBy === "typeLine") {
+      key = curr.card[groupBy].split(" ")[0];
+    } else {
+      key = curr.card[groupBy];
+    }
+
+    if (!acc[key]) {
+      acc[key] = [];
+    }
+    acc[key].push(curr);
+    return acc;
+  }, {});
+
+  for (const key in groupedCardData) {
+    groupedCardData[key] = sortCardData(groupedCardData[key], sortBy);
+  }
+
+  return (
+    <div className="grid grid-cols-7 gap-1">
+      {Object.keys(groupedCardData).map((key) => {
+        return (
+          <CardStack key={key} cardData={groupedCardData[key]} name={key} />
+        );
+      })}
+    </div>
+  );
+};
+
 export default async function DeckDetail({
   params: { deckId },
 }: DeckDetailProps) {
@@ -60,17 +118,16 @@ export default async function DeckDetail({
   return (
     <>
       <NavBar />
-
       <div className="relative bg-neutral-darkest h-96">
         <div className="absolute left-0 w-1/4 text-white-normal p-4 space-y-2">
           <div className="text-white-normal text-3xl">
-            {deckData && deckData[0].name}
+            {deckData && deckData.name}
           </div>
           <div className="text-white-normal text-xl opacity-80">
-            {deckData && deckData[0].format}
+            {deckData && deckData.format}
           </div>
           <div className="text-white-normal text-l opacity-70">
-            {deckData && deckData[0].description}
+            {deckData && deckData.description}
           </div>
         </div>
 
@@ -85,7 +142,7 @@ export default async function DeckDetail({
 
         <div className="absolute right-0 inset-y-0 w-1/2">
           <Image
-            src={deckData && deckData[0].featuredCardScryfallArtCropUrl}
+            src={deckData && deckData.featuredCardScryfallArtCropUrl}
             alt={"deck"}
             fill={true}
             style={{ objectFit: "cover", objectPosition: "top" }}
@@ -96,7 +153,7 @@ export default async function DeckDetail({
         </div>
       </div>
 
-      <CardStack cardData={cardData} name={"Main"} />
+      {renderCardStacks(cardData, deckData.groupBy, deckData.sortBy)}
     </>
   );
 }

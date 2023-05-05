@@ -12,8 +12,8 @@ export async function POST(request: Request) {
         name: res.name,
         description: res.description,
         format: res.format,
-        primarySorting: res.primarySorting,
-        secondarySorting: res.secondarySorting,
+        groupBy: res.groupBy,
+        sortBy: res.sortBy,
         featuredCardScryfallArtCropUrl: res.featuredCardScryfallArtCropUrl,
       },
     });

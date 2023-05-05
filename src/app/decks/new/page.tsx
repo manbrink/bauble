@@ -16,8 +16,8 @@ const DeckForm = () => {
       featuredCardScryfallArtCropUrl: "",
       description: "",
       format: "",
-      primarySorting: "type",
-      secondarySorting: "converted-cost",
+      groupBy: "typeLine",
+      sortBy: "cmc",
     },
     validationSchema: Yup.object({
       name: Yup.string().required("Required"),
@@ -27,8 +27,8 @@ const DeckForm = () => {
       ),
       description: Yup.string().max(999, "Must be 1000 characters or less"),
       format: Yup.string().required("Required"),
-      primarySorting: Yup.string().required("Required"),
-      secondarySorting: Yup.string().required("Required"),
+      groupBy: Yup.string().required("Required"),
+      sortBy: Yup.string().required("Required"),
     }),
     onSubmit: async (values) => {
       try {
@@ -147,41 +147,41 @@ const DeckForm = () => {
 
         <div className="mb-4">
           <label
-            htmlFor="primary-sorting"
+            htmlFor="group-by"
             className="text-white-normal block text-sm mb-2"
           >
-            Default Primary Sorting
+            Grouping
           </label>
           <select
-            id="primary-sorting"
+            id="group-by"
             className="text-gray-dark bg-white-normal w-full px-3 py-2 border border-white rounded"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            value={formik.values.primarySorting}
+            value={formik.values.groupBy}
           >
-            <option value="type">Type</option>
-            <option value="color">Color</option>
-            <option value="converted-cost">Converted Cost</option>
+            <option value="typeLine">Type</option>
+            <option value="colors">Color</option>
+            <option value="cmc">Converted Cost</option>
           </select>
         </div>
 
         <div className="mb-4">
           <label
-            htmlFor="secondary-sorting"
+            htmlFor="sort-by"
             className="text-white-normal block text-sm mb-2"
           >
-            Default Secondary Sorting
+            Sorting
           </label>
           <select
-            id="secondary-sorting"
+            id="sort-by"
             className="text-gray-dark bg-white-normal w-full px-3 py-2 border border-white rounded"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            value={formik.values.secondarySorting}
+            value={formik.values.sortBy}
           >
-            <option value="type">Type</option>
-            <option value="color">Color</option>
-            <option value="converted-cost">Converted Cost</option>
+            <option value="typeLine">Type</option>
+            <option value="colors">Color</option>
+            <option value="cmc">Converted Cost</option>
           </select>
         </div>
 
