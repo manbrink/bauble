@@ -1,4 +1,5 @@
 import NavBar from "../../components/navBar";
+import CardStack from "./CardStack";
 
 import Image from "next/image";
 
@@ -85,30 +86,7 @@ export default async function DeckDetail({
         </div>
       </div>
 
-      <main className="container mx-auto">
-        {cardData ? (
-          <div className="grid grid-cols-5 gap-1">
-            {cardData.map((card: Card) => (
-              <div key={card.card.name} className="p-4">
-                <div className="relative">
-                  <Image
-                    src={card.card.scryfallBorderCropUrl}
-                    alt={card.card.name}
-                    width={225}
-                    height={300}
-                    className="rounded-t"
-                  />
-                  <div className="absolute top-0 left-0 bg-black text-white-normal px-2 py-1 rounded opacity-70">
-                    {card.quantity}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div className="text-white-normal text-3xl">No cards found</div>
-        )}
-      </main>
+      <CardStack cardData={cardData} />
     </>
   );
 }
