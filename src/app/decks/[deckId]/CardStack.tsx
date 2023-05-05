@@ -3,6 +3,11 @@
 import React, { useState } from "react";
 import Image from "next/image";
 
+interface Props {
+  cardData: Card[];
+  name: string;
+}
+
 interface Card {
   quantity: number;
   card: {
@@ -18,11 +23,18 @@ interface Card {
   };
 }
 
-export default function CardStack({ cardData }: { cardData: Card[] }) {
+export default function CardStack({
+  cardData,
+  name,
+}: {
+  cardData: Card[];
+  name: string;
+}) {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
   return (
-    <main className="container p-4 mx-auto">
+    <main className="container p-4 mx-1">
+      <h1 className="text-white-normal text-xl mb-1">{name}</h1>
       {cardData ? (
         <div className="relative">
           {cardData.map((card: Card, index: number) => (
