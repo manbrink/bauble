@@ -4,6 +4,8 @@ import withQueryClientProvider from "../components/withQueryClientProvider";
 import Image from "next/image";
 import Link from "next/link";
 
+import Button from "../components/Button";
+
 interface DeckListProps {
   search: string;
 }
@@ -29,7 +31,7 @@ let formatMap = {
   penny: "Penny Dreadful",
   duel: "Duel Commander",
   oldschool: "Old School",
-  premodern: "Premodern",
+  premodern: "Pre-Modern",
   frontier: "Frontier",
   future: "Future",
   casual: "Casual",
@@ -66,7 +68,7 @@ const DeckList = ({ search }: DeckListProps) => {
 
   return (
     <main className="container mx-auto">
-      {data && (
+      {(data?.data?.length > 0 && (
         <div className="grid grid-cols-4 gap-1">
           {data.data.map((deck: Deck) => (
             <div key={deck.id} className="p-4">
@@ -94,6 +96,16 @@ const DeckList = ({ search }: DeckListProps) => {
               </Link>
             </div>
           ))}
+        </div>
+      )) || (
+        <div className="text-white-normal flex justify-center items-center h-64">
+          {isLoading && <p>Loading...</p>}
+          {isError && <p>Error loading decks</p>}
+          {!isLoading && !isError && (
+            <Link href={"/decks/new"}>
+              <Button text={"Create a New Deck"} />
+            </Link>
+          )}
         </div>
       )}
     </main>

@@ -25,7 +25,7 @@ const DeckForm = () => {
       featuredCardScryfallArtCropUrl: Yup.string().required(
         "Please choose a valid card"
       ),
-      description: Yup.string().length(1000, "Must be 1000 characters or less"),
+      description: Yup.string().max(999, "Must be 1000 characters or less"),
       format: Yup.string().required("Required"),
       primarySorting: Yup.string().required("Required"),
       secondarySorting: Yup.string().required("Required"),
@@ -134,7 +134,7 @@ const DeckForm = () => {
             <option value="vintage">Vintage</option>
             <option value="legacy">Legacy</option>
             <option value="modern">Modern</option>
-            <option value="pre-modern">Pre-Modern</option>
+            <option value="premodern">Pre-Modern</option>
             <option value="pioneer">Pioneer</option>
             <option value="standard">Standard</option>
             <option value="pauper">Pauper</option>
