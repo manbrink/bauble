@@ -78,11 +78,24 @@ const renderCardStacks = (
   groupBy: string,
   sortBy: string
 ) => {
+  const typeLineCategories = [
+    "Land",
+    "Creature",
+    "Planeswalker",
+    "Instant",
+    "Sorcery",
+    "Enchantment",
+    "Artifact",
+  ];
+
   const groupedCardData = cardData.reduce((acc: any, curr: any) => {
     let key = "";
 
     if (groupBy === "typeLine") {
-      key = curr.card[groupBy].split(" ")[0];
+      key =
+        typeLineCategories.find((category) =>
+          curr.card[groupBy].includes(category)
+        ) || "Other";
     } else {
       key = curr.card[groupBy];
     }
