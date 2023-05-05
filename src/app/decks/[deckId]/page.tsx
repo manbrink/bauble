@@ -1,6 +1,6 @@
 import NavBar from "../../components/navBar";
 import CardStack from "./CardStack";
-import Button from "../../components/Button";
+import DeckActions from "./DeckActions";
 
 import Image from "next/image";
 
@@ -144,14 +144,7 @@ export default async function DeckDetail({
           </div>
         </div>
 
-        <div className="absolute left-0 bottom-0 grid grid-cols-2 p-4">
-          <div className="p-2">
-            <Button text="Add Cards" theme="light" />
-          </div>
-          <div className="p-2">
-            <Button text="Edit" theme="light" />
-          </div>
-        </div>
+        <DeckActions deckId={deckId} />
 
         <div className="absolute right-0 inset-y-0 w-1/2">
           <Image
