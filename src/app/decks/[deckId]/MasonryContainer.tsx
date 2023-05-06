@@ -98,17 +98,21 @@ const renderCardStacks = (
 export default function MasonryContainer({ cardData, groupBy, sortBy }: Props) {
   const breakpointColumnsObj = {
     default: 5,
-    1100: 3,
+    2000: 7,
+    1500: 6,
+    1300: 5,
+    1050: 4,
+    850: 3,
     700: 2,
-    500: 1,
+    450: 1,
   };
 
   return (
-    <main className="container mx-4 h-screen">
+    <main className="mx-4 h-screen">
       <Masonry
         breakpointCols={breakpointColumnsObj}
         className="my-masonry-grid"
-        columnClassName="my-masonry-grid_column"
+        columnClassName=""
       >
         {renderCardStacks(cardData, groupBy, sortBy)}
       </Masonry>
