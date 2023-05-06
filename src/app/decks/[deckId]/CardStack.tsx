@@ -24,6 +24,13 @@ interface Card {
   };
 }
 
+const calculateCardStackHeight = (cardData: Card[]) => {
+  const cardHeight = 275;
+  const cardTopMargin = 30;
+
+  return cardData.length * cardTopMargin + cardHeight;
+};
+
 export default function CardStack({
   cardData,
   name,
@@ -60,7 +67,10 @@ export default function CardStack({
 
       <h1 className="text-white-normal text-xl mb-1">{name}</h1>
       {cardData ? (
-        <div className="relative">
+        <div
+          className="relative"
+          style={{ height: `${calculateCardStackHeight(cardData)}px` }}
+        >
           {cardData.map((card: Card, index: number) => (
             <div
               key={card.card.name}

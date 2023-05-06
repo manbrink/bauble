@@ -25,6 +25,11 @@ interface DeckCard {
   };
 }
 
+interface CardStack {
+  name: string;
+  cardData: DeckCard[];
+}
+
 const sortCardData = (cardData: DeckCard[], sortBy: string) => {
   return cardData.sort((a: DeckCard, b: DeckCard) => {
     if (sortBy === "name") {
@@ -79,7 +84,8 @@ const renderCardStacks = (
     groupedCardData[key] = sortCardData(groupedCardData[key], sortBy);
   }
 
-  let cardStacks = [];
+  let cardStacks: JSX.Element[] = [];
+
   Object.keys(groupedCardData).forEach((key) => {
     cardStacks.push(
       <CardStack key={key} cardData={groupedCardData[key]} name={key} />
