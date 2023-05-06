@@ -27,9 +27,11 @@ interface Card {
 export default function CardStack({
   cardData,
   name,
+  topMarginPx,
 }: {
   cardData: Card[];
   name: string;
+  topMarginPx: number;
 }) {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
@@ -46,7 +48,7 @@ export default function CardStack({
   };
 
   return (
-    <main className="container p-4 mx-1">
+    <main className="container p-4 mx-1" style={{ marginTop: topMarginPx }}>
       {modalOpen && (
         <Modal onClose={closeModal}>
           <Image
