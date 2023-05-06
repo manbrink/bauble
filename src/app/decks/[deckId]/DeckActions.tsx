@@ -7,6 +7,7 @@ import Link from "next/link";
 import { IconContext } from "react-icons";
 import { TbCards } from "react-icons/tb";
 import { BsVectorPen } from "react-icons/bs";
+import { AiOutlinePieChart } from "react-icons/ai";
 
 interface Props {
   deckId: number;
@@ -14,18 +15,25 @@ interface Props {
 
 const DeckActions = ({ deckId }: Props) => {
   return (
-    <IconContext.Provider value={{ size: "1.5em" }}>
-      <div className="absolute left-0 bottom-0 grid grid-cols-2 p-4">
-        <Link href={`/decks/${deckId}/builder`} title="Deck builder">
-          <div className="p-2">
-            <Button text={<TbCards />} theme="none" />
-          </div>
-        </Link>
-        <Link href={`/decks/${deckId}/edit`} title="Edit general information">
-          <div className="p-2">
-            <Button text={<BsVectorPen />} theme="none" />
-          </div>
-        </Link>
+    <IconContext.Provider
+      value={{ size: "1.5em", className: "text-white-normal" }}
+    >
+      <div className="absolute left-0 bottom-0 grid grid-cols-3 p-4">
+        <div className="mr-2 pt-2 pr-2 pb-2">
+          <Link href={`/decks/${deckId}/builder`} title="Deck builder">
+            <TbCards />
+          </Link>
+        </div>
+        <div className="mr-2 pt-2 pr-2 pb-2">
+          <Link href={`/decks/${deckId}/edit`} title="Edit general information">
+            <BsVectorPen />
+          </Link>
+        </div>
+        <div className="mr-2 pt-2 pr-2 pb-2">
+          <Link href={`/decks/${deckId}/stats`} title="View deck statistics">
+            <AiOutlinePieChart />
+          </Link>
+        </div>
       </div>
     </IconContext.Provider>
   );

@@ -112,7 +112,7 @@ const renderCardStacks = (
   }
 
   return (
-    <div className="grid grid-cols-7 gap-1">
+    <div className="grid grid-cols-5 grid-rows-auto gap-1 auto-rows-auto min-h-full">
       {Object.keys(groupedCardData).map((key) => {
         return (
           <CardStack key={key} cardData={groupedCardData[key]} name={key} />
@@ -159,7 +159,9 @@ export default async function DeckDetail({
         </div>
       </div>
 
-      {renderCardStacks(cardData, deckData.groupBy, deckData.sortBy)}
+      <main className="container mx-auto">
+        {renderCardStacks(cardData, deckData.groupBy, deckData.sortBy)}
+      </main>
     </>
   );
 }
