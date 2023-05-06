@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Modal from "./CardModal";
 
@@ -36,22 +36,6 @@ export default function CardStack({
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [modalImageSrc, setModalImageSrc] = useState<string>("");
 
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!containerRef.current) return;
-    const container = containerRef.current;
-    let maxHeight = 0;
-
-    container.childNodes.forEach((child) => {
-      const rect = (child as HTMLElement).getBoundingClientRect();
-      const bottom = rect.top + rect.height;
-      maxHeight = Math.max(maxHeight, bottom);
-    });
-
-    container.style.height = `${maxHeight * 0.8}px`;
-  }, [cardData]);
-
   const openModal = (src: string) => {
     setModalImageSrc(src);
     setModalOpen(true);
@@ -76,7 +60,7 @@ export default function CardStack({
 
       <h1 className="text-white-normal text-xl mb-1">{name}</h1>
       {cardData ? (
-        <div className="relative" ref={containerRef}>
+        <div className="relative">
           {cardData.map((card: Card, index: number) => (
             <div
               key={card.card.name}

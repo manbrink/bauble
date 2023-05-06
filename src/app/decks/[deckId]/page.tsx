@@ -1,6 +1,6 @@
 import NavBar from "../../components/navBar";
-import CardStack from "./CardStack";
 import DeckActions from "./DeckActions";
+import MasonryContainer from "./MasonryContainer";
 
 import Image from "next/image";
 
@@ -9,27 +9,6 @@ interface DeckDetailProps {
     deckId: number;
   };
 }
-
-interface DeckCard {
-  quantity: number;
-  card: {
-    name: string;
-    setName: string;
-    manaCost: string;
-    cmc: number;
-    typeLine: string;
-    flavorText: string;
-    colors: string[];
-    scryfallBorderCropUrl: string;
-    scryfallArtCropUrl: string;
-  };
-}
-
-const cardTypeMap = {
-  typeLine: "Type",
-  cmc: "Converted Cost",
-  color: "Color",
-};
 
 async function getDeckData(deckId: number) {
   const res = await fetch(
@@ -56,77 +35,6 @@ async function getCardData(deckId: number) {
 
   return res.json();
 }
-
-const sortCardData = (cardData: DeckCard[], sortBy: string) => {
-  return cardData.sort((a: DeckCard, b: DeckCard) => {
-    if (sortBy === "name") {
-      return a.card.name.localeCompare(b.card.name);
-    } else if (sortBy === "cmc") {
-      return a.card.cmc - b.card.cmc;
-    } else if (sortBy === "type") {
-      return a.card.typeLine.localeCompare(b.card.typeLine);
-    } else if (sortBy === "color") {
-      return a.card.colors.length - b.card.colors.length;
-    } else {
-      return 0;
-    }
-  });
-};
-
-const renderCardStacks = (
-  cardData: DeckCard[],
-  groupBy: string,
-  sortBy: string
-) => {
-  const typeLineCategories = [
-    "Land",
-    "Creature",
-    "Planeswalker",
-    "Instant",
-    "Sorcery",
-    "Enchantment",
-    "Artifact",
-  ];
-
-  const groupedCardData = cardData.reduce((acc: any, curr: any) => {
-    let key = "";
-
-    if (groupBy === "typeLine") {
-      key =
-        typeLineCategories.find((category) =>
-          curr.card[groupBy].includes(category)
-        ) || "Other";
-    } else {
-      key = curr.card[groupBy];
-    }
-
-    if (!acc[key]) {
-      acc[key] = [];
-    }
-    acc[key].push(curr);
-    return acc;
-  }, {});
-
-  for (const key in groupedCardData) {
-    groupedCardData[key] = sortCardData(groupedCardData[key], sortBy);
-  }
-
-  return (
-    <div className="flex flex-wrap">
-      {Object.keys(groupedCardData).map((key, index) => {
-        const topMarginPx =
-          index >= 5
-            ? groupedCardData[Object.keys(groupedCardData)[index - 5]].length *
-                30 +
-              300
-            : 0;
-        return (
-          <CardStack key={key} cardData={groupedCardData[key]} name={key} />
-        );
-      })}
-    </div>
-  );
-};
 
 export default async function DeckDetail({
   params: { deckId },
@@ -165,9 +73,13 @@ export default async function DeckDetail({
         </div>
       </div>
 
-      <main className="container mx-auto">
-        {renderCardStacks(cardData, deckData.groupBy, deckData.sortBy)}
-      </main>
+      {cardData && (
+        <MasonryContainer
+          cardData={cardData}
+          groupBy={deckData.groupBy}
+          sortBy={deckData.sortBy}
+        />
+      )}
     </>
   );
 }
