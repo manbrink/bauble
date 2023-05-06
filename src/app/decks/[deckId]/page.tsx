@@ -112,7 +112,7 @@ const renderCardStacks = (
   }
 
   return (
-    <div className="grid grid-cols-5 grid-rows-auto gap-1 auto-rows-auto min-h-full">
+    <div className="flex flex-wrap">
       {Object.keys(groupedCardData).map((key, index) => {
         const topMarginPx =
           index >= 5
@@ -121,12 +121,7 @@ const renderCardStacks = (
               300
             : 0;
         return (
-          <CardStack
-            key={key}
-            cardData={groupedCardData[key]}
-            name={key}
-            topMarginPx={topMarginPx}
-          />
+          <CardStack key={key} cardData={groupedCardData[key]} name={key} />
         );
       })}
     </div>

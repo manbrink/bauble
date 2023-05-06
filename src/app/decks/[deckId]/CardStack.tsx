@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Modal from "./CardModal";
 
@@ -27,16 +27,30 @@ interface Card {
 export default function CardStack({
   cardData,
   name,
-  topMarginPx,
 }: {
   cardData: Card[];
   name: string;
-  topMarginPx: number;
 }) {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [modalImageSrc, setModalImageSrc] = useState<string>("");
+
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const container = containerRef.current;
+    let maxHeight = 0;
+
+    container.childNodes.forEach((child) => {
+      const rect = (child as HTMLElement).getBoundingClientRect();
+      const bottom = rect.top + rect.height;
+      maxHeight = Math.max(maxHeight, bottom);
+    });
+
+    container.style.height = `${maxHeight * 0.8}px`;
+  }, [cardData]);
 
   const openModal = (src: string) => {
     setModalImageSrc(src);
@@ -48,7 +62,7 @@ export default function CardStack({
   };
 
   return (
-    <main className="container p-4 mx-1" style={{ marginTop: topMarginPx }}>
+    <div className="card-stack w-[225px] p-4 mx-1">
       {modalOpen && (
         <Modal onClose={closeModal}>
           <Image
@@ -62,7 +76,7 @@ export default function CardStack({
 
       <h1 className="text-white-normal text-xl mb-1">{name}</h1>
       {cardData ? (
-        <div className="relative">
+        <div className="relative" ref={containerRef}>
           {cardData.map((card: Card, index: number) => (
             <div
               key={card.card.name}
@@ -92,6 +106,6 @@ export default function CardStack({
       ) : (
         <div className="text-white-normal text-3xl">No cards found</div>
       )}
-    </main>
+    </div>
   );
 }
