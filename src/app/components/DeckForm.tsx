@@ -155,13 +155,13 @@ export default function DeckForm({ initialValues, editing }: Props) {
 
         <div className="mb-4">
           <label
-            htmlFor="group-by"
+            htmlFor="groupBy"
             className="text-white-normal block text-sm mb-2"
           >
             Grouping
           </label>
           <select
-            id="group-by"
+            id="groupBy"
             className="text-gray-dark bg-white-normal w-full px-3 py-2 border border-white rounded"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -175,13 +175,13 @@ export default function DeckForm({ initialValues, editing }: Props) {
 
         <div className="mb-4">
           <label
-            htmlFor="sort-by"
+            htmlFor="sortBy"
             className="text-white-normal block text-sm mb-2"
           >
             Sorting
           </label>
           <select
-            id="sort-by"
+            id="sortBy"
             className="text-gray-dark bg-white-normal w-full px-3 py-2 border border-white rounded"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
