@@ -72,7 +72,7 @@ const DeckList = ({ search }: DeckListProps) => {
         <div className="grid grid-cols-4 gap-1">
           {data.data.map((deck: Deck) => (
             <div key={deck.id} className="p-4">
-              <Link href={`/decks/${deck.id}`}>
+              <Link href={`/decks/${deck.id}/gallery`}>
                 <div className="bg-white-normal rounded shadow-lg">
                   <div className="relative" style={{ height: "250px" }}>
                     <div className="absolute inset-0">
