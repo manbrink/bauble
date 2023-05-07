@@ -25,6 +25,7 @@ export async function GET(
         format: true,
         groupBy: true,
         sortBy: true,
+        featuredCard: true,
         featuredCardScryfallArtCropUrl: true,
       },
     });

@@ -69,6 +69,8 @@ const renderCardStacks = (
         typeLineCategories.find((category) =>
           curr.card[groupBy].includes(category)
         ) || "Other";
+    } else if (groupBy === "cmc" && curr.card.cmc == null) {
+      key = "0";
     } else {
       key = curr.card[groupBy];
     }

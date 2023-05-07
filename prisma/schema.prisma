@@ -17,6 +17,7 @@ model Deck {
   format           String
   groupBy          String
   sortBy           String
+  featuredCard     String
   featuredCardScryfallArtCropUrl String?
   deckCards        DeckCard[]
   createdAt        DateTime      @default(now())

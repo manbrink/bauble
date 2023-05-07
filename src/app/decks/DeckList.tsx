@@ -41,7 +41,7 @@ async function getData(searchTerm: string) {
   let url = `${process.env.NEXT_PUBLIC_API_URL}/api/decks`;
 
   if (searchTerm) {
-    url += `/${encodeURIComponent(searchTerm)}`;
+    url += `/search/${encodeURIComponent(searchTerm)}`;
   }
 
   const res = await fetch(url, {
