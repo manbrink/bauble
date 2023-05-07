@@ -12,6 +12,7 @@ export default async function EditDeck({ params: { deckId } }: EditDeckProps) {
   const deckData = await getDeckData(deckId);
 
   const initialValues = {
+    deckId: deckData.id,
     name: deckData.name,
     featuredCard: deckData.featuredCard,
     featuredCardScryfallArtCropUrl: deckData.featuredCardScryfallArtCropUrl,

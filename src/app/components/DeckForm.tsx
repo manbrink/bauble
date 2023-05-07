@@ -8,6 +8,7 @@ import CardSearchInput from "@/app/components/cardSearchInput";
 
 interface Props {
   initialValues: {
+    deckId: number | null;
     name: string;
     featuredCard: string;
     featuredCardScryfallArtCropUrl: string;
@@ -38,6 +39,10 @@ export default function DeckForm({ initialValues, editing }: Props) {
     onSubmit: async (values) => {
       let postRoute = editing ? "/api/decks/update" : "/api/decks/new";
       let redirectRoute = editing ? "/decks" : "/decks";
+
+      if (editing) {
+        values = { ...values, ...{ deckId: initialValues.deckId } };
+      }
 
       try {
         const response = await fetch(postRoute, {
