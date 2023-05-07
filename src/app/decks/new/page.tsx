@@ -2,6 +2,7 @@ import DeckForm from "../../components/DeckForm";
 
 export default function NewDeck() {
   const initialValues = {
+    deckId: null,
     name: "",
     featuredCard: "",
     featuredCardScryfallArtCropUrl: "",

@@ -38,7 +38,9 @@ export default function DeckForm({ initialValues, editing }: Props) {
     }),
     onSubmit: async (values) => {
       let postRoute = editing ? "/api/decks/update" : "/api/decks/new";
-      let redirectRoute = editing ? "/decks" : "/decks";
+      let redirectRoute = editing
+        ? `/decks/${initialValues.deckId}/gallery`
+        : "/decks";
 
       if (editing) {
         values = { ...values, ...{ deckId: initialValues.deckId } };
@@ -73,7 +75,9 @@ export default function DeckForm({ initialValues, editing }: Props) {
       <form className="w-full max-w-lg" onSubmit={formik.handleSubmit}>
         <h1 className="text-white-normal text-2xl mb-4">Deck Information</h1>
         <h1 className="text-white-normal text-1xl mb-4 opacity-80">
-          Enter some general deck information.
+          {editing
+            ? "Deck general information."
+            : "Enter some general deck information."}
         </h1>
         <div className="mb-4">
           <label

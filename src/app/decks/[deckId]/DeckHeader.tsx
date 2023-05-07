@@ -1,23 +1,17 @@
-import NavBar from "../../components/navBar";
-import DeckActions from "./DeckActions";
-import MasonryContainer from "./MasonryContainer";
-
 import Image from "next/image";
 
-import { getDeckData, getCardData } from "./queries";
+import NavBar from "../../components/navBar";
+import DeckActions from "./DeckActions";
 
-interface DeckDetailProps {
-  params: {
-    deckId: number;
-  };
+interface Deck {
+  id: number;
+  name: string;
+  description: string;
+  format: string;
+  featuredCardScryfallArtCropUrl: string;
 }
 
-export default async function DeckDetail({
-  params: { deckId },
-}: DeckDetailProps) {
-  const deckData = await getDeckData(deckId);
-  const cardData = await getCardData(deckId);
-
+export default function DeckHeader({ deckData }: { deckData: Deck }) {
   return (
     <>
       <NavBar />
@@ -34,7 +28,7 @@ export default async function DeckDetail({
           </div>
         </div>
 
-        <DeckActions deckId={deckId} />
+        <DeckActions deckId={deckData.id} />
 
         <div className="absolute right-0 inset-y-0 w-1/2">
           <Image
@@ -48,14 +42,6 @@ export default async function DeckDetail({
           <div className="absolute inset-x-0 bottom-0 h-96 bg-gradient-to-r from-neutral-darkest to-transparent"></div>
         </div>
       </div>
-
-      {cardData && (
-        <MasonryContainer
-          cardData={cardData}
-          groupBy={deckData.groupBy}
-          sortBy={deckData.sortBy}
-        />
-      )}
     </>
   );
 }
