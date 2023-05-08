@@ -61,6 +61,7 @@ export default function CardStack({
             alt="Zoomed card"
             width={450}
             height={600}
+            className="rounded"
           />
         </Modal>
       )}
@@ -89,6 +90,8 @@ export default function CardStack({
                 width={225}
                 height={300}
                 className="rounded-t"
+                placeholder="blur"
+                blurDataURL={`${process.env.NEXT_PUBLIC_API_URL}/blur-placeholder.jpeg`}
                 onClick={() => openModal(card.card.scryfallBorderCropUrl)}
               />
               <div className="absolute top-0 left-0 bg-black text-white-normal px-2 py-1 rounded opacity-70">

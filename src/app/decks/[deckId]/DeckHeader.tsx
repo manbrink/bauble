@@ -1,6 +1,5 @@
 import Image from "next/image";
 
-import NavBar from "../../components/navBar";
 import DeckActions from "./DeckActions";
 
 interface Deck {
@@ -14,7 +13,6 @@ interface Deck {
 export default function DeckHeader({ deckData }: { deckData: Deck }) {
   return (
     <>
-      <NavBar />
       <div className="relative bg-neutral-darkest h-96">
         <div className="absolute left-0 w-1/4 text-white-normal p-4 space-y-2">
           <div className="text-white-normal text-3xl">
