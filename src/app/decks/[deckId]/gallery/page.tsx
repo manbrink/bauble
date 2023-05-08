@@ -44,27 +44,30 @@ export default async function Gallery({ params: { deckId } }: DeckDetailProps) {
     : "Sideboard";
 
   return (
-    <>
-      {cardData && cardData.length > 0 ? (
-        <main className="m-4 h-screen">
-          <div className="p-2">
-            <h1 className="text-2xl text-white-normal pl-1">Mainboard</h1>
-            <MasonryContainer
-              cardData={mainCardData}
-              groupBy={deckData.groupBy}
-              sortBy={deckData.sortBy}
-            />
-          </div>
-          <div className="p-2">
-            <h1 className="text-2xl text-white-normal pl-1">{sideString}</h1>
-            <MasonryContainer
-              cardData={sideCardData}
-              groupBy={deckData.groupBy}
-              sortBy={deckData.sortBy}
-            />
-          </div>
-        </main>
-      ) : (
+    <main className="m-4 h-screen">
+      {mainCardData && mainCardData.length > 0 && (
+        <div className="p-2">
+          <h1 className="text-2xl text-white-normal pl-1">Mainboard</h1>
+          <MasonryContainer
+            cardData={mainCardData}
+            groupBy={deckData.groupBy}
+            sortBy={deckData.sortBy}
+          />
+        </div>
+      )}
+
+      {sideCardData && sideCardData.length > 0 && (
+        <div className="p-2">
+          <h1 className="text-2xl text-white-normal pl-1">{sideString}</h1>
+          <MasonryContainer
+            cardData={sideCardData}
+            groupBy={deckData.groupBy}
+            sortBy={deckData.sortBy}
+          />
+        </div>
+      )}
+
+      {mainCardData.length === 0 && sideCardData.length === 0 && (
         <div className="text-white-normal flex justify-center items-center h-64 underline">
           <div className="mr-2 pt-2 pr-2 pb-2">
             <Link href={`/decks/${deckId}/builder`} title="Add cards">
@@ -73,6 +76,6 @@ export default async function Gallery({ params: { deckId } }: DeckDetailProps) {
           </div>
         </div>
       )}
-    </>
+    </main>
   );
 }
