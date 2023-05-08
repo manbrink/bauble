@@ -4,29 +4,11 @@ import MasonryContainer from "./MasonryContainer";
 
 import { getDeckData, getCardData } from "../queries";
 import { deckFormatMap } from "../../utils";
+import { DeckCard } from "../types";
 
 interface DeckDetailProps {
   params: {
     deckId: number;
-  };
-}
-
-interface DeckCard {
-  quantity: number;
-  isMain: boolean;
-  isSide: boolean;
-  card: {
-    name: string;
-    setName: string;
-    manaCost: string;
-    cmc: number;
-    typeLine: string;
-    flavorText: string;
-    colors: string[];
-    isMain: boolean;
-    isSide: boolean;
-    scryfallBorderCropUrl: string;
-    scryfallArtCropUrl: string;
   };
 }
 

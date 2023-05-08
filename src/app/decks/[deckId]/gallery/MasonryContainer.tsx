@@ -3,28 +3,12 @@
 import Masonry from "react-masonry-css";
 
 import CardStack from "./CardStack";
+import { DeckCard } from "../types";
 
 interface Props {
   cardData: DeckCard[];
   groupBy: string;
   sortBy: string;
-}
-
-interface DeckCard {
-  quantity: number;
-  card: {
-    name: string;
-    setName: string;
-    manaCost: string;
-    cmc: number;
-    typeLine: string;
-    flavorText: string;
-    colors: string[];
-    isMain: boolean;
-    isSide: boolean;
-    scryfallBorderCropUrl: string;
-    scryfallArtCropUrl: string;
-  };
 }
 
 interface CardStack {
