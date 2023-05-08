@@ -51,7 +51,7 @@ const DeckList = ({ search }: DeckListProps) => {
   return (
     <main className="container mx-auto">
       {(data?.data?.length > 0 && (
-        <div className="grid grid-cols-4 gap-1">
+        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-1">
           {data.data.map((deck: Deck) => (
             <div key={deck.id} className="p-4">
               <Link href={`/decks/${deck.id}/gallery`}>

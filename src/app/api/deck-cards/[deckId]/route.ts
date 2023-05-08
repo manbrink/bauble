@@ -24,6 +24,7 @@ export async function GET(
         isSide: true,
         card: {
           select: {
+            id: true,
             name: true,
             setName: true,
             manaCost: true,

@@ -12,6 +12,7 @@ interface Props {
 interface Card {
   quantity: number;
   card: {
+    id: string;
     name: string;
     setName: string;
     manaCost: string;
@@ -74,7 +75,7 @@ export default function CardStack({
         >
           {cardData.map((card: Card, index: number) => (
             <div
-              key={card.card.name}
+              key={card.card.id}
               className={`absolute hover:cursor-pointer transition-all duration-1000 ${
                 hoveredCard !== null && index > hoveredCard
                   ? "translate-y-full"
@@ -93,8 +94,10 @@ export default function CardStack({
                 placeholder="blur"
                 blurDataURL={`${process.env.NEXT_PUBLIC_API_URL}/blur-placeholder.jpeg`}
                 onClick={() => openModal(card.card.scryfallBorderCropUrl)}
+                priority={false}
               />
-              <div className="absolute top-0 left-0 bg-black text-white-normal px-2 py-1 rounded opacity-70">
+              <div className="absolute top-0 left-0 bg-black rounded bg-black w-[193px] h-[273px] -z-10"></div>
+              <div className="absolute top-0 left-0 bg-black text-white-normal px-2 py-1 rounded opacity-70 z-10">
                 {card.quantity}
               </div>
             </div>
