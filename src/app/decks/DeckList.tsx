@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import Button from "../components/Button";
+import { deckFormatMap } from "./utils";
 
 interface DeckListProps {
   search: string;
@@ -17,25 +18,6 @@ interface Deck {
   format: string;
   featuredCardScryfallArtCropUrl: string;
 }
-
-let formatMap = {
-  standard: "Standard",
-  historic: "Historic",
-  pioneer: "Pioneer",
-  modern: "Modern",
-  legacy: "Legacy",
-  vintage: "Vintage",
-  pauper: "Pauper",
-  commander: "Commander (EDH)",
-  brawl: "Brawl",
-  penny: "Penny Dreadful",
-  duel: "Duel Commander",
-  oldschool: "Old School",
-  premodern: "Pre-Modern",
-  frontier: "Frontier",
-  future: "Future",
-  casual: "Casual",
-};
 
 async function getData(searchTerm: string) {
   let url = `${process.env.NEXT_PUBLIC_API_URL}/api/decks`;
@@ -89,7 +71,7 @@ const DeckList = ({ search }: DeckListProps) => {
                   <div className="p-4">
                     <h2 className="text-l text-gray-dark">{deck.name}</h2>
                     <p className="text-sm text-gray-dark opacity-70">
-                      {formatMap[deck.format as keyof typeof formatMap]}
+                      {deckFormatMap[deck.format as keyof typeof deckFormatMap]}
                     </p>
                   </div>
                 </div>

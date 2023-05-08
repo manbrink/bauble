@@ -1,0 +1,18 @@
+export const deckFormatMap = {
+  standard: "Standard",
+  historic: "Historic",
+  pioneer: "Pioneer",
+  modern: "Modern",
+  legacy: "Legacy",
+  vintage: "Vintage",
+  pauper: "Pauper",
+  commander: "Commander (EDH)",
+  brawl: "Brawl",
+  penny: "Penny Dreadful",
+  duel: "Duel Commander",
+  oldschool: "Old School",
+  premodern: "Pre-Modern",
+  frontier: "Frontier",
+  future: "Future",
+  casual: "Casual",
+};

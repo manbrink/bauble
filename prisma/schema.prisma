@@ -45,6 +45,8 @@ model DeckCard {
   deckId   Int
   cardId   Int
   quantity Int
+  isMain Boolean @default(false)
+  isSide Boolean @default(false)
   deck     Deck   @relation(fields: [deckId], references: [id])
   card     Card   @relation(fields: [cardId], references: [id])
   @@id([deckId, cardId])

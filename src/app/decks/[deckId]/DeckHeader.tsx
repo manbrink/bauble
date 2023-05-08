@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import DeckActions from "./DeckActions";
+import { deckFormatMap } from "../utils";
 
 interface Deck {
   id: number;
@@ -14,12 +15,13 @@ export default function DeckHeader({ deckData }: { deckData: Deck }) {
   return (
     <>
       <div className="relative bg-neutral-darkest h-96">
-        <div className="absolute left-0 w-1/4 text-white-normal p-4 space-y-2">
+        <div className="absolute left-0 w-1/4 text-white-normal mx-4 px-2 py-4 space-y-2">
           <div className="text-white-normal text-3xl">
             {deckData && deckData.name}
           </div>
           <div className="text-white-normal text-xl opacity-80">
-            {deckData && deckData.format}
+            {deckData &&
+              deckFormatMap[deckData.format as keyof typeof deckFormatMap]}
           </div>
           <div className="text-white-normal text-l opacity-70">
             {deckData && deckData.description}

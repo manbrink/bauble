@@ -20,6 +20,8 @@ interface DeckCard {
     typeLine: string;
     flavorText: string;
     colors: string[];
+    isMain: boolean;
+    isSide: boolean;
     scryfallBorderCropUrl: string;
     scryfallArtCropUrl: string;
   };
@@ -30,27 +32,7 @@ interface CardStack {
   cardData: DeckCard[];
 }
 
-const sortCardData = (cardData: DeckCard[], sortBy: string) => {
-  return cardData.sort((a: DeckCard, b: DeckCard) => {
-    if (sortBy === "name") {
-      return a.card.name.localeCompare(b.card.name);
-    } else if (sortBy === "cmc") {
-      return a.card.cmc - b.card.cmc;
-    } else if (sortBy === "type") {
-      return a.card.typeLine.localeCompare(b.card.typeLine);
-    } else if (sortBy === "color") {
-      return a.card.colors.length - b.card.colors.length;
-    } else {
-      return 0;
-    }
-  });
-};
-
-const renderCardStacks = (
-  cardData: DeckCard[],
-  groupBy: string,
-  sortBy: string
-) => {
+const groupCardData = (cardData: DeckCard[], groupBy: string) => {
   const typeLineCategories = [
     "Land",
     "Creature",
@@ -82,6 +64,32 @@ const renderCardStacks = (
     return acc;
   }, {});
 
+  return groupedCardData;
+};
+
+const sortCardData = (cardData: DeckCard[], sortBy: string) => {
+  return cardData.sort((a: DeckCard, b: DeckCard) => {
+    if (sortBy === "name") {
+      return a.card.name.localeCompare(b.card.name);
+    } else if (sortBy === "cmc") {
+      return a.card.cmc - b.card.cmc;
+    } else if (sortBy === "type") {
+      return a.card.typeLine.localeCompare(b.card.typeLine);
+    } else if (sortBy === "color") {
+      return a.card.colors.length - b.card.colors.length;
+    } else {
+      return 0;
+    }
+  });
+};
+
+const renderCardStacks = (
+  cardData: DeckCard[],
+  groupBy: string,
+  sortBy: string
+) => {
+  const groupedCardData = groupCardData(cardData, groupBy);
+
   for (const key in groupedCardData) {
     groupedCardData[key] = sortCardData(groupedCardData[key], sortBy);
   }
@@ -110,7 +118,7 @@ export default function MasonryContainer({ cardData, groupBy, sortBy }: Props) {
   };
 
   return (
-    <main className="mx-4 h-screen">
+    <>
       <Masonry
         breakpointCols={breakpointColumnsObj}
         className="my-masonry-grid"
@@ -118,6 +126,6 @@ export default function MasonryContainer({ cardData, groupBy, sortBy }: Props) {
       >
         {renderCardStacks(cardData, groupBy, sortBy)}
       </Masonry>
-    </main>
+    </>
   );
 }

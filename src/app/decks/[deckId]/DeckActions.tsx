@@ -20,7 +20,7 @@ export default function DeckActions({ deckId }: Props) {
         <IconContext.Provider
           value={{ size: "1.5em", className: "text-white-normal" }}
         >
-          <div className="absolute left-0 bottom-0 grid grid-cols-4 p-4">
+          <div className="absolute left-0 bottom-0 grid grid-cols-4 mx-4 p-2">
             <div className="mr-2 pt-2 pr-2 pb-2">
               <Link href={`/decks/${deckId}/gallery`} title="View cards">
                 <TbCards />

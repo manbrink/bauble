@@ -20,6 +20,8 @@ export async function GET(
       },
       select: {
         quantity: true,
+        isMain: true,
+        isSide: true,
         card: {
           select: {
             name: true,
