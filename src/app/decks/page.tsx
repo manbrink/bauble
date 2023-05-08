@@ -9,12 +9,9 @@ export default function DecksPage() {
   const [search, setSearch] = useState("");
 
   return (
-    <>
-      <div className="absolute inset-x-0 bottom-0 h-48"></div>
-      <div className="relative">
-        <DeckFilter search={search} setSearch={setSearch} />
-        <DeckList search={search} />
-      </div>
-    </>
+    <div className="relative mt-[60px]">
+      <DeckFilter search={search} setSearch={setSearch} />
+      <DeckList search={search} />
+    </div>
   );
 }

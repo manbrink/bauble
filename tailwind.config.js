@@ -15,6 +15,7 @@ module.exports = {
     },
     colors: {
       white: {
+        lighter: "#E5E7EB",
         normal: "#d1d5db",
         bright: "#ffffff",
       },
