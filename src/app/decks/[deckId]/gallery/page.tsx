@@ -8,7 +8,7 @@ import { DeckCard } from "../types";
 
 interface DeckDetailProps {
   params: {
-    deckId: number;
+    deckId: string;
   };
 }
 

@@ -16,7 +16,7 @@ export async function UPDATE(
 
     const updatedDeckCard = await prisma.deckCard.update({
       where: {
-        id: Number(deckCardId),
+        id: deckCardId,
       },
       data: {
         quantity: body.quantity,

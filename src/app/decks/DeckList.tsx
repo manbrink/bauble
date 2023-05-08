@@ -12,7 +12,7 @@ interface DeckListProps {
 }
 
 interface Deck {
-  id: number;
+  id: string;
   name: string;
   description: string;
   format: string;

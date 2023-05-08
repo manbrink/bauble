@@ -8,7 +8,7 @@ import CardSearchInput from "@/app/components/cardSearchInput";
 
 interface Props {
   initialValues: {
-    deckId: number | null;
+    deckId: string | null;
     name: string;
     featuredCard: string;
     featuredCardScryfallArtCropUrl: string;

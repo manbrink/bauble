@@ -4,7 +4,7 @@ import { getDeckData } from "../queries";
 
 interface EditDeckProps {
   params: {
-    deckId: number;
+    deckId: string;
   };
 }
 

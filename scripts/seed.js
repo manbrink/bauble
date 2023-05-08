@@ -66,6 +66,29 @@ const commanders = [
 ];
 
 async function main() {
+  const allCardIds = await prisma.card.findMany({
+    select: {
+      id: true,
+    },
+  });
+
+  function shuffle(array) {
+    let currentIndex = array.length,
+      randomIndex;
+
+    while (currentIndex !== 0) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex],
+        array[currentIndex],
+      ];
+    }
+
+    return array;
+  }
+
   for (let i = 0; i < 15; i++) {
     const deck = await prisma.deck.create({
       data: {
@@ -79,27 +102,15 @@ async function main() {
       },
     });
 
-    const deckCards = [];
+    const shuffledCardIds = shuffle([...allCardIds]);
 
-    for (let j = 0; j < 100; j++) {
-      let randomCardId;
-      let uniqueCard = false;
-
-      while (!uniqueCard) {
-        randomCardId = Math.floor(Math.random() * 35000) + 1;
-        if (!deckCards.some((card) => card.cardId === randomCardId)) {
-          uniqueCard = true;
-        }
-      }
-
-      deckCards.push({
-        deckId: deck.id,
-        cardId: randomCardId,
-        quantity: 1,
-        isMain: true,
-        isSide: false,
-      });
-    }
+    const deckCards = shuffledCardIds.slice(0, 100).map((card) => ({
+      deckId: deck.id,
+      cardId: card.id,
+      quantity: 1,
+      isMain: true,
+      isSide: false,
+    }));
 
     await prisma.deckCard.createMany({
       data: deckCards,

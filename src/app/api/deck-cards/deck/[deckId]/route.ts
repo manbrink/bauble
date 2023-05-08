@@ -16,7 +16,7 @@ export async function GET(
 
     const cardData = await prisma.deckCard.findMany({
       where: {
-        deckId: Number(deckId),
+        deckId: deckId,
       },
       select: {
         quantity: true,

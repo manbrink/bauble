@@ -11,7 +11,7 @@ import CardTable from "./CardTable";
 
 interface DeckBuilderProps {
   params: {
-    deckId: number;
+    deckId: string;
   };
 }
 

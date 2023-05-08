@@ -11,7 +11,7 @@ datasource db {
 }
 
 model Deck {
-  id               Int           @id @default(autoincrement())
+  id               String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name             String
   description      String
   format           String
@@ -25,7 +25,7 @@ model Deck {
 }
 
 model Card {
-  id                Int           @id @default(autoincrement())
+  id                String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name              String
   setName           String
   manaCost          String?
@@ -42,9 +42,9 @@ model Card {
 }
 
 model DeckCard {
-  id       Int    @id @default(autoincrement())
-  deckId   Int
-  cardId   Int
+  id       String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  deckId   String @db.Uuid
+  cardId   String @db.Uuid
   quantity Int
   isMain Boolean @default(false)
   isSide Boolean @default(false)

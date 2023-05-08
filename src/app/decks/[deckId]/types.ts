@@ -3,7 +3,7 @@ export interface DeckCard {
   isMain: boolean;
   isSide: boolean;
   card: {
-    id: number;
+    id: string;
     name: string;
     setName: string;
     manaCost: string;

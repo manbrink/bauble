@@ -10,7 +10,7 @@ import { AiOutlinePieChart } from "react-icons/ai";
 import { TiInfoLargeOutline } from "react-icons/ti";
 
 interface Props {
-  deckId: number;
+  deckId: string;
 }
 
 export default function DeckActions({ deckId }: Props) {

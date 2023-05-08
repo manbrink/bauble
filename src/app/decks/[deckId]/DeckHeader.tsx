@@ -4,7 +4,7 @@ import DeckActions from "./DeckActions";
 import { deckFormatMap } from "../utils";
 
 interface Deck {
-  id: number;
+  id: string;
   name: string;
   description: string;
   format: string;
