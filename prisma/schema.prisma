@@ -42,6 +42,7 @@ model Card {
 }
 
 model DeckCard {
+  id       Int    @id @default(autoincrement())
   deckId   Int
   cardId   Int
   quantity Int
@@ -49,7 +50,6 @@ model DeckCard {
   isSide Boolean @default(false)
   deck     Deck   @relation(fields: [deckId], references: [id])
   card     Card   @relation(fields: [cardId], references: [id])
-  @@id([deckId, cardId])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

@@ -1,4 +1,7 @@
 import { DeckCard } from "../types";
+import { updateDeckCard } from "../mutations";
+
+import Button from "../../../components/Button";
 
 interface CardTableProps {
   cardData: DeckCard[];
@@ -21,29 +24,33 @@ export default function CardTable({ cardData, setBoard }: CardTableProps) {
       </table>
 
       <div className="text-white-normal max-h-[500px] overflow-scroll">
-        <table className="table-fixed w-full">
+        <table className="table-fixed w-full border-separate border-spacing-2">
           <tbody>
             {cardData.map((deckCard: DeckCard) => (
-              <tr key={deckCard.card.id}>
+              <tr key={deckCard.id}>
                 <td className="truncate">{deckCard.card.name}</td>
                 <td className="text-center">{deckCard.quantity}</td>
                 <td className="text-center">
-                  <button
-                    onClick={() => {
-                      console.log("Add");
-                    }}
-                  >
-                    +
-                  </button>
+                  <Button
+                    className="w-[30px] h-[30px]"
+                    text="+"
+                    theme="light"
+                    size="sm"
+                    onClick={() =>
+                      updateDeckCard(deckCard.id, deckCard.quantity + 1)
+                    }
+                  />
                 </td>
                 <td className="text-center">
-                  <button
-                    onClick={() => {
-                      console.log("Remove");
-                    }}
-                  >
-                    -
-                  </button>
+                  <Button
+                    className="w-[30px] h-[30px]"
+                    text="-"
+                    theme="light"
+                    size="sm"
+                    onClick={() =>
+                      updateDeckCard(deckCard.id, deckCard.quantity - 1)
+                    }
+                  />
                 </td>
               </tr>
             ))}

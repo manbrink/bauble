@@ -85,7 +85,7 @@ const DeckList = ({ search }: DeckListProps) => {
           {isError && <p>Error loading decks</p>}
           {!isLoading && !isError && (
             <Link href={"/decks/new"}>
-              <Button text="Create a New Deck" theme="light" />
+              <Button text="Create a New Deck" theme="light" size="md" />
             </Link>
           )}
         </div>
