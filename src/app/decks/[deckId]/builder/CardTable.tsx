@@ -1,18 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import withQueryClientProvider from "../../../components/withQueryClientProvider";
 
 import { DeckCard } from "../types";
 import { updateDeckCard } from "../mutations";
-import { getCardData } from "../queries";
 
 import Button from "../../../components/Button";
 
 interface CardTableProps {
   deckId: string;
-  board: string;
+  cardData: DeckCard[];
 }
 
 interface DeckCardUpdateParams {
@@ -40,15 +39,11 @@ const filterCardData = (data: DeckCard[], board: string, filter: string) => {
   return filteredCardData;
 };
 
-const CardTable = ({ deckId, board }: CardTableProps) => {
+const CardTable = ({ deckId, cardData }: CardTableProps) => {
   const [filter, setFilter] = useState("");
-  const queryClient = useQueryClient();
+  const [board, setBoard] = useState("main");
 
-  const { isLoading, isError, data } = useQuery({
-    queryKey: ["cards", deckId],
-    queryFn: () => getCardData(deckId),
-    enabled: deckId !== "",
-  });
+  const queryClient = useQueryClient();
 
   const mutation = useMutation({
     mutationFn: (params: DeckCardUpdateParams) =>
@@ -58,7 +53,7 @@ const CardTable = ({ deckId, board }: CardTableProps) => {
     },
   });
 
-  const filteredCardData = filterCardData(data, board, filter);
+  const filteredCardData = filterCardData(cardData, board, filter);
 
   return (
     <div className="text-white-normal">

@@ -52,3 +52,55 @@ export async function GET(
     await prisma.$disconnect();
   }
 }
+
+export async function POST(
+  request: Request,
+  {
+    params,
+    body,
+  }: {
+    params: { deckId: string };
+    body: {
+      cardId: string;
+      quantity: number;
+      isMain: boolean;
+      isSide: boolean;
+    };
+  }
+) {
+  try {
+    const res = await request.json();
+
+    const deckId = params.deckId;
+    const cardId = res.cardId;
+    const quantity = res.quantity;
+    const isMain = res.isMain;
+    const isSide = res.isSide;
+
+    const deckCard = await prisma.deckCard.create({
+      data: {
+        quantity: quantity,
+        isMain: isMain,
+        isSide: isSide,
+        deck: {
+          connect: {
+            id: deckId,
+          },
+        },
+        card: {
+          connect: {
+            id: cardId,
+          },
+        },
+      },
+    });
+
+    return NextResponse.json(deckCard);
+  } catch (error) {
+    console.log(error);
+
+    return NextResponse.json({ error: error }, { status: 500 });
+  } finally {
+    await prisma.$disconnect();
+  }
+}
