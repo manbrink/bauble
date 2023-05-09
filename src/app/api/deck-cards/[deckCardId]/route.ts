@@ -1,0 +1,53 @@
+import { NextResponse } from "next/server";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
+
+export async function PATCH(
+  request: Request,
+  {
+    params,
+    body,
+  }: {
+    params: { deckCardId: string };
+    body: { quantity: number };
+  }
+) {
+  try {
+    const res = await request.json();
+
+    const deckCardId = params.deckCardId;
+
+    console.log(deckCardId);
+    console.log(res.quantity);
+
+    if (res.quantity <= 0) {
+      await prisma.deckCard.delete({
+        where: {
+          id: deckCardId,
+        },
+      });
+      return NextResponse.json({ message: "DeckCard deleted" });
+    } else {
+      const updatedDeckCard = await prisma.deckCard.update({
+        where: {
+          id: deckCardId,
+        },
+        data: {
+          quantity: res.quantity,
+        },
+        select: {
+          quantity: true,
+        },
+      });
+
+      return NextResponse.json(updatedDeckCard);
+    }
+  } catch (error) {
+    console.log(error);
+
+    return NextResponse.json({ error: error }, { status: 500 });
+  } finally {
+    await prisma.$disconnect();
+  }
+}

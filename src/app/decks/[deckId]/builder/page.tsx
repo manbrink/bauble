@@ -2,8 +2,7 @@
 
 import { useState } from "react";
 
-import { getDeckData, getCardData } from "../queries";
-import { DeckCard } from "../types";
+import { getDeckData } from "../queries";
 
 import AddCard from "./AddCard";
 import QuickStats from "./QuickStats";
@@ -21,10 +20,6 @@ export default async function DeckBuilder({
   const [board, setBoard] = useState("main");
 
   const deckData = await getDeckData(deckId);
-  const cardData = await getCardData(deckId);
-
-  const mainCardData = cardData.filter((card: DeckCard) => card.isMain);
-  const sideCardData = cardData.filter((card: DeckCard) => card.isSide);
 
   return (
     <main className="m-4 h-screen">
@@ -33,11 +28,7 @@ export default async function DeckBuilder({
           <AddCard />
           <QuickStats />
         </div>
-        {board === "main" ? (
-          <CardTable cardData={mainCardData} setBoard={setBoard} />
-        ) : (
-          <CardTable cardData={sideCardData} setBoard={setBoard} />
-        )}
+        <CardTable deckId={deckId} board={board} />
       </div>
     </main>
   );

@@ -19,6 +19,7 @@ export async function GET(
         deckId: deckId,
       },
       select: {
+        id: true,
         quantity: true,
         isMain: true,
         isSide: true,

@@ -1,4 +1,4 @@
-export async function getDeckData(deckId: number) {
+export async function getDeckData(deckId: string) {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/decks/detail/${deckId}`,
     { cache: "no-store" }
@@ -11,7 +11,7 @@ export async function getDeckData(deckId: number) {
   return res.json();
 }
 
-export async function getCardData(deckId: number) {
+export async function getCardData(deckId: string) {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/deck-cards/deck/${deckId}`,
     { cache: "no-store" }

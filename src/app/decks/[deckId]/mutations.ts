@@ -1,12 +1,14 @@
 export async function updateDeckCard(deckCardId: string, quantity: number) {
+  console.log("client quantity", quantity);
+
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/deck-cards/${deckCardId}`,
     {
-      method: "UPDATE",
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ deckCardId, quantity }),
+      body: JSON.stringify({ quantity: quantity }),
     }
   );
 

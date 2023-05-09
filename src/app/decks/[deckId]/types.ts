@@ -1,4 +1,5 @@
 export interface DeckCard {
+  id: string;
   quantity: number;
   isMain: boolean;
   isSide: boolean;
