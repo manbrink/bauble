@@ -51,11 +51,11 @@ const DeckList = ({ search }: DeckListProps) => {
   return (
     <main className="container mx-auto">
       {(data?.data?.length > 0 && (
-        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-1">
+        <div className="grid gap-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {data.data.map((deck: Deck) => (
             <div key={deck.id} className="p-4">
               <Link href={`/decks/${deck.id}/gallery`}>
-                <div className="bg-white-normal rounded shadow-lg">
+                <div className="rounded bg-white-normal shadow-lg">
                   <div className="relative" style={{ height: "250px" }}>
                     <div className="absolute inset-0">
                       <Image
@@ -80,7 +80,7 @@ const DeckList = ({ search }: DeckListProps) => {
           ))}
         </div>
       )) || (
-        <div className="text-white-normal flex justify-center items-center h-64">
+        <div className="flex h-64 items-center justify-center text-white-normal">
           {isLoading && <p>Loading...</p>}
           {isError && <p>Error loading decks</p>}
           {!isLoading && !isError && (

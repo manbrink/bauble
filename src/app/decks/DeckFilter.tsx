@@ -8,14 +8,14 @@ export default function DeckFilter({ search, setSearch }: DeckFilterProps) {
     <div className="container mx-auto">
       <div className="grid grid-cols-4 gap-1">
         <div className="col-span-1 p-4"></div>
-        <div className="col-span-2 p-4 relative">
+        <div className="relative col-span-2 p-4">
           <input
             type="text"
-            className="w-full bg-neutral-dark text-white-normal border-b border-white pl-10 py-2 pr-4 focus:outline-none"
+            className="border-white w-full border-b bg-neutral-dark py-2 pl-10 pr-4 text-white-normal focus:outline-none"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
-          <span className="absolute top-1/2 left-3 transform -translate-y-1/2">
+          <span className="absolute left-3 top-1/2 -translate-y-1/2 transform">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5 text-white-normal"

@@ -54,7 +54,7 @@ export default function CardStack({
   };
 
   return (
-    <div className="card-stack w-[225px] p-4 mx-1">
+    <div className="card-stack mx-1 w-[225px] p-4">
       {modalOpen && (
         <Modal onClose={closeModal}>
           <Image
@@ -67,7 +67,7 @@ export default function CardStack({
         </Modal>
       )}
 
-      <h1 className="text-white-normal text-xl mb-1">{name}</h1>
+      <h1 className="mb-1 text-xl text-white-normal">{name}</h1>
       {cardData ? (
         <div
           className="relative"
@@ -76,7 +76,7 @@ export default function CardStack({
           {cardData.map((card: Card, index: number) => (
             <div
               key={card.card.id}
-              className={`absolute hover:cursor-pointer transition-all duration-1000 ${
+              className={`absolute transition-all duration-1000 hover:cursor-pointer ${
                 hoveredCard !== null && index > hoveredCard
                   ? "translate-y-full"
                   : ""
@@ -96,15 +96,15 @@ export default function CardStack({
                 onClick={() => openModal(card.card.scryfallBorderCropUrl)}
                 priority={false}
               />
-              <div className="absolute top-0 left-0 bg-black rounded bg-black w-[193px] h-[273px] -z-10"></div>
-              <div className="absolute top-0 left-0 bg-black text-white-normal px-2 py-1 rounded opacity-70 z-10">
+              <div className="absolute left-0 top-0 -z-10 h-[273px] w-[193px] rounded bg-black bg-black"></div>
+              <div className="absolute left-0 top-0 z-10 rounded bg-black px-2 py-1 text-white-normal opacity-70">
                 {card.quantity}
               </div>
             </div>
           ))}
         </div>
       ) : (
-        <div className="text-white-normal text-3xl">No cards found</div>
+        <div className="text-3xl text-white-normal">No cards found</div>
       )}
     </div>
   );

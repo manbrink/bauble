@@ -82,7 +82,7 @@ const CardSearchInput = ({ formik }: Props) => {
         type="text"
         id="featuredCard"
         name="featuredCard"
-        className="text-gray-dark w-full px-3 py-2 border border-white rounded"
+        className="border-white w-full rounded border px-3 py-2 text-gray-dark"
         value={formik.values.featuredCard}
         onChange={handleFeaturedCardChange}
         onBlur={formik.handleBlur}
@@ -99,14 +99,14 @@ const CardSearchInput = ({ formik }: Props) => {
       ) : null}
 
       {data && showResults && (
-        <div className="absolute z-10 bg-white-normal w-full max-h-[500px] overflow-y-auto">
+        <div className="absolute z-10 max-h-[500px] w-full overflow-y-auto bg-white-normal">
           {data.data.map((card: Card) => (
             <div
               key={card.id}
-              className="p-2 cursor-pointer flex items-center hover:bg-gray-medium transition-colors duration-800"
+              className="duration-800 flex cursor-pointer items-center p-2 transition-colors hover:bg-gray-medium"
               onClick={() => handleCardClick(card)}
             >
-              <div className="relative w-[105px] h-[140px] overflow-hidden">
+              <div className="relative h-[140px] w-[105px] overflow-hidden">
                 <Image
                   src={card.scryfallBorderCropUrl}
                   alt={card.name}

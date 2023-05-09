@@ -10,7 +10,7 @@ const Toast: React.FC<ToastProps> = ({ message, type }) => {
 
   return (
     <div
-      className={`fixed bottom-4 right-4 px-4 py-2 rounded text-white ${bgColor} z-50 transition duration-500`}
+      className={`text-white fixed bottom-4 right-4 rounded px-4 py-2 ${bgColor} z-50 transition duration-500`}
     >
       {message}
     </div>

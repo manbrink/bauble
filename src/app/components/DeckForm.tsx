@@ -69,10 +69,10 @@ export default function DeckForm({ initialValues, editing }: Props) {
   });
 
   return (
-    <div className="container mx-auto px-4 py-8 flex justify-center">
+    <div className="container mx-auto flex justify-center px-4 py-8">
       <form className="w-full max-w-lg" onSubmit={formik.handleSubmit}>
-        <h1 className="text-white-normal text-2xl mb-4">Deck Information</h1>
-        <h1 className="text-white-normal text-1xl mb-4 opacity-80">
+        <h1 className="mb-4 text-2xl text-white-normal">Deck Information</h1>
+        <h1 className="text-1xl mb-4 text-white-normal opacity-80">
           {editing
             ? "Deck general information."
             : "Enter some general deck information."}
@@ -80,14 +80,14 @@ export default function DeckForm({ initialValues, editing }: Props) {
         <div className="mb-4">
           <label
             htmlFor="name"
-            className="text-white-normal block text-sm mb-2"
+            className="mb-2 block text-sm text-white-normal"
           >
             Name
           </label>
           <input
             type="text"
             id="name"
-            className="text-gray-dark bg-white-normal w-full px-3 py-2 border border-white rounded"
+            className="border-white w-full rounded border bg-white-normal px-3 py-2 text-gray-dark"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.name}
@@ -100,7 +100,7 @@ export default function DeckForm({ initialValues, editing }: Props) {
         <div className="mb-4">
           <label
             htmlFor="featured-card"
-            className="text-white-normal block text-sm mb-2"
+            className="mb-2 block text-sm text-white-normal"
           >
             Featured Card
           </label>
@@ -110,14 +110,14 @@ export default function DeckForm({ initialValues, editing }: Props) {
         <div className="mb-4">
           <label
             htmlFor="description"
-            className="text-white-normal block text-sm mb-2"
+            className="mb-2 block text-sm text-white-normal"
           >
             Description
           </label>
           <textarea
             id="description"
             rows={4}
-            className="text-gray-dark bg-white-normal w-full px-3 py-2 border border-white rounded"
+            className="border-white w-full rounded border bg-white-normal px-3 py-2 text-gray-dark"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.description}
@@ -130,13 +130,13 @@ export default function DeckForm({ initialValues, editing }: Props) {
         <div className="mb-4">
           <label
             htmlFor="format"
-            className="text-white-normal block text-sm mb-2"
+            className="mb-2 block text-sm text-white-normal"
           >
             Format
           </label>
           <select
             id="format"
-            className="text-gray-dark bg-white-normal w-full px-3 py-2 border border-white rounded"
+            className="border-white w-full rounded border bg-white-normal px-3 py-2 text-gray-dark"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.format}
@@ -163,13 +163,13 @@ export default function DeckForm({ initialValues, editing }: Props) {
         <div className="mb-4">
           <label
             htmlFor="groupBy"
-            className="text-white-normal block text-sm mb-2"
+            className="mb-2 block text-sm text-white-normal"
           >
             Grouping
           </label>
           <select
             id="groupBy"
-            className="text-gray-dark bg-white-normal w-full px-3 py-2 border border-white rounded"
+            className="border-white w-full rounded border bg-white-normal px-3 py-2 text-gray-dark"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.groupBy}
@@ -183,13 +183,13 @@ export default function DeckForm({ initialValues, editing }: Props) {
         <div className="mb-4">
           <label
             htmlFor="sortBy"
-            className="text-white-normal block text-sm mb-2"
+            className="mb-2 block text-sm text-white-normal"
           >
             Sorting
           </label>
           <select
             id="sortBy"
-            className="text-gray-dark bg-white-normal w-full px-3 py-2 border border-white rounded"
+            className="border-white w-full rounded border bg-white-normal px-3 py-2 text-gray-dark"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.sortBy}
@@ -202,7 +202,7 @@ export default function DeckForm({ initialValues, editing }: Props) {
 
         <button
           type="submit"
-          className="text-white-normal bg-neutral-darkest px-4 py-2 rounded hover:bg-black hover:text-white-bright transition-colors duration-1000"
+          className="rounded bg-neutral-darkest px-4 py-2 text-white-normal transition-colors duration-1000 hover:bg-black hover:text-white-bright"
         >
           {editing ? "Update Deck" : "Create Deck"}
         </button>

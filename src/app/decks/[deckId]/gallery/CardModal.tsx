@@ -8,11 +8,11 @@ interface Props {
 const Modal = ({ children, onClose }: Props) => {
   return (
     <div
-      className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-70 flex justify-center items-center z-50"
+      className="fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black bg-opacity-70"
       onClick={onClose}
     >
       <div
-        className="bg-white p-4 rounded-md max-w-5/6 max-h-5/6 overflow-auto"
+        className="bg-white max-w-5/6 max-h-5/6 overflow-auto rounded-md p-4"
         onClick={(e) => e.stopPropagation()}
       >
         {children}

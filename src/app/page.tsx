@@ -6,26 +6,26 @@ export default function HomePage() {
   return (
     <>
       <div
-        className="bg-cover bg-center h-screen relative"
+        className="relative h-screen bg-cover bg-center"
         style={{
           backgroundImage: `url(${imageUrl})`,
         }}
       >
-        <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-black to-transparent"></div>
+        <div className="to-transparent absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-black"></div>
         <div className="absolute inset-0 bg-black bg-opacity-50"></div>
         <div className="relative">
-          <main className="flex flex-col items-center justify-between max-h-screen p-24">
+          <main className="flex max-h-screen flex-col items-center justify-between p-24">
             <div>
-              <h1 className="text-white-normal text-6xl font-bold text-center opacity-85">
+              <h1 className="opacity-85 text-center text-6xl font-bold text-white-normal">
                 Bauble
               </h1>
-              <p className="text-white-normal mt-4 text-center text-xl opacity-85">
+              <p className="opacity-85 mt-4 text-center text-xl text-white-normal">
                 Minimalist Magic the Gathering deck builder.
               </p>
               <div className="mt-8 flex justify-center">
                 <Link
                   href="decks/new"
-                  className="text-white-normal font-bold py-2 px-4 rounded underline hover:text-white-bright transition-text duration-1000"
+                  className="transition-text rounded px-4 py-2 font-bold text-white-normal underline duration-1000 hover:text-white-bright"
                 >
                   Try it
                 </Link>
@@ -33,8 +33,8 @@ export default function HomePage() {
             </div>
           </main>
         </div>
-        <footer className="absolute bottom-0 left-0 w-full px-8 py-4 bg-opacity-75">
-          <p className="text-xs text-white-normal text-center opacity-40">
+        <footer className="absolute bottom-0 left-0 w-full bg-opacity-75 px-8 py-4">
+          <p className="text-center text-xs text-white-normal opacity-40">
             Wizards of the Coast, Magic: The Gathering, and their logos are
             trademarks of Wizards of the Coast LLC in the United States and
             other countries. © 1993-2023 Wizards. All Rights Reserved.

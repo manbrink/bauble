@@ -91,14 +91,14 @@ const AddCard = ({ deckId }: AddCardProps) => {
   });
 
   return (
-    <div className="text-white-normal mb-4">
+    <div className="mb-4 text-white-normal">
       {showToast && <Toast message={toastMessage} type={toastType} />}
-      <h1 className="text-xl text-center mb-4">Add Card</h1>
+      <h1 className="mb-4 text-center text-xl">Add Card</h1>
       <form className="w-full max-w-lg" onSubmit={formik.handleSubmit}>
         <div className="mb-2">
           <label
             htmlFor="featured-card"
-            className="text-white-normal block text-sm mb-2"
+            className="mb-2 block text-sm text-white-normal"
           >
             Card
           </label>
@@ -108,7 +108,7 @@ const AddCard = ({ deckId }: AddCardProps) => {
         <div className="mb-2">
           <label
             htmlFor="quantity"
-            className="text-white-normal block text-sm mb-2"
+            className="mb-2 block text-sm text-white-normal"
           >
             Quantity
           </label>
@@ -116,7 +116,7 @@ const AddCard = ({ deckId }: AddCardProps) => {
             id="quantity"
             name="quantity"
             type="number"
-            className="text-gray-dark px-3 py-2 border border-white rounded"
+            className="border-white rounded border px-3 py-2 text-gray-dark"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.quantity}
@@ -129,14 +129,14 @@ const AddCard = ({ deckId }: AddCardProps) => {
         <div className="mb-6">
           <label
             htmlFor="board"
-            className="text-white-normal block text-sm mb-2"
+            className="mb-2 block text-sm text-white-normal"
           >
             Board
           </label>
           <select
             id="board"
             name="board"
-            className="text-gray-dark px-3 py-2 border border-white rounded"
+            className="border-white rounded border px-3 py-2 text-gray-dark"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.board}

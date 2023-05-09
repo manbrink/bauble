@@ -56,17 +56,17 @@ const CardTable = ({ cardData }: CardTableProps) => {
 
   return (
     <div className="text-white-normal">
-      <h1 className="text-xl text-center mb-4">
+      <h1 className="mb-4 text-center text-xl">
         {board === "main" ? "Main board" : "Side board"}
       </h1>
       <input
-        className="mb-4 w-2/5 bg-neutral-dark text-white-normal border-b border-white pt-2 pr-4 focus:outline-none"
+        className="border-white mb-4 w-2/5 border-b bg-neutral-dark pr-4 pt-2 text-white-normal focus:outline-none"
         type="text"
         placeholder="filter..."
         value={filter}
         onChange={(e) => setFilter(e.target.value)}
       />
-      <table className="table-fixed w-full">
+      <table className="w-full table-fixed">
         <thead>
           <tr>
             <th className="w-2/5">Card Name</th>
@@ -77,18 +77,18 @@ const CardTable = ({ cardData }: CardTableProps) => {
         </thead>
       </table>
 
-      <div className="text-white-normal max-h-[650px] overflow-scroll">
-        <table className="table-fixed w-full border-separate border-spacing-2">
+      <div className="max-h-[675px] overflow-scroll text-white-normal">
+        <table className="w-full table-fixed border-separate border-spacing-2">
           <tbody>
             {filteredCardData &&
               filteredCardData.map((deckCard: DeckCard) => (
                 <tr key={deckCard.id}>
-                  <td className="truncate w-2/5">{deckCard.card.name}</td>
-                  <td className="text-center w-1/5">{deckCard.quantity}</td>
-                  <td className="text-center w-1/5">
+                  <td className="w-2/5 truncate">{deckCard.card.name}</td>
+                  <td className="w-1/5 text-center">{deckCard.quantity}</td>
+                  <td className="w-1/5 text-center">
                     <Button
                       type="submit"
-                      className="w-[30px] h-[30px]"
+                      className="h-[30px] w-[30px]"
                       text="+"
                       theme="light"
                       size="sm"
@@ -100,10 +100,10 @@ const CardTable = ({ cardData }: CardTableProps) => {
                       }
                     />
                   </td>
-                  <td className="text-center w-1/5">
+                  <td className="w-1/5 text-center">
                     <Button
                       type="submit"
-                      className="w-[30px] h-[30px]"
+                      className="h-[30px] w-[30px]"
                       text="-"
                       theme="light"
                       size="sm"

@@ -29,7 +29,7 @@ export default async function Gallery({ params: { deckId } }: DeckDetailProps) {
     <main className="m-4 h-screen">
       {mainCardData && mainCardData.length > 0 && (
         <div className="p-2">
-          <h1 className="text-2xl text-white-normal pl-1">Mainboard</h1>
+          <h1 className="pl-1 text-2xl text-white-normal">Mainboard</h1>
           <MasonryContainer
             cardData={mainCardData}
             groupBy={deckData.groupBy}
@@ -40,7 +40,7 @@ export default async function Gallery({ params: { deckId } }: DeckDetailProps) {
 
       {sideCardData && sideCardData.length > 0 && (
         <div className="p-2">
-          <h1 className="text-2xl text-white-normal pl-1">{sideString}</h1>
+          <h1 className="pl-1 text-2xl text-white-normal">{sideString}</h1>
           <MasonryContainer
             cardData={sideCardData}
             groupBy={deckData.groupBy}
@@ -50,8 +50,8 @@ export default async function Gallery({ params: { deckId } }: DeckDetailProps) {
       )}
 
       {mainCardData.length === 0 && sideCardData.length === 0 && (
-        <div className="text-white-normal flex justify-center items-center h-64 underline">
-          <div className="mr-2 pt-2 pr-2 pb-2">
+        <div className="flex h-64 items-center justify-center text-white-normal underline">
+          <div className="mr-2 pb-2 pr-2 pt-2">
             <Link href={`/decks/${deckId}/builder`} title="Add cards">
               Add Cards
             </Link>

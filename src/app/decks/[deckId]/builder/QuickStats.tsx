@@ -55,10 +55,10 @@ export default function QuickStats({ cardData }: QuickStatsProps) {
   }
 
   return (
-    <div className="text-white-normal mb-4">
-      <h1 className="text-xl text-center mb-4">Main board Quick Stats</h1>
+    <div className="mb-4 text-white-normal">
+      <h1 className="mb-4 text-center text-xl">Main board Quick Stats</h1>
 
-      <table className="table-fixed border-separate mb-2">
+      <table className="mb-2 table-fixed border-separate">
         <thead>
           <tr>
             <th className="text-left">Card Count</th>
@@ -71,7 +71,7 @@ export default function QuickStats({ cardData }: QuickStatsProps) {
         </tbody>
       </table>
 
-      <table className="table-fixed border-separate mb-2">
+      <table className="mb-2 table-fixed border-separate">
         <thead>
           <tr>
             <th>Average CMC</th>
@@ -84,7 +84,7 @@ export default function QuickStats({ cardData }: QuickStatsProps) {
         </tbody>
       </table>
 
-      <div className="text-white-normal max-h-[550px] overflow-scroll">
+      <div className="max-h-[550px] overflow-scroll text-white-normal">
         <table className="table-fixed border-separate">
           <thead>
             <tr>
