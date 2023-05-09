@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import withQueryClientProvider from "../../../components/withQueryClientProvider";
 
@@ -19,7 +20,28 @@ interface DeckCardUpdateParams {
   quantity: number;
 }
 
+const filterCardData = (data: DeckCard[], board: string, filter: string) => {
+  let filteredCardData = data;
+
+  if (data && data.length > 0) {
+    if (board === "main") {
+      filteredCardData = data.filter((card: DeckCard) => card.isMain);
+    } else {
+      filteredCardData = data.filter((card: DeckCard) => card.isSide);
+    }
+  }
+
+  if (filter !== "") {
+    filteredCardData = filteredCardData.filter((card: DeckCard) =>
+      card.card.name.toLowerCase().includes(filter.toLowerCase())
+    );
+  }
+
+  return filteredCardData;
+};
+
 const CardTable = ({ deckId, board }: CardTableProps) => {
+  const [filter, setFilter] = useState("");
   const queryClient = useQueryClient();
 
   const { isLoading, isError, data } = useQuery({
@@ -36,19 +58,21 @@ const CardTable = ({ deckId, board }: CardTableProps) => {
     },
   });
 
-  let filteredCardData = [];
-  if (data && data.length > 0) {
-    if (board === "main") {
-      filteredCardData = data.filter((card: DeckCard) => card.isMain);
-    } else {
-      filteredCardData = data.filter((card: DeckCard) => card.isSide);
-    }
-  }
+  const filteredCardData = filterCardData(data, board, filter);
 
   return (
     <div className="text-white-normal">
+      <h1 className="text-xl text-center mb-4">
+        {board === "main" ? "Main board" : "Side board"}
+      </h1>
+      <input
+        className="mb-4 w-2/5 bg-neutral-dark text-white-normal border-b border-white pt-2 pr-4 focus:outline-none"
+        type="text"
+        placeholder="filter..."
+        value={filter}
+        onChange={(e) => setFilter(e.target.value)}
+      />
       <table className="table-fixed w-full">
-        <caption className="caption-top mb-4">Cards</caption>
         <thead>
           <tr>
             <th className="w-2/5">Card Name</th>
