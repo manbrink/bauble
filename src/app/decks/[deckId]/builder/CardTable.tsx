@@ -77,7 +77,7 @@ const CardTable = ({ cardData }: CardTableProps) => {
         </thead>
       </table>
 
-      <div className="text-white-normal max-h-[550px] overflow-scroll">
+      <div className="text-white-normal max-h-[650px] overflow-scroll">
         <table className="table-fixed w-full border-separate border-spacing-2">
           <tbody>
             {filteredCardData &&

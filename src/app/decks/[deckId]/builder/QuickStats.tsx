@@ -38,36 +38,72 @@ const typeCounts = (cardData: DeckCard[]) => {
   return groupedCardData;
 };
 
+const avgCmc = (cardData: DeckCard[]) => {
+  const totalCmc = cardData.reduce((acc, curr) => {
+    return acc + curr.card.cmc;
+  }, 0);
+
+  return (totalCmc / cardData.length).toFixed(2);
+};
+
 export default function QuickStats({ cardData }: QuickStatsProps) {
   let typeCount = {} as typeCount;
+  let averageCmc = "";
   if (cardData != null) {
     typeCount = typeCounts(cardData);
+    averageCmc = avgCmc(cardData);
   }
 
   return (
     <div className="text-white-normal mb-4">
       <h1 className="text-xl text-center mb-4">Main board Quick Stats</h1>
-      <div className="mb-4">
-        <h2>Card Count</h2>
-        <ul>
-          <li>Total: {cardData?.length}</li>
-        </ul>
+
+      <table className="table-fixed border-separate mb-2">
+        <thead>
+          <tr>
+            <th className="text-left">Card Count</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td className="truncate">{cardData?.length}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table className="table-fixed border-separate mb-2">
+        <thead>
+          <tr>
+            <th>Average CMC</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{averageCmc}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div className="text-white-normal max-h-[550px] overflow-scroll">
+        <table className="table-fixed border-separate">
+          <thead>
+            <tr>
+              <th className="text-left">Card Type</th>
+              <th>Count</th>
+            </tr>
+          </thead>
+          <tbody>
+            {typeCount &&
+              averageCmc &&
+              Object.keys(typeCount).map((key) => (
+                <tr key={key}>
+                  <td className="truncate">{key}</td>
+                  <td className="w-1/6">{typeCount[key]}</td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
       </div>
-      {cardData && (
-        <div className="mb-4">
-          <h2>Card Types</h2>
-          <ul>
-            <li>Land: {typeCount["Land"]}</li>
-            <li>Creature: {typeCount["Creature"]}</li>
-            <li>Planeswalker: {typeCount["Planeswalker"]}</li>
-            <li>Instant: {typeCount["Instant"]}</li>
-            <li>Sorcery: {typeCount["Sorcery"]}</li>
-            <li>Enchantment: {typeCount["Enchantment"]}</li>
-            <li>Artifact: {typeCount["Artifact"]}</li>
-            <li>Other: {typeCount["Other"]}</li>
-          </ul>
-        </div>
-      )}
     </div>
   );
 }
