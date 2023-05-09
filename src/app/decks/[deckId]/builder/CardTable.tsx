@@ -10,7 +10,6 @@ import { updateDeckCard } from "../mutations";
 import Button from "../../../components/Button";
 
 interface CardTableProps {
-  deckId: string;
   cardData: DeckCard[];
 }
 
@@ -39,7 +38,7 @@ const filterCardData = (data: DeckCard[], board: string, filter: string) => {
   return filteredCardData;
 };
 
-const CardTable = ({ deckId, cardData }: CardTableProps) => {
+const CardTable = ({ cardData }: CardTableProps) => {
   const [filter, setFilter] = useState("");
   const [board, setBoard] = useState("main");
 
@@ -78,7 +77,7 @@ const CardTable = ({ deckId, cardData }: CardTableProps) => {
         </thead>
       </table>
 
-      <div className="text-white-normal max-h-[500px] overflow-scroll">
+      <div className="text-white-normal max-h-[550px] overflow-scroll">
         <table className="table-fixed w-full border-separate border-spacing-2">
           <tbody>
             {filteredCardData &&
