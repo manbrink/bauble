@@ -1,4 +1,5 @@
 interface Props {
+  type?: "button" | "submit" | "reset";
   className?: string; // extra custom classes
   text: string | JSX.Element;
   theme: "dark" | "light" | "neutral" | "none";
@@ -7,6 +8,7 @@ interface Props {
 }
 
 export default function Button({
+  type,
   className,
   text,
   theme,
@@ -37,7 +39,7 @@ export default function Button({
   return (
     <>
       <button
-        type="submit"
+        type={type}
         className={`${className} ${themeMap[theme]} ${sizeMap[size]} rounded transition-colors duration-1000`}
         onClick={onClick}
       >

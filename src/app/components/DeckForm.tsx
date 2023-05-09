@@ -62,8 +62,6 @@ export default function DeckForm({ initialValues, editing }: Props) {
         const responseData = await response.json();
 
         router.push(redirectRoute);
-
-        console.log("Form submitted successfully:", responseData);
       } catch (error) {
         console.error("Error submitting form:", error);
       }

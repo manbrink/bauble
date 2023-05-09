@@ -93,6 +93,7 @@ const CardTable = ({ deckId, board }: CardTableProps) => {
                   <td className="text-center w-1/5">{deckCard.quantity}</td>
                   <td className="text-center w-1/5">
                     <Button
+                      type="submit"
                       className="w-[30px] h-[30px]"
                       text="+"
                       theme="light"
@@ -107,6 +108,7 @@ const CardTable = ({ deckId, board }: CardTableProps) => {
                   </td>
                   <td className="text-center w-1/5">
                     <Button
+                      type="submit"
                       className="w-[30px] h-[30px]"
                       text="-"
                       theme="light"

@@ -13,8 +13,8 @@ export default function NewDeck() {
   };
 
   return (
-    <>
+    <main className="mx-4 mt-[60px]">
       <DeckForm initialValues={initialValues} editing={false} />
-    </>
+    </main>
   );
 }

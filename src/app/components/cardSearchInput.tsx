@@ -60,6 +60,8 @@ const CardSearchInput = ({ formik }: Props) => {
   const handleCardClick = (card: Card) => {
     formik.setFieldValue("featuredCard", `${card.name} (${card.setName})`);
 
+    formik.setFieldValue("featuredCardId", card.id);
+
     formik.setFieldValue(
       "featuredCardScryfallArtCropUrl",
       card.scryfallArtCropUrl

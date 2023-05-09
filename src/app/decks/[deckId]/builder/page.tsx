@@ -22,10 +22,10 @@ export default async function DeckBuilder({
   const deckData = await getDeckData(deckId);
 
   return (
-    <main className="m-4 h-screen">
+    <main className="m-4">
       <div className="grid md:grid-cols-1 lg:grid-cols-2">
         <div>
-          <AddCard />
+          <AddCard deckId={deckId} />
           <QuickStats />
         </div>
         <CardTable deckId={deckId} board={board} />
