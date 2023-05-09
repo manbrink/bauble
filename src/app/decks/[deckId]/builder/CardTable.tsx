@@ -48,13 +48,13 @@ const CardTable = ({ deckId, board }: CardTableProps) => {
   return (
     <div className="text-white-normal">
       <table className="table-fixed w-full">
-        <caption className="caption-top">Cards</caption>
+        <caption className="caption-top mb-4">Cards</caption>
         <thead>
           <tr>
-            <th>Card Name</th>
-            <th>Quantity</th>
-            <th>Add</th>
-            <th>Remove</th>
+            <th className="w-2/5">Card Name</th>
+            <th className="w-1/5">Quantity</th>
+            <th className="w-1/5">Add</th>
+            <th className="w-1/5">Remove</th>
           </tr>
         </thead>
       </table>
@@ -65,9 +65,9 @@ const CardTable = ({ deckId, board }: CardTableProps) => {
             {filteredCardData &&
               filteredCardData.map((deckCard: DeckCard) => (
                 <tr key={deckCard.id}>
-                  <td className="truncate">{deckCard.card.name}</td>
-                  <td className="text-center">{deckCard.quantity}</td>
-                  <td className="text-center">
+                  <td className="truncate w-2/5">{deckCard.card.name}</td>
+                  <td className="text-center w-1/5">{deckCard.quantity}</td>
+                  <td className="text-center w-1/5">
                     <Button
                       className="w-[30px] h-[30px]"
                       text="+"
@@ -81,7 +81,7 @@ const CardTable = ({ deckId, board }: CardTableProps) => {
                       }
                     />
                   </td>
-                  <td className="text-center">
+                  <td className="text-center w-1/5">
                     <Button
                       className="w-[30px] h-[30px]"
                       text="-"

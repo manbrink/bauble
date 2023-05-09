@@ -38,6 +38,11 @@ export async function GET(
           },
         },
       },
+      orderBy: {
+        card: {
+          name: "asc",
+        },
+      },
     });
 
     return NextResponse.json(cardData);
