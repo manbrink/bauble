@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import Button from "../components/Button";
+import Spinner from "../components/Spinner";
 import { deckFormatMap } from "./utils";
 
 interface DeckListProps {
@@ -71,7 +72,9 @@ const DeckList = ({ search }: DeckListProps) => {
                   <div className="p-4">
                     <h2 className="text-l text-gray-dark">{deck.name}</h2>
                     <p className="text-sm text-gray-dark opacity-70">
-                      {deckFormatMap[deck.format as keyof typeof deckFormatMap]}
+                      {deckFormatMap[
+                        deck.format as keyof typeof deckFormatMap
+                      ] || "Unknown Format"}
                     </p>
                   </div>
                 </div>
@@ -81,7 +84,7 @@ const DeckList = ({ search }: DeckListProps) => {
         </div>
       )) || (
         <div className="flex h-64 items-center justify-center text-white-normal">
-          {isLoading && <p>Loading...</p>}
+          {isLoading && <Spinner />}
           {isError && <p>Error loading decks</p>}
           {!isLoading && !isError && (
             <Link href={"/decks/new"}>

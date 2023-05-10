@@ -8,6 +8,7 @@ import { DeckCard } from "../types";
 import { updateDeckCard } from "../mutations";
 
 import Button from "../../../components/Button";
+import Spinner from "../../../components/Spinner";
 
 interface CardTableProps {
   cardData: DeckCard[];
@@ -61,11 +62,7 @@ const CardTable = ({ cardData, isLoading }: CardTableProps) => {
         {board === "main" ? "Main board" : "Side board"}
       </h1>
 
-      {isLoading ? (
-        <div className="flex justify-center">
-          <div className="border-white h-32 w-32 animate-spin rounded-full border-b-2"></div>
-        </div>
-      ) : null}
+      {isLoading ? <Spinner /> : null}
 
       {!isLoading && filteredCardData.length === 0 ? (
         <div className="flex justify-center">

@@ -117,7 +117,7 @@ const AddCard = ({ deckId }: AddCardProps) => {
               id="quantity"
               name="quantity"
               type="number"
-              className="border-white w-full rounded border px-3 py-2 text-gray-dark"
+              className="border-white h-[42px] w-full rounded border px-3 py-2 text-gray-dark"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.quantity}
@@ -137,7 +137,7 @@ const AddCard = ({ deckId }: AddCardProps) => {
             <select
               id="board"
               name="board"
-              className="border-white w-full rounded border px-3 py-2 text-gray-dark"
+              className="border-white h-[42px] w-full rounded border px-3 py-2 text-gray-dark"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.board}

@@ -1,4 +1,5 @@
 import { DeckCard } from "../types";
+import Spinner from "../../../components/Spinner";
 
 interface QuickStatsProps {
   cardData: DeckCard[];
@@ -59,11 +60,7 @@ export default function QuickStats({ cardData, isLoading }: QuickStatsProps) {
     <div className="mb-4 text-white-normal">
       <h1 className="mb-4 text-center text-xl">Main board Quick Stats</h1>
 
-      {isLoading ? (
-        <div className="flex justify-center">
-          <div className="border-white h-32 w-32 animate-spin rounded-full border-b-2"></div>
-        </div>
-      ) : null}
+      {isLoading ? <Spinner /> : null}
 
       {cardData?.length === 0 && !isLoading ? (
         <div className="flex justify-center">
