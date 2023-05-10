@@ -8,6 +8,7 @@ export interface DeckCard {
     name: string;
     setName: string;
     manaCost: string;
+    producedMana: string[];
     cmc: number;
     typeLine: string;
     flavorText: string;

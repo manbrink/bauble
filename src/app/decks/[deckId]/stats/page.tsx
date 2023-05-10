@@ -2,7 +2,8 @@ import { getCardData } from "../queries";
 
 import ManaCurve from "./ManaCurve";
 import ManaProduction from "./ManaProduction";
-import PriceDistribution from "./PriceDistribution";
+
+import Spinner from "../../../components/Spinner";
 
 interface DeckBuilderProps {
   params: {
@@ -18,9 +19,18 @@ export default async function DeckBuilder({
   return (
     <main className="mx-2 my-4 lg:mx-4">
       <div className="grid grid-cols-1">
-        <ManaCurve cardData={cardData} />
-        <ManaProduction />
-        <PriceDistribution />
+        {!cardData && <Spinner />}
+
+        {cardData && cardData.length === 0 && (
+          <div className="text-center text-xl">No cards in deck</div>
+        )}
+
+        {cardData && cardData.length > 0 && (
+          <>
+            <ManaCurve cardData={cardData} />
+            <ManaProduction cardData={cardData} />
+          </>
+        )}
       </div>
     </main>
   );

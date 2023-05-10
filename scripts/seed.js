@@ -94,7 +94,7 @@ async function main() {
       data: {
         name: commanders[i][0],
         description: "This is a deck description.",
-        format: "Commander",
+        format: "commander",
         groupBy: "typeLine",
         sortBy: "cmc",
         featuredCard: commanders[i][0],

@@ -28,11 +28,12 @@ model Card {
   id                String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name              String
   setName           String
-  manaCost          String?
-  cmc               Int?
+  manaCost          String
+  cmc               Int
   typeLine          String?
   flavorText        String?
   colors            String[]
+  producedMana      String[]
   scryfallId        String        @unique
   scryfallBorderCropUrl String?
   scryfallArtCropUrl String?

@@ -13,7 +13,7 @@ function extractCardData(cardObj) {
   return {
     name: cardObj.name,
     setName: cardObj.set_name,
-    manaCost: cardObj.mana_cost || null,
+    manaCost: cardObj.mana_cost || "",
     cmc: cardObj.cmc ? Math.floor(cardObj.cmc) : 0, // Unglued can have cmc decimals...
     typeLine: cardObj.type_line || null,
     flavorText: cardObj.flavor_text || null,
@@ -21,6 +21,7 @@ function extractCardData(cardObj) {
     scryfallId: cardObj.id,
     scryfallBorderCropUrl: cardObj.image_uris?.border_crop,
     scryfallArtCropUrl: cardObj.image_uris?.art_crop,
+    producedMana: cardObj.produced_mana || [],
   };
 }
 

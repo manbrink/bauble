@@ -27,6 +27,7 @@ export async function GET(
             name: true,
             setName: true,
             manaCost: true,
+            producedMana: true,
             cmc: true,
             typeLine: true,
             flavorText: true,

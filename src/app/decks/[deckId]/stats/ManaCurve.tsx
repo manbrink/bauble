@@ -1,6 +1,5 @@
 "use client";
 
-import Spinner from "../../../components/Spinner";
 import { DeckCard } from "../types";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend } from "recharts";
 
@@ -10,13 +9,6 @@ interface ManaCurveProps {
 
 interface chartData {
   cmc: number;
-  creature: number;
-  instant: number;
-  sorcery: number;
-  enchantment: number;
-  artifact: number;
-  planeswalker: number;
-  land: number;
 }
 
 const typeLineCategories = [
@@ -29,38 +21,40 @@ const typeLineCategories = [
   "Artifact",
 ];
 
-const prepareData = (cardData: DeckCard[]) => {
+type ChartDataKey = keyof chartData;
+
+const incrementTypeLineCount = (dataItem: chartData, typeLine: string) => {
+  const key = typeLine.toLowerCase() as ChartDataKey;
+  dataItem[key] = (dataItem[key] || 0) + 1;
+};
+
+const findChartDataByCmc = (data: chartData[], cmc: number) => {
+  return data.find((item) => item.cmc === cmc);
+};
+
+const createNewChartData = (cmc: number, typeLine: string): chartData => {
+  const newChartData: chartData = { cmc };
+  incrementTypeLineCount(newChartData, typeLine);
+  return newChartData;
+};
+
+const prepareData = (cardData: DeckCard[]): chartData[] => {
   const data: chartData[] = [];
 
   cardData.forEach((deckCard) => {
-    let { cmc } = deckCard.card;
-
+    const { cmc } = deckCard.card;
     const typeLine =
       typeLineCategories.find((category) =>
         deckCard.card.typeLine.includes(category)
       ) || "Other";
 
-    const existingData = data.find((data) => data.cmc === cmc);
+    let existingData = findChartDataByCmc(data, cmc);
 
     if (existingData) {
-      existingData[typeLine.toLowerCase() as keyof typeof existingData]++;
-    }
-
-    if (!existingData) {
-      const newChartData: chartData = {
-        cmc: cmc,
-        creature: 0,
-        instant: 0,
-        sorcery: 0,
-        enchantment: 0,
-        artifact: 0,
-        planeswalker: 0,
-        land: 0,
-      };
-
-      newChartData[typeLine.toLowerCase() as keyof typeof newChartData]++;
-
-      data.push(newChartData);
+      incrementTypeLineCount(existingData, typeLine);
+    } else {
+      existingData = createNewChartData(cmc, typeLine);
+      data.push(existingData);
     }
   });
 
@@ -73,11 +67,8 @@ export default function ManaCurve({ cardData }: ManaCurveProps) {
   const data = prepareData(cardData);
 
   return (
-    <div className="mx-4 mb-4 w-1/2 justify-self-center text-white-normal">
+    <div className="mx-4 mb-10 justify-self-center text-white-normal">
       <div className="text-center text-xl">Mana Curve</div>
-
-      {!cardData && <Spinner />}
-
       {data && data.length > 0 && (
         <BarChart
           className=""
