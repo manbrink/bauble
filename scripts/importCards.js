@@ -14,7 +14,7 @@ function extractCardData(cardObj) {
     name: cardObj.name,
     setName: cardObj.set_name,
     manaCost: cardObj.mana_cost || null,
-    cmc: Math.floor(cardObj.cmc) || null, // Unglued can have cmc decimals...
+    cmc: cardObj.cmc ? Math.floor(cardObj.cmc) : 0, // Unglued can have cmc decimals...
     typeLine: cardObj.type_line || null,
     flavorText: cardObj.flavor_text || null,
     colors: cardObj.colors,

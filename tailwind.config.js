@@ -32,6 +32,24 @@ module.exports = {
         dark: "#262626",
         darkest: "#0A0A0A",
       },
+      amber: {
+        dark: "#78350F",
+      },
+      lime: {
+        dark: "#1A2E05",
+      },
+      cyan: {
+        medium: "#06B6D4",
+      },
+      blue: {
+        dark: "#1D4ED8",
+      },
+      teal: {
+        medium: "#14B8A6",
+      },
+      rose: {
+        dark: "#881337",
+      },
       red: "#DC2626",
       green: "#16A34A",
     },
