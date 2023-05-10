@@ -9,6 +9,7 @@ import { updateDeckCard } from "../mutations";
 
 import Button from "../../../components/Button";
 import Spinner from "../../../components/Spinner";
+import { HiSwitchHorizontal } from "react-icons/hi";
 
 interface CardTableProps {
   cardData: DeckCard[];
@@ -58,9 +59,15 @@ const CardTable = ({ cardData, isLoading }: CardTableProps) => {
 
   return (
     <div className="text-white-normal">
-      <h1 className="mb-4 text-center text-xl">
-        {board === "main" ? "Main board" : "Side board"}
-      </h1>
+      <div className="mb-4 flex items-center justify-center">
+        <h1 className="cursor-pointer text-center text-xl">
+          {board === "main" ? "Main board" : "Side board"}
+        </h1>
+        <HiSwitchHorizontal
+          className="ml-2 cursor-pointer text-lg text-white-normal hover:text-white-bright"
+          onClick={() => setBoard(board === "main" ? "side" : "main")}
+        />
+      </div>
 
       <input
         className="border-white mb-4 w-2/5 border-b bg-neutral-dark pr-4 pt-2 text-white-normal focus:outline-none"
