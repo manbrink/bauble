@@ -73,34 +73,34 @@ export default function QuickStats({ cardData, isLoading }: QuickStatsProps) {
 
       {cardData?.length > 0 && !isLoading ? (
         <>
-          <table className="mb-2 table-fixed border-separate">
+          <table className="mb-2 table-fixed">
             <thead>
               <tr>
                 <th className="text-left">Card Count</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr className="hover:bg-neutral-darkest">
                 <td className="truncate">{cardData?.length}</td>
               </tr>
             </tbody>
           </table>
 
-          <table className="mb-2 table-fixed border-separate">
+          <table className="mb-2 table-fixed">
             <thead>
               <tr>
                 <th>Average CMC</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr className="hover:bg-neutral-darkest">
                 <td>{averageCmc}</td>
               </tr>
             </tbody>
           </table>
 
           <div className="max-h-[550px] overflow-scroll text-white-normal">
-            <table className="table-fixed border-separate">
+            <table className="table-fixed">
               <thead>
                 <tr>
                   <th className="text-left">Card Type</th>
@@ -111,7 +111,7 @@ export default function QuickStats({ cardData, isLoading }: QuickStatsProps) {
                 {typeCount &&
                   averageCmc &&
                   Object.keys(typeCount).map((key) => (
-                    <tr key={key}>
+                    <tr className="hover:bg-neutral-darkest" key={key}>
                       <td className="truncate">{key}</td>
                       <td className="w-1/6">{typeCount[key]}</td>
                     </tr>

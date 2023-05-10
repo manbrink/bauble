@@ -99,11 +99,11 @@ const CardSearchInput = ({ formik }: Props) => {
       ) : null}
 
       {data && showResults && (
-        <div className="absolute z-10 max-h-[500px] w-full overflow-y-auto bg-white-normal">
+        <div className="absolute z-10 max-h-[550px] w-full overflow-y-auto bg-neutral-darkest">
           {data.data.map((card: Card) => (
             <div
               key={card.id}
-              className="duration-800 flex cursor-pointer items-center p-2 transition-colors hover:bg-gray-medium"
+              className="duration-800 flex cursor-pointer items-center p-2 transition-colors hover:bg-neutral-medium"
               onClick={() => handleCardClick(card)}
             >
               <div className="relative h-[140px] w-[105px] overflow-hidden">

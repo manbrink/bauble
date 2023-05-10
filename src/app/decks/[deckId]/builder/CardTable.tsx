@@ -62,6 +62,14 @@ const CardTable = ({ cardData, isLoading }: CardTableProps) => {
         {board === "main" ? "Main board" : "Side board"}
       </h1>
 
+      <input
+        className="border-white mb-4 w-2/5 border-b bg-neutral-dark pr-4 pt-2 text-white-normal focus:outline-none"
+        type="text"
+        placeholder="filter..."
+        value={filter}
+        onChange={(e) => setFilter(e.target.value)}
+      />
+
       {isLoading ? <Spinner /> : null}
 
       {!isLoading && filteredCardData.length === 0 ? (
@@ -72,14 +80,6 @@ const CardTable = ({ cardData, isLoading }: CardTableProps) => {
 
       {!isLoading && filteredCardData.length > 0 ? (
         <>
-          <input
-            className="border-white mb-4 w-2/5 border-b bg-neutral-dark pr-4 pt-2 text-white-normal focus:outline-none"
-            type="text"
-            placeholder="filter..."
-            value={filter}
-            onChange={(e) => setFilter(e.target.value)}
-          />
-
           <table className="w-full table-fixed">
             <thead>
               <tr>
@@ -92,11 +92,11 @@ const CardTable = ({ cardData, isLoading }: CardTableProps) => {
           </table>
 
           <div className="max-h-[575px] overflow-scroll text-white-normal">
-            <table className="w-full table-fixed border-separate border-spacing-2">
+            <table className="w-full table-fixed">
               <tbody>
                 {filteredCardData &&
                   filteredCardData.map((deckCard: DeckCard) => (
-                    <tr key={deckCard.id}>
+                    <tr className="hover:bg-neutral-darkest" key={deckCard.id}>
                       <td className="w-2/5 truncate">{deckCard.card.name}</td>
                       <td className="w-1/5 text-center">{deckCard.quantity}</td>
                       <td className="w-1/5 text-center">
