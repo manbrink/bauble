@@ -105,45 +105,47 @@ const AddCard = ({ deckId }: AddCardProps) => {
           <CardSearchInput formik={formik} />
         </div>
 
-        <div className="mb-2">
-          <label
-            htmlFor="quantity"
-            className="mb-2 block text-sm text-white-normal"
-          >
-            Quantity
-          </label>
-          <input
-            id="quantity"
-            name="quantity"
-            type="number"
-            className="border-white rounded border px-3 py-2 text-gray-dark"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.quantity}
-          />
-          {formik.touched.quantity && formik.errors.quantity ? (
-            <div className="text-red">{formik.errors.quantity}</div>
-          ) : null}
-        </div>
+        <div className="mb-3 flex justify-between">
+          <div className="w-1/2">
+            <label
+              htmlFor="quantity"
+              className="mb-2 block text-sm text-white-normal"
+            >
+              Quantity
+            </label>
+            <input
+              id="quantity"
+              name="quantity"
+              type="number"
+              className="border-white w-full rounded border px-3 py-2 text-gray-dark"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.quantity}
+            />
+            {formik.touched.quantity && formik.errors.quantity ? (
+              <div className="text-red">{formik.errors.quantity}</div>
+            ) : null}
+          </div>
 
-        <div className="mb-6">
-          <label
-            htmlFor="board"
-            className="mb-2 block text-sm text-white-normal"
-          >
-            Board
-          </label>
-          <select
-            id="board"
-            name="board"
-            className="border-white rounded border px-3 py-2 text-gray-dark"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.board}
-          >
-            <option value="main">Main</option>
-            <option value="sideboard">Sideboard</option>
-          </select>
+          <div className="ml-2 w-1/2">
+            <label
+              htmlFor="board"
+              className="mb-2 block text-sm text-white-normal"
+            >
+              Board
+            </label>
+            <select
+              id="board"
+              name="board"
+              className="border-white w-full rounded border px-3 py-2 text-gray-dark"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.board}
+            >
+              <option value="main">Main</option>
+              <option value="sideboard">Sideboard</option>
+            </select>
+          </div>
         </div>
 
         <Button type="submit" className="" text="Add" theme="light" size="md" />

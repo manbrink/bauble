@@ -27,9 +27,9 @@ const DeckBuilder = ({ params: { deckId } }: DeckBuilderProps) => {
       <div className="grid md:grid-cols-1 lg:grid-cols-2">
         <div>
           <AddCard deckId={deckId} />
-          <QuickStats cardData={data} />
+          <QuickStats cardData={data} isLoading={isLoading} />
         </div>
-        <CardTable cardData={data} />
+        <CardTable cardData={data} isLoading={isLoading} />
       </div>
     </main>
   );
