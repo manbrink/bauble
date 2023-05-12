@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { unstable_revalidateTag } from "next/server";
 import { prisma } from "../../../../../prisma/prisma";
 
 export async function POST(request: Request) {
@@ -19,6 +20,9 @@ export async function POST(request: Request) {
         featuredCardScryfallArtCropUrl: res.featuredCardScryfallArtCropUrl,
       },
     });
+
+    unstable_revalidateTag("cards");
+    unstable_revalidateTag("deck");
 
     return NextResponse.json({ updatedDeck });
   } catch (error: any) {

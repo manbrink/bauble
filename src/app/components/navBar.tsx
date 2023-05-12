@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
+
 import BaubleIcon from "./BaubleIcon";
 
 export default function NavBar() {
@@ -12,18 +14,7 @@ export default function NavBar() {
         </div>
 
         <div className="flex items-center space-x-4">
-          <a
-            href="#"
-            className="transition-text rounded px-4 py-2 font-bold text-white-normal duration-1000 hover:text-white-bright"
-          >
-            Register
-          </a>
-          <a
-            href="#"
-            className="transition-text rounded px-4 py-2 font-bold text-white-normal duration-1000 hover:text-white-bright"
-          >
-            Log in
-          </a>
+          <SignInButton />
         </div>
       </div>
     </nav>

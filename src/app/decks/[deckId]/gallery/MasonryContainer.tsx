@@ -35,8 +35,8 @@ const groupCardData = (cardData: DeckCard[], groupBy: string) => {
         typeLineCategories.find((category) =>
           curr.card[groupBy].includes(category)
         ) || "Other";
-    } else if (groupBy === "cmc" && curr.card.cmc == null) {
-      key = "0";
+    } else if (groupBy === "colors" && curr.card.colors.length == 0) {
+      key = "Colorless";
     } else {
       key = curr.card[groupBy];
     }
