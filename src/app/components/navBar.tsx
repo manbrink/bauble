@@ -1,5 +1,11 @@
 import Link from "next/link";
-import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
+import {
+  ClerkProvider,
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  UserButton,
+} from "@clerk/nextjs";
 
 import BaubleIcon from "./BaubleIcon";
 
@@ -14,7 +20,14 @@ export default function NavBar() {
         </div>
 
         <div className="flex items-center space-x-4">
-          <SignInButton />
+          <SignedIn>
+            {/* Mount the UserButton component */}
+            <UserButton />
+          </SignedIn>
+          <SignedOut>
+            {/* Signed out users get sign in button */}
+            <SignInButton />
+          </SignedOut>
         </div>
       </div>
     </nav>
