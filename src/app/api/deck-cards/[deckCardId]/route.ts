@@ -16,9 +16,6 @@ export async function PATCH(
 
     const deckCardId = params.deckCardId;
 
-    console.log(deckCardId);
-    console.log(res.quantity);
-
     if (res.quantity <= 0) {
       await prisma.deckCard.delete({
         where: {
@@ -42,8 +39,6 @@ export async function PATCH(
       return NextResponse.json(updatedDeckCard);
     }
   } catch (error) {
-    console.log(error);
-
     return NextResponse.json({ error: error }, { status: 500 });
   } finally {
     await prisma.$disconnect();

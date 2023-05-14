@@ -1,6 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import { redirect } from "next/navigation";
+
 import { useQuery } from "@tanstack/react-query";
 import withQueryClientProvider from "../../../components/withQueryClientProvider";
 import Loading from "../../../components/Loading";
@@ -45,7 +47,7 @@ const Gallery = ({ params: { deckId } }: DeckDetailProps) => {
   }
 
   if (isErrorDeckData || isErrorCardData) {
-    return <div>Error</div>;
+    redirect("/decks");
   }
 
   const mainCardData = cardData?.filter((card: DeckCard) => card.isMain);

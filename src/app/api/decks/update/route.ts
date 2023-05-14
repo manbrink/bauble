@@ -1,10 +1,30 @@
 import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
 import { prisma } from "../../../../../prisma/prisma";
+import { auth } from "@clerk/nextjs";
 
 export async function POST(request: Request) {
   try {
+    const { userId } = auth();
+
+    if (!userId) {
+      return NextResponse.json({ error: "Not authorized" }, { status: 401 });
+    }
+
     const res = await request.json();
+
+    const existingDeck = await prisma.deck.findUnique({
+      where: {
+        id: res.deckId,
+      },
+    });
+
+    if (!existingDeck || existingDeck.userId !== userId) {
+      return NextResponse.json(
+        { error: "Not authorized to update this deck" },
+        { status: 401 }
+      );
+    }
 
     const updatedDeck = await prisma.deck.update({
       where: {

@@ -12,31 +12,26 @@ export async function GET(
 ) {
   try {
     const { userId } = auth();
+    const deckId = params.deckId;
 
     if (!userId) {
       return NextResponse.json({ error: "Not authorized" }, { status: 401 });
     }
 
-    const deckId = params.deckId;
-
-    const deckData = await prisma.deck.findMany({
+    const existingDeck = await prisma.deck.findUnique({
       where: {
         id: deckId,
-        // userId: userId,
-      },
-      select: {
-        id: true,
-        name: true,
-        description: true,
-        format: true,
-        groupBy: true,
-        sortBy: true,
-        featuredCard: true,
-        featuredCardScryfallArtCropUrl: true,
       },
     });
 
-    return NextResponse.json(deckData[0]);
+    if (!existingDeck || existingDeck.userId !== userId) {
+      return NextResponse.json(
+        { error: "Not authorized to view this deck" },
+        { status: 401 }
+      );
+    }
+
+    return NextResponse.json(existingDeck);
   } catch (error) {
     console.log(error);
 

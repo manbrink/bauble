@@ -31,8 +31,6 @@ export async function GET(
 
     return NextResponse.json({ data });
   } catch (error) {
-    console.log(error);
-
     return NextResponse.json({ error: error }, { status: 500 });
   } finally {
     await prisma.$disconnect();

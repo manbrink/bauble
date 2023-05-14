@@ -38,9 +38,6 @@ export default function DeckForm({ initialValues, editing }: Props) {
     }),
     onSubmit: async (values) => {
       let postRoute = editing ? "/api/decks/update" : "/api/decks/new";
-      let redirectRoute = editing
-        ? `/decks/${initialValues.deckId}/gallery`
-        : "/decks";
 
       if (editing) {
         values = { ...values, ...{ deckId: initialValues.deckId } };
@@ -58,10 +55,6 @@ export default function DeckForm({ initialValues, editing }: Props) {
         if (!response.ok) {
           throw new Error("Failed to submit form data");
         }
-
-        // await response.json();
-
-        // router.push(redirectRoute);
       } catch (error) {
         console.error("Error submitting form:", error);
       }

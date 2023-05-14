@@ -1,5 +1,7 @@
 "use client";
 
+import { redirect } from "next/navigation";
+
 import { useQuery } from "@tanstack/react-query";
 import withQueryClientProvider from "../../../components/withQueryClientProvider";
 import Loading from "../../../components/Loading";
@@ -43,7 +45,7 @@ const DeckBuilder = ({ params: { deckId } }: DeckBuilderProps) => {
   }
 
   if (isErrorDeckData || isErrorCardData) {
-    return <div>Error</div>;
+    redirect("/decks");
   }
 
   return (

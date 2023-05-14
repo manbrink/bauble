@@ -1,5 +1,7 @@
 "use client";
 
+import { redirect } from "next/navigation";
+
 import DeckForm from "../../../components/DeckForm";
 import Loading from "../../../components/Loading";
 
@@ -29,7 +31,7 @@ const EditDeck = ({ params: { deckId } }: EditDeckProps) => {
   }
 
   if (isErrorDeckData) {
-    return <div>Error</div>;
+    redirect("/decks");
   }
 
   const initialValues = {
