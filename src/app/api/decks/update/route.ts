@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { unstable_revalidateTag, unstable_revalidatePath } from "next/server";
+import { revalidatePath } from "next/cache";
 import { prisma } from "../../../../../prisma/prisma";
 
 export async function POST(request: Request) {
@@ -21,9 +21,7 @@ export async function POST(request: Request) {
       },
     });
 
-    // unstable_revalidateTag("cards");
-    // unstable_revalidateTag("deck");
-    unstable_revalidatePath(`/decks/${res.deckId}`);
+    revalidatePath(`/decks/${res.deckId}`);
 
     return NextResponse.json({ updatedDeck });
   } catch (error: any) {

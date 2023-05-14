@@ -1,6 +1,7 @@
 "use client";
 
 import DeckForm from "../../../components/DeckForm";
+import Loading from "../../../components/Loading";
 
 import { getDeckData } from "../queries";
 import { useQuery } from "@tanstack/react-query";
@@ -22,6 +23,14 @@ const EditDeck = ({ params: { deckId } }: EditDeckProps) => {
     queryFn: () => getDeckData(deckId),
     enabled: deckId !== "",
   });
+
+  if (isLoadingDeckData) {
+    return <Loading />;
+  }
+
+  if (isErrorDeckData) {
+    return <div>Error</div>;
+  }
 
   const initialValues = {
     deckId: deckData.id,

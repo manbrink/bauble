@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import withQueryClientProvider from "../../../components/withQueryClientProvider";
+import Loading from "../../../components/Loading";
 
 import DeckHeader from "../DeckHeader";
 import MasonryContainer from "./MasonryContainer";
@@ -40,7 +41,7 @@ const Gallery = ({ params: { deckId } }: DeckDetailProps) => {
   });
 
   if (isLoadingDeckData || isLoadingCardData) {
-    return null;
+    return <Loading />;
   }
 
   if (isErrorDeckData || isErrorCardData) {

@@ -2,6 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import withQueryClientProvider from "../../../components/withQueryClientProvider";
+import Loading from "../../../components/Loading";
 
 import { getCardData, getDeckData } from "../queries";
 
@@ -38,7 +39,7 @@ const DeckBuilder = ({ params: { deckId } }: DeckBuilderProps) => {
   });
 
   if (isLoadingDeckData || isLoadingCardData) {
-    return null;
+    return <Loading />;
   }
 
   if (isErrorDeckData || isErrorCardData) {
