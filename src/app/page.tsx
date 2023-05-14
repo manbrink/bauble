@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
 
+import Button from "./components/Button";
+
 export default function HomePage() {
   const imageUrl = process.env.SPLASH_IMAGE_URL;
 
@@ -33,7 +35,14 @@ export default function HomePage() {
                   </Link>
                 </SignedIn>
                 <SignedOut>
-                  <SignInButton />
+                  <SignInButton>
+                    <Button
+                      type="button"
+                      text="Sign In"
+                      theme="light"
+                      size="md"
+                    />
+                  </SignInButton>
                 </SignedOut>
               </div>
             </div>
