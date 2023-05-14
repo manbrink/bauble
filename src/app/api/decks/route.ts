@@ -1,10 +1,20 @@
 import { NextResponse } from "next/server";
 import { Prisma } from "@prisma/client";
-
 import { prisma } from "../../../../prisma/prisma";
+import { auth } from "@clerk/nextjs";
 
 export async function GET(request: Request) {
   try {
+    const { userId } = auth();
+
+    if (!userId) {
+      return new NextResponse(
+        JSON.stringify({
+          error: "You must be logged in to create a deck",
+        })
+      );
+    }
+
     const findManyOptions = {
       select: {
         id: true,
@@ -12,6 +22,9 @@ export async function GET(request: Request) {
         description: true,
         format: true,
         featuredCardScryfallArtCropUrl: true,
+      },
+      where: {
+        userId: userId,
       },
       orderBy: {
         createdAt: Prisma.SortOrder.desc,

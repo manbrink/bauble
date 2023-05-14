@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "../../../../../../prisma/prisma";
+// import { auth } from "@clerk/nextjs";
 
 export async function GET(
   request: Request,
@@ -10,11 +11,21 @@ export async function GET(
   }
 ) {
   try {
+    // const { userId } = auth();
+
+    // console.log("userId", userId);
+
+    // if (!userId) {
+    //   console.log("no userId");
+    //   return NextResponse.json({ error: "Not authorized" }, { status: 401 });
+    // }
+
     const deckId = params.deckId;
 
     const deckData = await prisma.deck.findMany({
       where: {
         id: deckId,
+        // userId: userId,
       },
       select: {
         id: true,

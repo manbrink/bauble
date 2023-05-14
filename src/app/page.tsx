@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
 
 export default function HomePage() {
   const imageUrl = process.env.SPLASH_IMAGE_URL;
@@ -23,12 +24,17 @@ export default function HomePage() {
                 Minimalist Magic the Gathering deck builder.
               </p>
               <div className="mt-8 flex justify-center">
-                <Link
-                  href="decks/new"
-                  className="transition-text rounded px-4 py-2 font-bold text-white-normal underline duration-1000 hover:text-white-bright"
-                >
-                  Try it
-                </Link>
+                <SignedIn>
+                  <Link
+                    href="decks/new"
+                    className="transition-text rounded px-4 py-2 font-bold text-white-normal underline duration-1000 hover:text-white-bright"
+                  >
+                    Add a Deck
+                  </Link>
+                </SignedIn>
+                <SignedOut>
+                  <SignInButton />
+                </SignedOut>
               </div>
             </div>
           </main>

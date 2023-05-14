@@ -8,7 +8,7 @@ export default async function DeckLayout({
 }: {
   children: React.ReactNode;
   params: {
-    deckId: number;
+    deckId: string;
   };
 }) {
   const deckData = await getDeckData(deckId);

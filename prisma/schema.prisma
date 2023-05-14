@@ -12,6 +12,7 @@ datasource db {
 
 model Deck {
   id               String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId           String
   name             String
   description      String
   format           String

@@ -1,12 +1,24 @@
 import { NextResponse } from "next/server";
 import { prisma } from "../../../../../prisma/prisma";
+import { auth } from "@clerk/nextjs";
 
 export async function POST(request: Request) {
   try {
     const res = await request.json();
 
+    const { userId } = auth();
+
+    if (!userId) {
+      return new NextResponse(
+        JSON.stringify({
+          error: "You must be logged in to create a deck",
+        })
+      );
+    }
+
     const createdDeck = await prisma.deck.create({
       data: {
+        userId: userId,
         name: res.name,
         description: res.description,
         format: res.format,

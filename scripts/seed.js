@@ -89,11 +89,41 @@ async function main() {
     return array;
   }
 
-  for (let i = 0; i < 15; i++) {
+  for (let i = 0; i < 10; i++) {
     const deck = await prisma.deck.create({
       data: {
+        userId: "user_2Pj1wnrvI75e9bBtxMZyju3hrO3",
         name: commanders[i][0],
-        description: "This is a deck description.",
+        description: "This is a deck description for user 1",
+        format: "commander",
+        groupBy: "typeLine",
+        sortBy: "cmc",
+        featuredCard: commanders[i][0],
+        featuredCardScryfallArtCropUrl: commanders[i][1],
+      },
+    });
+
+    const shuffledCardIds = shuffle([...allCardIds]);
+
+    const deckCards = shuffledCardIds.slice(0, 100).map((card) => ({
+      deckId: deck.id,
+      cardId: card.id,
+      quantity: 1,
+      isMain: true,
+      isSide: false,
+    }));
+
+    await prisma.deckCard.createMany({
+      data: deckCards,
+    });
+  }
+
+  for (let i = 10; i < 15; i++) {
+    const deck = await prisma.deck.create({
+      data: {
+        userId: "user_2PlBhCa6ih75vJCJPrK35A2SrOi",
+        name: commanders[i][0],
+        description: "This is a deck description for user 2",
         format: "commander",
         groupBy: "typeLine",
         sortBy: "cmc",
