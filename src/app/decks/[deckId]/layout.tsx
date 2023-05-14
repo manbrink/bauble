@@ -11,11 +11,11 @@ export default async function DeckLayout({
     deckId: string;
   };
 }) {
-  const deckData = await getDeckData(deckId);
+  // const deckData = await getDeckData(deckId);
 
   return (
     <>
-      <DeckHeader deckData={deckData} />
+      {/* <DeckHeader deckData={deckData} /> */}
 
       {children}
     </>

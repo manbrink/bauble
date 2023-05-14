@@ -32,13 +32,7 @@ const calculateCardStackHeight = (cardData: Card[]) => {
   return cardData.length * cardTopMargin + cardHeight;
 };
 
-export default function CardStack({
-  cardData,
-  name,
-}: {
-  cardData: Card[];
-  name: string;
-}) {
+export default function CardStack({ cardData, name }: Props) {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
   const [modalOpen, setModalOpen] = useState<boolean>(false);

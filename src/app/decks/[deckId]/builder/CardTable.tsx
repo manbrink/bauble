@@ -13,7 +13,6 @@ import { HiSwitchHorizontal } from "react-icons/hi";
 
 interface CardTableProps {
   cardData: DeckCard[];
-  isLoading: boolean;
 }
 
 interface DeckCardUpdateParams {
@@ -41,7 +40,7 @@ const filterCardData = (data: DeckCard[], board: string, filter: string) => {
   return filteredCardData;
 };
 
-const CardTable = ({ cardData, isLoading }: CardTableProps) => {
+const CardTable = ({ cardData }: CardTableProps) => {
   const [filter, setFilter] = useState("");
   const [board, setBoard] = useState("main");
 
@@ -51,7 +50,7 @@ const CardTable = ({ cardData, isLoading }: CardTableProps) => {
     mutationFn: (params: DeckCardUpdateParams) =>
       updateDeckCard(params.deckCardId, params.quantity),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["cards"] });
+      queryClient.invalidateQueries({ queryKey: ["cardData"] });
     },
   });
 
@@ -77,15 +76,13 @@ const CardTable = ({ cardData, isLoading }: CardTableProps) => {
         onChange={(e) => setFilter(e.target.value)}
       />
 
-      {isLoading ? <Spinner /> : null}
-
-      {!isLoading && filteredCardData.length === 0 ? (
+      {filteredCardData.length === 0 && (
         <div className="flex justify-center">
           <p className="text-white-normal">No cards in {board} board</p>
         </div>
-      ) : null}
+      )}
 
-      {!isLoading && filteredCardData.length > 0 ? (
+      {filteredCardData.length > 0 && (
         <>
           <table className="w-full table-fixed">
             <thead>
@@ -142,7 +139,7 @@ const CardTable = ({ cardData, isLoading }: CardTableProps) => {
             </table>
           </div>
         </>
-      ) : null}
+      )}
     </div>
   );
 };

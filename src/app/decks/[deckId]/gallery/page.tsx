@@ -1,8 +1,14 @@
-import Link from "next/link";
+"use client";
 
+import Link from "next/link";
+import { useQuery } from "@tanstack/react-query";
+import withQueryClientProvider from "../../../components/withQueryClientProvider";
+
+import DeckHeader from "../DeckHeader";
 import MasonryContainer from "./MasonryContainer";
 
 import { getDeckData, getCardData } from "../queries";
+
 import { deckFormatMap } from "../../utils";
 import { DeckCard } from "../types";
 
@@ -12,52 +18,82 @@ interface DeckDetailProps {
   };
 }
 
-export default async function Gallery({ params: { deckId } }: DeckDetailProps) {
-  const deckData = await getDeckData(deckId);
-  const cardData = await getCardData(deckId);
+const Gallery = ({ params: { deckId } }: DeckDetailProps) => {
+  const {
+    isLoading: isLoadingDeckData,
+    isError: isErrorDeckData,
+    data: deckData,
+  } = useQuery({
+    queryKey: ["deckData", deckId],
+    queryFn: () => getDeckData(deckId),
+    enabled: deckId !== "",
+  });
 
-  const mainCardData = cardData.filter((card: DeckCard) => card.isMain);
-  const sideCardData = cardData.filter((card: DeckCard) => card.isSide);
+  const {
+    isLoading: isLoadingCardData,
+    isError: isErrorCardData,
+    data: cardData,
+  } = useQuery({
+    queryKey: ["cardData", deckId],
+    queryFn: () => getCardData(deckId),
+    enabled: deckId !== "",
+  });
+
+  if (isLoadingDeckData || isLoadingCardData) {
+    return null;
+  }
+
+  if (isErrorDeckData || isErrorCardData) {
+    return <div>Error</div>;
+  }
+
+  const mainCardData = cardData?.filter((card: DeckCard) => card.isMain);
+  const sideCardData = cardData?.filter((card: DeckCard) => card.isSide);
 
   const deckFormat =
-    deckFormatMap[deckData.format as keyof typeof deckFormatMap];
+    deckFormatMap[deckData?.format as keyof typeof deckFormatMap];
   const sideString = ["Commander (EDH)", "Duel Commander"].includes(deckFormat)
     ? "Commander"
     : "Sideboard";
 
   return (
-    <main className="m-4 h-screen">
-      {mainCardData && mainCardData.length > 0 && (
-        <div className="p-2">
-          <h1 className="pl-1 text-2xl text-white-normal">Mainboard</h1>
-          <MasonryContainer
-            cardData={mainCardData}
-            groupBy={deckData.groupBy}
-            sortBy={deckData.sortBy}
-          />
-        </div>
-      )}
-
-      {sideCardData && sideCardData.length > 0 && (
-        <div className="p-2">
-          <h1 className="pl-1 text-2xl text-white-normal">{sideString}</h1>
-          <MasonryContainer
-            cardData={sideCardData}
-            groupBy={deckData.groupBy}
-            sortBy={deckData.sortBy}
-          />
-        </div>
-      )}
-
-      {mainCardData.length === 0 && sideCardData.length === 0 && (
-        <div className="flex h-64 items-center justify-center text-white-normal underline">
-          <div className="mr-2 pb-2 pr-2 pt-2">
-            <Link href={`/decks/${deckId}/builder`} title="Add cards">
-              Add Cards
-            </Link>
+    <>
+      <DeckHeader deckData={deckData} />
+      <main className="m-4 h-screen">
+        {mainCardData.length > 0 && (
+          <div className="p-2">
+            <h1 className="pl-1 text-2xl text-white-normal">Mainboard</h1>
+            <MasonryContainer
+              cardData={mainCardData}
+              groupBy={deckData.groupBy}
+              sortBy={deckData.sortBy}
+            />
           </div>
-        </div>
-      )}
-    </main>
+        )}
+
+        {sideCardData.length > 0 && (
+          <div className="p-2">
+            <h1 className="pl-1 text-2xl text-white-normal">{sideString}</h1>
+            <MasonryContainer
+              cardData={sideCardData}
+              groupBy={deckData.groupBy}
+              sortBy={deckData.sortBy}
+            />
+          </div>
+        )}
+
+        {mainCardData.length === 0 && sideCardData.length === 0 && (
+          <div className="flex h-64 items-center justify-center text-white-normal underline">
+            <div className="mr-2 pb-2 pr-2 pt-2">
+              <Link href={`/decks/${deckId}/builder`} title="Add cards">
+                Add Cards
+              </Link>
+            </div>
+          </div>
+        )}
+      </main>
+    </>
   );
-}
+};
+
+export default withQueryClientProvider(Gallery);

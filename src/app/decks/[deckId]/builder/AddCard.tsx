@@ -86,7 +86,7 @@ const AddCard = ({ deckId }: AddCardProps) => {
         params.isSide
       ),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["cards"] });
+      queryClient.invalidateQueries({ queryKey: ["cardData"] });
     },
   });
 

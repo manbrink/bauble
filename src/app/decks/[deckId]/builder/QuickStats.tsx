@@ -3,7 +3,6 @@ import Spinner from "../../../components/Spinner";
 
 interface QuickStatsProps {
   cardData: DeckCard[];
-  isLoading: boolean;
 }
 
 interface typeCount {
@@ -48,7 +47,7 @@ const avgCmc = (cardData: DeckCard[]) => {
   return (totalCmc / cardData.length).toFixed(2);
 };
 
-export default function QuickStats({ cardData, isLoading }: QuickStatsProps) {
+export default function QuickStats({ cardData }: QuickStatsProps) {
   let typeCount = {} as typeCount;
   let averageCmc = "";
   if (cardData != null) {
@@ -60,18 +59,16 @@ export default function QuickStats({ cardData, isLoading }: QuickStatsProps) {
     <div className="mb-4 text-white-normal">
       <h1 className="mb-4 text-center text-xl">Main board Quick Stats</h1>
 
-      {isLoading ? <Spinner /> : null}
-
-      {cardData?.length === 0 && !isLoading ? (
+      {cardData?.length === 0 && (
         <div className="flex justify-center">
           <div className="text-center">
             <p className="text-2xl">No cards in deck</p>
             <p className="text-xl">Add cards to see stats</p>
           </div>
         </div>
-      ) : null}
+      )}
 
-      {cardData?.length > 0 && !isLoading ? (
+      {cardData?.length > 0 && (
         <>
           <table className="mb-2 table-fixed">
             <thead>
@@ -120,7 +117,7 @@ export default function QuickStats({ cardData, isLoading }: QuickStatsProps) {
             </table>
           </div>
         </>
-      ) : null}
+      )}
     </div>
   );
 }
