@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "../../../../../../prisma/prisma";
+import { auth } from "@clerk/nextjs";
 
 export async function GET(
   request: Request,
@@ -10,7 +11,26 @@ export async function GET(
   }
 ) {
   try {
+    const { userId } = auth();
+
+    if (!userId) {
+      return NextResponse.json({ error: "Not authorized" }, { status: 401 });
+    }
+
     const deckId = params.deckId;
+
+    const existingDeck = await prisma.deck.findUnique({
+      where: {
+        id: deckId,
+      },
+    });
+
+    if (!existingDeck || existingDeck.userId !== userId) {
+      return NextResponse.json(
+        { error: "Not authorized to view this deck" },
+        { status: 401 }
+      );
+    }
 
     const cardData = await prisma.deckCard.findMany({
       where: {
@@ -70,6 +90,12 @@ export async function POST(
   }
 ) {
   try {
+    const { userId } = auth();
+
+    if (!userId) {
+      return NextResponse.json({ error: "Not authorized" }, { status: 401 });
+    }
+
     const res = await request.json();
 
     const deckId = params.deckId;
@@ -77,6 +103,20 @@ export async function POST(
     const quantity = res.quantity;
     const isMain = res.isMain;
     const isSide = res.isSide;
+
+    // Find deck and ensure it belongs to the authenticated user
+    const existingDeck = await prisma.deck.findUnique({
+      where: {
+        id: deckId,
+      },
+    });
+
+    if (!existingDeck || existingDeck.userId !== userId) {
+      return NextResponse.json(
+        { error: "Not authorized to add card to this deck" },
+        { status: 401 }
+      );
+    }
 
     const deckCard = await prisma.deckCard.create({
       data: {

@@ -9,11 +9,7 @@ export async function POST(request: Request) {
     const { userId } = auth();
 
     if (!userId) {
-      return new NextResponse(
-        JSON.stringify({
-          error: "You must be logged in to create a deck",
-        })
-      );
+      return NextResponse.json({ error: "Not authorized" }, { status: 401 });
     }
 
     const createdDeck = await prisma.deck.create({
