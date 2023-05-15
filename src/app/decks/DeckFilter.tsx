@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 interface DeckFilterProps {
   search: string;
   setSearch: (search: string) => void;
@@ -6,7 +8,7 @@ interface DeckFilterProps {
 export default function DeckFilter({ search, setSearch }: DeckFilterProps) {
   return (
     <div className="container mx-auto">
-      <div className="grid grid-cols-4 gap-1">
+      <div className="grid grid-cols-4 items-center gap-1">
         <div className="col-span-1 p-4"></div>
         <div className="relative col-span-2 p-4">
           <input
@@ -30,6 +32,12 @@ export default function DeckFilter({ search, setSearch }: DeckFilterProps) {
             </svg>
           </span>
         </div>
+        <Link
+          href="decks/new"
+          className="transition-text rounded px-4 py-2 text-white-normal underline duration-1000 hover:text-white-bright"
+        >
+          Add Deck
+        </Link>
         <div className="col-span-1 p-4"></div>
       </div>
     </div>
