@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
-import { useQuery } from "@tanstack/react-query";
+import { useQueries } from "@tanstack/react-query";
 import withQueryClientProvider from "../../../components/withQueryClientProvider";
 import Loading from "../../../components/Loading";
 
@@ -22,36 +22,41 @@ interface DeckDetailProps {
 }
 
 const Gallery = ({ params: { deckId } }: DeckDetailProps) => {
-  const {
-    isLoading: isLoadingDeckData,
-    isError: isErrorDeckData,
-    data: deckData,
-  } = useQuery({
-    queryKey: ["deckData", deckId],
-    queryFn: () => getDeckData(deckId),
-    enabled: deckId !== "",
+  const results = useQueries({
+    queries: [
+      {
+        queryKey: ["deckData", deckId],
+        queryFn: () => getDeckData(deckId),
+      },
+      {
+        queryKey: ["cardData", deckId],
+        queryFn: () => getCardData(deckId),
+      },
+    ],
   });
 
-  const {
-    isLoading: isLoadingCardData,
-    isError: isErrorCardData,
-    data: cardData,
-  } = useQuery({
-    queryKey: ["cardData", deckId],
-    queryFn: () => getCardData(deckId),
-    enabled: deckId !== "",
-  });
+  if (deckId === "") {
+    return null; // or some fallback UI
+  }
 
-  if (isLoadingDeckData || isLoadingCardData) {
+  const isLoading = results.some((result) => result.isLoading);
+  const isError = results.some((result) => result.isError);
+
+  if (isLoading) {
     return <Loading />;
   }
 
-  if (isErrorDeckData || isErrorCardData) {
+  if (isError) {
     redirect("/decks");
   }
 
-  const mainCardData = cardData?.filter((card: DeckCard) => card.isMain);
-  const sideCardData = cardData?.filter((card: DeckCard) => card.isSide);
+  const deckData = results[0].data;
+  const cardData = results[1].data;
+
+  const mainCardData = cardData?.filter((card: DeckCard) => card.isMain) || [];
+  const sideCardData = cardData?.filter((card: DeckCard) => card.isSide) || [];
+
+  const { groupBy, sortBy } = deckData;
 
   const deckFormat =
     deckFormatMap[deckData?.format as keyof typeof deckFormatMap];
@@ -59,33 +64,36 @@ const Gallery = ({ params: { deckId } }: DeckDetailProps) => {
     ? "Commander"
     : "Sideboard";
 
+  const hasMainCards = mainCardData.length > 0;
+  const hasSideCards = sideCardData.length > 0;
+
   return (
     <>
       <DeckHeader deckData={deckData} />
       <main className="m-4 h-screen">
-        {mainCardData.length > 0 && (
+        {hasMainCards && (
           <div className="p-2">
             <h1 className="pl-1 text-2xl text-white-normal">Mainboard</h1>
             <MasonryContainer
               cardData={mainCardData}
-              groupBy={deckData.groupBy}
-              sortBy={deckData.sortBy}
+              groupBy={groupBy}
+              sortBy={sortBy}
             />
           </div>
         )}
 
-        {sideCardData.length > 0 && (
+        {hasSideCards && (
           <div className="p-2">
             <h1 className="pl-1 text-2xl text-white-normal">{sideString}</h1>
             <MasonryContainer
               cardData={sideCardData}
-              groupBy={deckData.groupBy}
-              sortBy={deckData.sortBy}
+              groupBy={groupBy}
+              sortBy={sortBy}
             />
           </div>
         )}
 
-        {mainCardData.length === 0 && sideCardData.length === 0 && (
+        {!hasMainCards && !hasSideCards && (
           <div className="flex h-64 items-center justify-center text-white-normal underline">
             <div className="mr-2 pb-2 pr-2 pt-2">
               <Link href={`/decks/${deckId}/builder`} title="Add cards">

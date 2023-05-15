@@ -17,6 +17,7 @@ export interface DeckCard {
     isSide: boolean;
     scryfallBorderCropUrl: string;
     scryfallArtCropUrl: string;
+    [key: string]: any; // Index signature
   };
 }
 
