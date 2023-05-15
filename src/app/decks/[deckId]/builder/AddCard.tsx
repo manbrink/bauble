@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { useFormik } from "formik";
+import { useState, useCallback } from "react";
+import { useFormik, FormikHelpers } from "formik";
 import * as Yup from "yup";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -25,12 +25,36 @@ interface DeckCardCreateParams {
   isSide: boolean;
 }
 
+interface FormValues {
+  featuredCard: string;
+  featuredCardScryfallArtCropUrl: string;
+  featuredCardId: string;
+  board: string;
+  quantity: number;
+}
+
 const AddCard = ({ deckId }: AddCardProps) => {
   const [toastMessage, setToastMessage] = useState("");
   const [toastType, setToastType] = useState<"success" | "error">("success");
   const [showToast, setShowToast] = useState(false);
 
-  const formik = useFormik({
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation({
+    mutationFn: (params: DeckCardCreateParams) =>
+      createDeckCard(
+        params.deckId,
+        params.cardId,
+        params.quantity,
+        params.isMain,
+        params.isSide
+      ),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["cardData"] });
+    },
+  });
+
+  const formik = useFormik<FormValues>({
     initialValues: {
       featuredCard: "",
       featuredCardScryfallArtCropUrl: "",
@@ -47,47 +71,34 @@ const AddCard = ({ deckId }: AddCardProps) => {
         .min(1, "Must be at least 1")
         .max(100, "Must be 100 or less"),
     }),
-    onSubmit: async (values, { resetForm }) => {
-      try {
-        values = { ...values, ...{ deckId: deckId } };
+    onSubmit: useCallback(
+      async (values: FormValues, { resetForm }: FormikHelpers<FormValues>) => {
+        try {
+          values = { ...values, ...{ deckId: deckId } };
 
-        mutation.mutate({
-          deckId: deckId,
-          cardId: values.featuredCardId,
-          quantity: values.quantity,
-          isMain: values.board === "main",
-          isSide: values.board === "side",
-        });
+          mutation.mutate({
+            deckId: deckId,
+            cardId: values.featuredCardId,
+            quantity: values.quantity,
+            isMain: values.board === "main",
+            isSide: values.board === "side",
+          });
 
-        resetForm();
+          resetForm();
 
-        setToastMessage("Card Added");
-        setToastType("success");
-        setShowToast(true);
+          setToastMessage("Card Added");
+          setToastType("success");
+          setShowToast(true);
 
-        setTimeout(() => {
-          setShowToast(false);
-        }, 3000);
-      } catch (error) {
-        console.error(error);
-      }
-    },
-  });
-
-  const queryClient = useQueryClient();
-
-  const mutation = useMutation({
-    mutationFn: (params: DeckCardCreateParams) =>
-      createDeckCard(
-        params.deckId,
-        params.cardId,
-        params.quantity,
-        params.isMain,
-        params.isSide
-      ),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["cardData"] });
-    },
+          setTimeout(() => {
+            setShowToast(false);
+          }, 3000);
+        } catch (error) {
+          console.error(error);
+        }
+      },
+      [mutation, deckId]
+    ),
   });
 
   return (

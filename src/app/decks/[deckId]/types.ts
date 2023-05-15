@@ -20,6 +20,14 @@ export interface DeckCard {
   };
 }
 
+export interface Deck {
+  id: string;
+  name: string;
+  description: string;
+  format: string;
+  featuredCardScryfallArtCropUrl: string;
+}
+
 export const typeLineCategories = [
   "Land",
   "Creature",

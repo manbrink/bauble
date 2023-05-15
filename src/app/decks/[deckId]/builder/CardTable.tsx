@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import withQueryClientProvider from "../../../components/withQueryClientProvider";
 
@@ -8,7 +8,6 @@ import { DeckCard } from "../types";
 import { updateDeckCard } from "../mutations";
 
 import Button from "../../../components/Button";
-import Spinner from "../../../components/Spinner";
 import { HiSwitchHorizontal } from "react-icons/hi";
 
 interface CardTableProps {
@@ -24,15 +23,13 @@ const filterCardData = (data: DeckCard[], board: string, filter: string) => {
   let filteredCardData = data;
 
   if (data && data.length > 0) {
-    if (board === "main") {
-      filteredCardData = data.filter((card: DeckCard) => card.isMain);
-    } else {
-      filteredCardData = data.filter((card: DeckCard) => card.isSide);
-    }
+    filteredCardData = data.filter((card) =>
+      board === "main" ? card.isMain : card.isSide
+    );
   }
 
   if (filter !== "") {
-    filteredCardData = filteredCardData.filter((card: DeckCard) =>
+    filteredCardData = filteredCardData.filter((card) =>
       card.card.name.toLowerCase().includes(filter.toLowerCase())
     );
   }
@@ -54,7 +51,10 @@ const CardTable = ({ cardData }: CardTableProps) => {
     },
   });
 
-  const filteredCardData = filterCardData(cardData, board, filter);
+  const filteredCardData = useMemo(
+    () => filterCardData(cardData, board, filter),
+    [cardData, board, filter]
+  );
 
   return (
     <div className="text-white-normal">
@@ -99,10 +99,10 @@ const CardTable = ({ cardData }: CardTableProps) => {
             <table className="w-full table-fixed">
               <tbody>
                 {filteredCardData &&
-                  filteredCardData.map((deckCard: DeckCard) => (
-                    <tr className="hover:bg-neutral-darkest" key={deckCard.id}>
-                      <td className="w-2/5 truncate">{deckCard.card.name}</td>
-                      <td className="w-1/5 text-center">{deckCard.quantity}</td>
+                  filteredCardData.map(({ id, quantity, card: { name } }) => (
+                    <tr className="hover:bg-neutral-darkest" key={id}>
+                      <td className="w-2/5 truncate">{name}</td>
+                      <td className="w-1/5 text-center">{quantity}</td>
                       <td className="w-1/5 text-center">
                         <Button
                           type="submit"
@@ -112,8 +112,8 @@ const CardTable = ({ cardData }: CardTableProps) => {
                           size="sm"
                           onClick={() =>
                             mutation.mutate({
-                              deckCardId: deckCard.id,
-                              quantity: deckCard.quantity + 1,
+                              deckCardId: id,
+                              quantity: quantity + 1,
                             })
                           }
                         />
@@ -127,8 +127,8 @@ const CardTable = ({ cardData }: CardTableProps) => {
                           size="sm"
                           onClick={() =>
                             mutation.mutate({
-                              deckCardId: deckCard.id,
-                              quantity: deckCard.quantity - 1,
+                              deckCardId: id,
+                              quantity: quantity - 1,
                             })
                           }
                         />

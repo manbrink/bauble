@@ -2,11 +2,12 @@
 
 import { redirect } from "next/navigation";
 
-import { useQuery } from "@tanstack/react-query";
+import { useQueries } from "@tanstack/react-query";
 import withQueryClientProvider from "../../../components/withQueryClientProvider";
 import Loading from "../../../components/Loading";
 
 import { getCardData, getDeckData } from "../queries";
+import { Deck, DeckCard } from "../types";
 
 import DeckHeader from "../DeckHeader";
 import AddCard from "./AddCard";
@@ -20,33 +21,31 @@ interface DeckBuilderProps {
 }
 
 const DeckBuilder = ({ params: { deckId } }: DeckBuilderProps) => {
-  const {
-    isLoading: isLoadingDeckData,
-    isError: isErrorDeckData,
-    data: deckData,
-  } = useQuery({
-    queryKey: ["deckData", deckId],
-    queryFn: () => getDeckData(deckId),
-    enabled: deckId !== "",
+  const queryResults = useQueries({
+    queries: [
+      { queryKey: ["deckData", deckId], queryFn: () => getDeckData(deckId) },
+      { queryKey: ["cardData", deckId], queryFn: () => getCardData(deckId) },
+    ],
   });
 
-  const {
-    isLoading: isLoadingCardData,
-    isError: isErrorCardData,
-    data: cardData,
-  } = useQuery({
-    queryKey: ["cardData", deckId],
-    queryFn: () => getCardData(deckId),
-    enabled: deckId !== "",
-  });
+  if (deckId === "") {
+    return null; // or some fallback UI
+  }
 
-  if (isLoadingDeckData || isLoadingCardData) {
+  const isLoading = queryResults.some((result) => result.isLoading);
+  const isError = queryResults.some((result) => result.isError);
+
+  if (isLoading) {
     return <Loading />;
   }
 
-  if (isErrorDeckData || isErrorCardData) {
+  if (isError) {
     redirect("/decks");
   }
+
+  const [deckDataResult, cardDataResult] = queryResults;
+  const deckData = deckDataResult.data as Deck;
+  const cardData = cardDataResult.data as DeckCard[];
 
   return (
     <>

@@ -1,11 +1,11 @@
+import { useMemo } from "react";
 import { DeckCard } from "../types";
-import Spinner from "../../../components/Spinner";
 
 interface QuickStatsProps {
   cardData: DeckCard[];
 }
 
-interface typeCount {
+interface TypeCount {
   [key: string]: number;
 }
 
@@ -20,40 +20,24 @@ const typeCounts = (cardData: DeckCard[]) => {
     "Artifact",
   ];
 
-  const groupedCardData = cardData.reduce((acc: any, curr: any) => {
-    let key = "";
-
-    key =
+  return cardData.reduce<TypeCount>((acc, curr) => {
+    const key =
       typeLineCategories.find((category) =>
         curr.card.typeLine.includes(category)
       ) || "Other";
-
-    if (!acc[key]) {
-      acc[key] = 0;
-    }
-    acc[key]++;
-
+    acc[key] = (acc[key] || 0) + 1;
     return acc;
   }, {});
-
-  return groupedCardData;
 };
 
 const avgCmc = (cardData: DeckCard[]) => {
-  const totalCmc = cardData.reduce((acc, curr) => {
-    return acc + curr.card.cmc;
-  }, 0);
-
+  const totalCmc = cardData.reduce((acc, curr) => acc + curr.card.cmc, 0);
   return (totalCmc / cardData.length).toFixed(2);
 };
 
 export default function QuickStats({ cardData }: QuickStatsProps) {
-  let typeCount = {} as typeCount;
-  let averageCmc = "";
-  if (cardData != null) {
-    typeCount = typeCounts(cardData);
-    averageCmc = avgCmc(cardData);
-  }
+  const typeCount = useMemo(() => cardData && typeCounts(cardData), [cardData]);
+  const averageCmc = useMemo(() => cardData && avgCmc(cardData), [cardData]);
 
   return (
     <div className="mb-4 text-white-normal">
