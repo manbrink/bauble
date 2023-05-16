@@ -1,3 +1,18 @@
+export async function deleteDeck(deckId: string) {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/decks/${deckId}`,
+    {
+      method: "DELETE",
+    }
+  );
+
+  if (!res.ok) {
+    throw new Error(res.statusText);
+  }
+
+  return res.json();
+}
+
 export async function updateDeckCard(deckCardId: string, quantity: number) {
   console.log("client quantity", quantity);
 

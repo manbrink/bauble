@@ -5,6 +5,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 
 import CardSearchInput from "@/app/components/cardSearchInput";
+import { deleteDeck } from "../decks/[deckId]/mutations";
 
 interface Props {
   initialValues: {
@@ -52,8 +53,13 @@ export default function DeckForm({ initialValues, editing }: Props) {
           body: JSON.stringify({ ...values }),
         });
 
-        if (!response.ok) {
-          throw new Error("Failed to submit form data");
+        if (response.ok) {
+          if (editing) {
+            router.push(`/decks/${initialValues.deckId}/gallery`);
+          } else {
+            const data = await response.json();
+            router.push(`/decks/${data.createdDeck.id}/gallery`);
+          }
         }
       } catch (error) {
         console.error("Error submitting form:", error);
@@ -62,14 +68,9 @@ export default function DeckForm({ initialValues, editing }: Props) {
   });
 
   return (
-    <div className="container mx-auto flex justify-center px-4 py-8">
+    <div className="container mx-auto mt-[60px] flex justify-center px-4 py-8">
       <form className="w-full max-w-lg" onSubmit={formik.handleSubmit}>
         <h1 className="mb-4 text-2xl text-white-normal">Deck Information</h1>
-        <h1 className="text-1xl mb-4 text-white-normal opacity-80">
-          {editing
-            ? "Deck general information."
-            : "Enter some general deck information."}
-        </h1>
         <div className="mb-4">
           <label
             htmlFor="name"
@@ -193,12 +194,29 @@ export default function DeckForm({ initialValues, editing }: Props) {
           </select>
         </div>
 
-        <button
-          type="submit"
-          className="rounded bg-neutral-darkest px-4 py-2 text-white-normal transition-colors duration-1000 hover:bg-black hover:text-white-bright"
-        >
-          {editing ? "Update Deck" : "Create Deck"}
-        </button>
+        <div className="flex justify-between">
+          <button
+            type="submit"
+            className="rounded bg-neutral-darkest px-4 py-2 text-white-normal transition-colors duration-1000 hover:bg-black hover:text-white-bright"
+          >
+            {editing ? "Update Deck" : "Create Deck"}
+          </button>
+
+          {editing && (
+            <button
+              type="button"
+              className="hover:bg-red-dark rounded bg-red px-4 py-2 text-white-normal transition-colors duration-1000"
+              onClick={() => {
+                if (confirm("Are you sure you want to delete this deck?")) {
+                  deleteDeck(initialValues.deckId as string);
+                  router.push("/decks");
+                }
+              }}
+            >
+              Delete Deck
+            </button>
+          )}
+        </div>
       </form>
     </div>
   );
