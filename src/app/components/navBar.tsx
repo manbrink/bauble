@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { SignedIn, UserButton } from "@clerk/nextjs";
 
+import Image from "next/image";
+
 import BaubleIcon from "./BaubleIcon";
 
 export default function NavBar() {
@@ -14,6 +16,14 @@ export default function NavBar() {
         </div>
 
         <div className="flex items-center space-x-4">
+          <Link href={`${process.env.PATREON_URL}`} target="_blank">
+            <Image
+              src="/patreon-logo-white.png"
+              alt="Patreon"
+              width={25}
+              height={25}
+            />
+          </Link>
           <SignedIn>
             <UserButton />
           </SignedIn>
