@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useCallback } from "react";
 import { useFormik, FormikHelpers } from "formik";
 import * as Yup from "yup";
 
@@ -74,7 +74,7 @@ const AddCard = ({ deckId }: AddCardProps) => {
         try {
           values = { ...values, ...{ deckId: deckId } };
 
-          mutation.mutate({
+          const mutationResult = await mutation.mutateAsync({
             deckId: deckId,
             cardId: values.featuredCardId,
             quantity: values.quantity,
@@ -82,9 +82,14 @@ const AddCard = ({ deckId }: AddCardProps) => {
             isSide: values.board === "side",
           });
 
-          resetForm();
+          if (mutationResult.error) {
+            toast.error(mutationResult.error);
+            return;
+          } else {
+            toast.success("Card added!");
+          }
 
-          toast.success("Card added to deck");
+          resetForm();
         } catch (error) {
           console.error(error);
         }

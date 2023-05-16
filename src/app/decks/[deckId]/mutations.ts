@@ -14,8 +14,6 @@ export async function deleteDeck(deckId: string) {
 }
 
 export async function updateDeckCard(deckCardId: string, quantity: number) {
-  console.log("client quantity", quantity);
-
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/deck-cards/${deckCardId}`,
     {
@@ -41,7 +39,7 @@ export async function createDeckCard(
   isMain: boolean,
   isSide: boolean
 ) {
-  const res = await fetch(
+  const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/deck-cards/deck/${deckId}`,
     {
       method: "POST",
@@ -57,9 +55,7 @@ export async function createDeckCard(
     }
   );
 
-  if (!res.ok) {
-    throw new Error(res.statusText);
-  }
+  const data: response = await response.json();
 
-  return res.json();
+  return data;
 }

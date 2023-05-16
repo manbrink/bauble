@@ -118,6 +118,20 @@ export async function POST(
       );
     }
 
+    // check that deck does not have 250 deck cards
+    const deckCardCount = await prisma.deckCard.count({
+      where: {
+        deckId: deckId,
+      },
+    });
+
+    if (deckCardCount >= 250) {
+      return NextResponse.json(
+        { error: "Deck cannot have more than 250 cards" },
+        { status: 400 }
+      );
+    }
+
     const deckCard = await prisma.deckCard.create({
       data: {
         quantity: quantity,
