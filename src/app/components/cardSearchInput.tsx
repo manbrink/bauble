@@ -82,7 +82,7 @@ const CardSearchInput = ({ formik }: Props) => {
         type="text"
         id="featuredCard"
         name="featuredCard"
-        className="border-white w-full rounded border px-3 py-2 text-gray-dark"
+        className="border-white w-full rounded border bg-white-normal px-3 py-2 text-gray-dark"
         value={formik.values.featuredCard}
         onChange={handleFeaturedCardChange}
         onBlur={formik.handleBlur}

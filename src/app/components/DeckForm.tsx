@@ -4,6 +4,9 @@ import { useRouter } from "next/navigation";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import CardSearchInput from "@/app/components/cardSearchInput";
 import { deleteDeck } from "../decks/[deckId]/mutations";
 
@@ -62,6 +65,9 @@ export default function DeckForm({ initialValues, editing }: Props) {
             const data = await response.json();
             router.push(`/decks/${data.createdDeck.id}/gallery`);
           }
+        } else {
+          const data: response = await response.json();
+          toast.error(data.error);
         }
       } catch (error) {
         console.error("Error submitting form:", error);
@@ -207,7 +213,7 @@ export default function DeckForm({ initialValues, editing }: Props) {
           {editing && (
             <button
               type="button"
-              className="hover:bg-red-dark rounded bg-red px-4 py-2 text-white-normal transition-colors duration-1000"
+              className="rounded bg-rose-dark px-4 py-2 text-white-normal transition-colors duration-1000 hover:bg-red"
               onClick={() => {
                 if (confirm("Are you sure you want to delete this deck?")) {
                   deleteDeck(initialValues.deckId as string);
@@ -220,6 +226,7 @@ export default function DeckForm({ initialValues, editing }: Props) {
           )}
         </div>
       </form>
+      <ToastContainer />
     </div>
   );
 }

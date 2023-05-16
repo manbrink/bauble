@@ -9,7 +9,9 @@ import withQueryClientProvider from "../../../components/withQueryClientProvider
 
 import CardSearchInput from "@/app/components/cardSearchInput";
 import Button from "../../../components/Button";
-import Toast from "./Toast";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { createDeckCard } from "../mutations";
 
@@ -34,10 +36,6 @@ interface FormValues {
 }
 
 const AddCard = ({ deckId }: AddCardProps) => {
-  const [toastMessage, setToastMessage] = useState("");
-  const [toastType, setToastType] = useState<"success" | "error">("success");
-  const [showToast, setShowToast] = useState(false);
-
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
@@ -86,13 +84,7 @@ const AddCard = ({ deckId }: AddCardProps) => {
 
           resetForm();
 
-          setToastMessage("Card Added");
-          setToastType("success");
-          setShowToast(true);
-
-          setTimeout(() => {
-            setShowToast(false);
-          }, 3000);
+          toast.success("Card added to deck");
         } catch (error) {
           console.error(error);
         }
@@ -103,7 +95,6 @@ const AddCard = ({ deckId }: AddCardProps) => {
 
   return (
     <div className="mb-4 text-white-normal">
-      {showToast && <Toast message={toastMessage} type={toastType} />}
       <h1 className="mb-4 text-center text-xl">Add Card</h1>
       <form className="w-full max-w-lg" onSubmit={formik.handleSubmit}>
         <div className="mb-2">
@@ -161,6 +152,8 @@ const AddCard = ({ deckId }: AddCardProps) => {
 
         <Button type="submit" className="" text="Add" theme="light" size="md" />
       </form>
+
+      <ToastContainer />
     </div>
   );
 };

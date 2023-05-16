@@ -1,59 +1,28 @@
-import { useQuery } from "@tanstack/react-query";
-import withQueryClientProvider from "../components/withQueryClientProvider";
-
 import Image from "next/image";
 import Link from "next/link";
 
 import Button from "../components/Button";
-import Spinner from "../components/Spinner";
+
 import { deckFormatMap } from "./utils";
+import { Deck } from "./types";
 
 interface DeckListProps {
-  search: string;
+  data: Deck[];
 }
 
-interface Deck {
-  id: string;
-  name: string;
-  description: string;
-  format: string;
-  featuredCardScryfallArtCropUrl: string;
-}
-
-async function getData(searchTerm: string) {
-  let url = `${process.env.NEXT_PUBLIC_API_URL}/api/decks`;
-
-  if (searchTerm) {
-    url += `/search/${encodeURIComponent(searchTerm)}`;
-  }
-
-  const res = await fetch(url, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    cache: "no-store",
-  });
-
-  if (!res.ok) {
-    throw new Error(res.statusText);
-  }
-
-  return res.json();
-}
-
-const DeckList = ({ search }: DeckListProps) => {
-  const { isLoading, isError, data } = useQuery({
-    queryKey: ["decks", search],
-    queryFn: () => getData(search),
-    retry: 5,
-  });
-
+const DeckList = ({ data }: DeckListProps) => {
   return (
     <main className="container mx-auto">
-      {(data?.data?.length > 0 && (
+      {data.length >= 25 && (
+        <div className="p-1 text-center text-yellow-light">
+          <div>You&apos;ve reached the maximum number of decks.</div>
+          <div>Please delete a deck from its information page to add more.</div>
+        </div>
+      )}
+
+      {(data.length > 0 && (
         <div className="grid gap-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {data.data.map((deck: Deck) => (
+          {data.map((deck: Deck) => (
             <div key={deck.id} className="p-4">
               <Link href={`/decks/${deck.id}/gallery`}>
                 <div className="rounded bg-white-normal shadow-lg">
@@ -84,22 +53,18 @@ const DeckList = ({ search }: DeckListProps) => {
         </div>
       )) || (
         <div className="flex h-64 items-center justify-center text-white-normal">
-          {isLoading && <Spinner />}
-          {isError && <p>Error loading decks</p>}
-          {!isLoading && !isError && (
-            <Link href={"/decks/new"}>
-              <Button
-                type="submit"
-                text="Create a New Deck"
-                theme="light"
-                size="md"
-              />
-            </Link>
-          )}
+          <Link href={"/decks/new"}>
+            <Button
+              type="submit"
+              text="Create a New Deck"
+              theme="light"
+              size="md"
+            />
+          </Link>
         </div>
       )}
     </main>
   );
 };
 
-export default withQueryClientProvider(DeckList);
+export default DeckList;

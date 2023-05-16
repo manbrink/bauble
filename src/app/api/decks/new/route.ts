@@ -12,6 +12,21 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Not authorized" }, { status: 401 });
     }
 
+    // Get count of user's decks
+    const userDeckCount = await prisma.deck.count({
+      where: {
+        userId: userId,
+      },
+    });
+
+    // Check if userDeckCount is 25 or more
+    if (userDeckCount >= 25) {
+      return NextResponse.json(
+        { error: "You've reached the maximum number of decks allowed (25)." },
+        { status: 400 }
+      );
+    }
+
     const createdDeck = await prisma.deck.create({
       data: {
         userId: userId,
