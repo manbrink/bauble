@@ -15,7 +15,7 @@ export default function DeckHeader({ deckData }: { deckData: Deck }) {
   return (
     <>
       <div className="relative h-96 bg-neutral-darkest">
-        <div className="absolute left-0 mx-4 mt-20 w-1/4 space-y-2 px-2 py-4 text-white-normal">
+        <div className="absolute left-0 mx-4 mt-20 w-1/2 space-y-2 px-2 py-4 text-white-normal">
           <div className="text-3xl text-white-normal">
             {deckData && deckData.name}
           </div>

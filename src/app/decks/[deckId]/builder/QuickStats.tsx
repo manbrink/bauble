@@ -46,8 +46,7 @@ export default function QuickStats({ cardData }: QuickStatsProps) {
       {cardData?.length === 0 && (
         <div className="flex justify-center">
           <div className="text-center">
-            <p className="text-2xl">No cards in deck</p>
-            <p className="text-xl">Add cards to see stats</p>
+            <p className="opacity-70">Add cards to see stats</p>
           </div>
         </div>
       )}

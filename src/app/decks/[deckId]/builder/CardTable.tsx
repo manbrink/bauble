@@ -78,7 +78,9 @@ const CardTable = ({ cardData }: CardTableProps) => {
 
       {filteredCardData.length === 0 && (
         <div className="flex justify-center">
-          <p className="text-white-normal">No cards in {board} board</p>
+          <p className="text-white-normal opacity-70">
+            No cards in {board} board
+          </p>
         </div>
       )}
 

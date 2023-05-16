@@ -95,7 +95,7 @@ const AddCard = ({ deckId }: AddCardProps) => {
 
   return (
     <div className="mb-4 text-white-normal">
-      <h1 className="mb-4 text-center text-xl">Add Card</h1>
+      <h1 className="mb-4 text-center text-xl">Add Cards</h1>
       <form className="w-full max-w-lg" onSubmit={formik.handleSubmit}>
         <div className="mb-2">
           <label
