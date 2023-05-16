@@ -150,7 +150,7 @@ const AddCard = ({ deckId }: AddCardProps) => {
               value={formik.values.board}
             >
               <option value="main">Main</option>
-              <option value="sideboard">Sideboard</option>
+              <option value="side">Sideboard</option>
             </select>
           </div>
         </div>
