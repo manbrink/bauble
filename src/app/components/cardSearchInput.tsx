@@ -114,7 +114,7 @@ const CardSearchInput = ({ formik }: Props) => {
                   sizes="(max-width: 105px) 100vw, (max-width: 105px) 50vw, 33vw"
                 />
               </div>
-              <div className="ml-2">
+              <div className="ml-2 text-white-normal">
                 <div>{card.name}</div>
                 <div className="text-sm opacity-70">{card.setName}</div>
               </div>

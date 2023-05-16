@@ -1,6 +1,6 @@
 export async function getDeckData(deckId: string) {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/decks/detail/${deckId}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/api/decks/${deckId}`,
     { cache: "no-store", next: { tags: ["deck"] } }
   );
 

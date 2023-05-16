@@ -38,7 +38,9 @@ export default function DeckForm({ initialValues, editing }: Props) {
       sortBy: Yup.string().required("Required"),
     }),
     onSubmit: async (values) => {
-      let postRoute = editing ? "/api/decks/update" : "/api/decks/new";
+      let postRoute = editing
+        ? `/api/decks/${initialValues.deckId}`
+        : "/api/decks/new";
 
       if (editing) {
         values = { ...values, ...{ deckId: initialValues.deckId } };
