@@ -86,13 +86,13 @@ export default function ManaCurve({ cardData }: ManaCurveProps) {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Bar dataKey="artifact" stackId="a" fill="#78350F" />
-          <Bar dataKey="creature" stackId="a" fill="#881337" />
-          <Bar dataKey="enchantment" stackId="a" fill="#d1d5db" />
-          <Bar dataKey="instant" stackId="a" fill="#1D4ED8" />
-          <Bar dataKey="land" stackId="a" fill="#14B8A6" />
-          <Bar dataKey="planeswalker" stackId="a" fill="#82139d" />
-          <Bar dataKey="sorcery" stackId="a" fill="#06B6D4" />
+          <Bar dataKey="artifact" stackId="a" fill="#264653" />
+          <Bar dataKey="creature" stackId="a" fill="#e76f51" />
+          <Bar dataKey="enchantment" stackId="a" fill="#e9c46a" />
+          <Bar dataKey="instant" stackId="a" fill="#90e0ef" />
+          <Bar dataKey="land" stackId="a" fill="#2a9d8f" />
+          <Bar dataKey="planeswalker" stackId="a" fill="#f8edeb" />
+          <Bar dataKey="sorcery" stackId="a" fill="#5B5B5B" />
         </BarChart>
       )}
     </div>
