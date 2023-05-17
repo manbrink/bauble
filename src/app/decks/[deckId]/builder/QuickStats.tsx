@@ -32,7 +32,7 @@ const typeCounts = (cardData: DeckCard[]) => {
       typeLineCategories.find((category) =>
         curr.card.typeLine.includes(category)
       ) || "Other";
-    acc[key] = (acc[key] || 0) + 1;
+    acc[key] = (acc[key] || 0) + curr.quantity;
     return acc;
   }, {});
 };
