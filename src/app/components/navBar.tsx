@@ -16,7 +16,12 @@ export default function NavBar() {
         </div>
 
         <div className="flex items-center space-x-4">
-          <Link href={`${process.env.PATREON_URL}`} target="_blank">
+          <Link
+            href={`${process.env.PATREON_URL}`}
+            target="_blank"
+            title="Support us on Patreon"
+            rel="noopener noreferrer"
+          >
             <Image
               src="/patreon-logo-white.png"
               alt="Patreon"
