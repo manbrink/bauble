@@ -85,8 +85,6 @@ const AddCard = ({ deckId }: AddCardProps) => {
           if (mutationResult.error) {
             toast.error(mutationResult.error);
             return;
-          } else {
-            toast.success("Card added!");
           }
 
           resetForm();

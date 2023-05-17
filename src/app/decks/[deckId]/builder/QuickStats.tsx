@@ -9,6 +9,13 @@ interface TypeCount {
   [key: string]: number;
 }
 
+const cardCount = (cardData: DeckCard[]) => {
+  return cardData.reduce((acc, curr) => {
+    acc += curr.quantity;
+    return acc;
+  }, 0);
+};
+
 const typeCounts = (cardData: DeckCard[]) => {
   const typeLineCategories = [
     "Land",
@@ -31,8 +38,17 @@ const typeCounts = (cardData: DeckCard[]) => {
 };
 
 const avgCmc = (cardData: DeckCard[]) => {
-  const totalCmc = cardData.reduce((acc, curr) => acc + curr.card.cmc, 0);
-  return (totalCmc / cardData.length).toFixed(2);
+  let totalCmc = 0;
+  let count = 0;
+
+  cardData.forEach((card) => {
+    if (!card.card.typeLine.includes("Land")) {
+      totalCmc += card.card.cmc;
+      count++;
+    }
+  });
+
+  return (totalCmc / count).toFixed(2);
 };
 
 export default function QuickStats({ cardData }: QuickStatsProps) {
@@ -42,8 +58,8 @@ export default function QuickStats({ cardData }: QuickStatsProps) {
   );
 
   const typeCount = typeCounts(mainBoardData);
-
   const averageCmc = avgCmc(mainBoardData);
+  const numCards = cardCount(mainBoardData);
 
   return (
     <div className="mb-4 text-white-normal">
@@ -67,7 +83,7 @@ export default function QuickStats({ cardData }: QuickStatsProps) {
             </thead>
             <tbody>
               <tr className="hover:bg-neutral-darkest">
-                <td className="truncate">{mainBoardData?.length}</td>
+                <td className="truncate">{numCards}</td>
               </tr>
             </tbody>
           </table>
