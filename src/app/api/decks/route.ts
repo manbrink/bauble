@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { Prisma } from "@prisma/client";
-import { prisma } from "../../../../prisma/prisma";
+import prisma from "../../../../prisma/prisma";
 import { auth } from "@clerk/nextjs";
 
 export async function GET(request: Request) {

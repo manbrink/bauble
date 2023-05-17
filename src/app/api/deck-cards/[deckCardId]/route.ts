@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { prisma } from "../../../../../prisma/prisma";
+import prisma from "../../../../../prisma/prisma";
 import { auth } from "@clerk/nextjs";
 
 export async function PATCH(
