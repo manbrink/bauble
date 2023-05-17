@@ -130,7 +130,7 @@ const CardTable = ({ cardData }: CardTableProps) => {
                           onClick={() =>
                             mutation.mutate({
                               deckCardId: id,
-                              quantity: quantity - 1,
+                              quantity: 0,
                             })
                           }
                         />

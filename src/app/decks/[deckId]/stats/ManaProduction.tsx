@@ -69,51 +69,54 @@ export default function ManaProduction({ cardData }: ManaCurveProps) {
 
   return (
     <div className="mx-4 mb-8 justify-self-center text-white-normal">
-      <div className="text-center text-xl">Mana Production</div>
-      <div className="text-md text-center">
-        Card Costs (Outer) / Land Mana (Inner)
-      </div>
       {cardCostsData &&
         cardCostsData.length > 0 &&
         landManaData &&
         landManaData.length > 0 && (
-          <PieChart width={300} height={300}>
-            <Tooltip />
+          <>
+            <div className="text-center text-xl">Mana Production</div>
+            <div className="text-md text-center">
+              Card Costs (Outer) / Land Mana (Inner)
+            </div>
 
-            <Pie
-              data={landManaData}
-              dataKey="value"
-              cx="50%"
-              cy="50%"
-              outerRadius={60}
-              fill="#8884d8"
-            >
-              {landManaData.map((entry, index) => (
-                <Cell
-                  key={`cell-${index}`}
-                  fill={COLORS[entry.name as keyof typeof COLORS]}
-                />
-              ))}
-            </Pie>
+            <PieChart width={300} height={300}>
+              <Tooltip />
 
-            <Pie
-              data={cardCostsData}
-              dataKey="value"
-              cx="50%"
-              cy="50%"
-              innerRadius={70}
-              outerRadius={90}
-              fill="#82ca9d"
-              label
-            >
-              {cardCostsData.map((entry, index) => (
-                <Cell
-                  key={`cell-${index}`}
-                  fill={COLORS[entry.name as keyof typeof COLORS]}
-                />
-              ))}
-            </Pie>
-          </PieChart>
+              <Pie
+                data={landManaData}
+                dataKey="value"
+                cx="50%"
+                cy="50%"
+                outerRadius={60}
+                fill="#8884d8"
+              >
+                {landManaData.map((entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={COLORS[entry.name as keyof typeof COLORS]}
+                  />
+                ))}
+              </Pie>
+
+              <Pie
+                data={cardCostsData}
+                dataKey="value"
+                cx="50%"
+                cy="50%"
+                innerRadius={70}
+                outerRadius={90}
+                fill="#82ca9d"
+                label
+              >
+                {cardCostsData.map((entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={COLORS[entry.name as keyof typeof COLORS]}
+                  />
+                ))}
+              </Pie>
+            </PieChart>
+          </>
         )}
     </div>
   );
