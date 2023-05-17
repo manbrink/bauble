@@ -66,7 +66,7 @@ export default function DeckForm({ initialValues, editing }: Props) {
             router.push(`/decks/${data.createdDeck.id}/gallery`);
           }
         } else {
-          const data: response = await response.json();
+          const data = await response.json();
           toast.error(data.error);
         }
       } catch (error) {

@@ -55,7 +55,7 @@ export async function createDeckCard(
     }
   );
 
-  const data: response = await response.json();
+  const data = await response.json();
 
   return data;
 }
