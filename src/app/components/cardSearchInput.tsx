@@ -51,7 +51,7 @@ const CardSearchInput = ({ formik }: Props) => {
     return () => clearTimeout(timer);
   }, [formik.values.featuredCard]);
 
-  const { isLoading, isError, data } = useQuery({
+  const { isLoading, isError, data, fetchStatus } = useQuery({
     queryKey: ["cards", internalSearchTerm],
     queryFn: () => getData(internalSearchTerm),
     enabled: internalSearchTerm !== "",
@@ -78,16 +78,23 @@ const CardSearchInput = ({ formik }: Props) => {
 
   return (
     <div className="relative">
-      <input
-        type="text"
-        id="featuredCard"
-        name="featuredCard"
-        className="border-white w-full rounded border bg-white-normal px-3 py-2 text-gray-dark"
-        value={formik.values.featuredCard}
-        onChange={handleFeaturedCardChange}
-        onBlur={formik.handleBlur}
-        placeholder="Search for cards"
-      />
+      <div className="relative">
+        <input
+          type="text"
+          id="featuredCard"
+          name="featuredCard"
+          className="border-white w-full rounded border bg-white-normal px-3 py-2 text-gray-dark"
+          value={formik.values.featuredCard}
+          onChange={handleFeaturedCardChange}
+          onBlur={formik.handleBlur}
+          placeholder="Search for cards"
+        />
+        {fetchStatus === "fetching" && (
+          <div className="absolute inset-y-0 right-0 flex items-center pr-3">
+            <div className="border-gray-900 h-5 w-5 animate-spin rounded-full border-b-2 text-gray-dark"></div>
+          </div>
+        )}
+      </div>
       {formik.touched.featuredCard && formik.errors.featuredCard ? (
         <div className="text-red">{formik.errors.featuredCard}</div>
       ) : null}
