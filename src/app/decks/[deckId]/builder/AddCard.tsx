@@ -97,7 +97,7 @@ const AddCard = ({ deckId }: AddCardProps) => {
   });
 
   return (
-    <div className="mb-4 text-white-normal">
+    <div className="mb-8 text-white-normal lg:mb-4">
       <h1 className="mb-4 text-center text-xl">Add Cards</h1>
       <form className="w-full max-w-lg" onSubmit={formik.handleSubmit}>
         <div className="mb-2">
@@ -122,7 +122,7 @@ const AddCard = ({ deckId }: AddCardProps) => {
               id="quantity"
               name="quantity"
               type="number"
-              className="border-white h-[42px] w-full rounded border px-3 py-2 text-gray-dark"
+              className="border-white h-[42px] w-full rounded border bg-white-normal px-3 py-2 text-gray-dark"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.quantity}
@@ -142,7 +142,7 @@ const AddCard = ({ deckId }: AddCardProps) => {
             <select
               id="board"
               name="board"
-              className="border-white h-[42px] w-full rounded border px-3 py-2 text-gray-dark"
+              className="border-white h-[42px] w-full rounded border bg-white-normal px-3 py-2 text-gray-dark"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.board}

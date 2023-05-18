@@ -52,9 +52,9 @@ const prepareDataLandMana = (cardData: DeckCard[]): chartData[] => {
       manaCostLetters.forEach((letter) => {
         const existingData = data.find((item) => item.name === letter);
         if (existingData) {
-          existingData.value += 1;
+          existingData.value += deckCard.quantity;
         } else {
-          data.push({ name: letter, value: 1 });
+          data.push({ name: letter, value: deckCard.quantity });
         }
       });
     }
