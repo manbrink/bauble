@@ -2,10 +2,16 @@ const fs = require("fs");
 const path = require("path");
 const { PrismaClient } = require("@prisma/client");
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient({
+  datasources: {
+    db: {
+      url: process.env.POSTGRES_PRISMA_URL, // uses connection pooling
+    },
+  },
+});
 
 async function readJsonFile(filePath) {
-  const data = fs.readFileSync(path.resolve(filePath), "utf-8");
+  const data = await fs.promises.readFile(path.resolve(filePath), "utf-8");
   return JSON.parse(data);
 }
 
@@ -25,34 +31,44 @@ function extractCardData(cardObj) {
   };
 }
 
-async function saveCard(cardData) {
-  return await prisma.card.create({ data: cardData });
-}
-
-async function cardExists(scryfallId) {
-  return (
-    (await prisma.card.findUnique({ where: { scryfallId: scryfallId } })) !==
-    null
-  );
-}
-
 async function importCards() {
   try {
     const cardObjects = await readJsonFile(path.join(__dirname, "cards.json"));
     let newCardCount = 0;
+    let cardDataArray = [];
+
+    const existingCards = await prisma.card.findMany({
+      select: { scryfallId: true },
+    });
+    const existingCardIds = new Set(existingCards.map((c) => c.scryfallId));
 
     for (const cardObj of cardObjects) {
       if (cardObj.image_uris?.border_crop && cardObj.image_uris?.art_crop) {
         const cardData = extractCardData(cardObj);
 
-        if (!(await cardExists(cardData.scryfallId))) {
-          await saveCard(cardData);
-          newCardCount++;
+        if (!existingCardIds.has(cardData.scryfallId)) {
+          cardDataArray.push(cardData);
+
+          if (cardDataArray.length === 1000) {
+            // batch size for batch processing
+            await prisma.card.createMany({ data: cardDataArray });
+            newCardCount += cardDataArray.length;
+            console.log(`${newCardCount} new cards imported successfully.`);
+            cardDataArray = [];
+          }
         }
       }
     }
 
-    console.log(`${newCardCount} new cards imported successfully.`);
+    if (cardDataArray.length > 0) {
+      // insert any remaining cards
+      await prisma.card.createMany({ data: cardDataArray });
+      newCardCount += cardDataArray.length;
+    }
+
+    console.log(
+      `Import complete: ${newCardCount} new cards imported successfully.`
+    );
   } catch (error) {
     console.error("Error importing cards", error);
   } finally {
