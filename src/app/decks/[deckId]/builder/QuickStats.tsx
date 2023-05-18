@@ -62,7 +62,7 @@ export default function QuickStats({ cardData }: QuickStatsProps) {
   const numCards = cardCount(mainBoardData);
 
   return (
-    <div className="mb-4 text-white-normal">
+    <div className="mb-8 text-white-normal lg:mb-4">
       <h1 className="mb-4 text-center text-xl">Main board Quick Stats</h1>
 
       {mainBoardData?.length === 0 && (
