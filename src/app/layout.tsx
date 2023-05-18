@@ -1,6 +1,7 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
+import { Analytics } from "@vercel/analytics/react";
 
 import NavBar from "./components/navBar";
 
@@ -22,6 +23,7 @@ export default function RootLayout({
         <body className={`${inter.className} bg-neutral-dark`}>
           <NavBar />
           {children}
+          <Analytics />
         </body>
       </html>
     </ClerkProvider>
