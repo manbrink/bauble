@@ -4,7 +4,13 @@ const nextConfig = {
     appDir: true,
   },
   images: {
-    domains: ["cards.scryfall.io"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "cards.scryfall.io",
+      },
+    ],
+    unoptimized: true,
   },
 };
 
