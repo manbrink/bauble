@@ -34,40 +34,37 @@ function extractCardData(cardObj) {
 async function importCards() {
   try {
     const cardObjects = await readJsonFile(path.join(__dirname, "cards.json"));
-    let newCardCount = 0;
-    let cardDataArray = [];
 
-    const existingCards = await prisma.card.findMany({
-      select: { scryfallId: true },
+    const existingCardIds = new Set(
+      await prisma.card.findMany({
+        select: { scryfallId: true },
+      })
+    );
+
+    const newCards = cardObjects.filter((cardObj) => {
+      return (
+        !existingCardIds.has(cardObj.scryfallId) &&
+        cardObj.image_uris?.border_crop &&
+        cardObj.image_uris?.art_crop
+      );
     });
-    const existingCardIds = new Set(existingCards.map((c) => c.scryfallId));
 
-    for (const cardObj of cardObjects) {
-      if (cardObj.image_uris?.border_crop && cardObj.image_uris?.art_crop) {
-        const cardData = extractCardData(cardObj);
+    let cardDataArray = [];
+    for (const newCard of newCards) {
+      cardDataArray.push(extractCardData(newCard));
 
-        if (!existingCardIds.has(cardData.scryfallId)) {
-          cardDataArray.push(cardData);
-
-          if (cardDataArray.length === 1000) {
-            // batch size for batch processing
-            await prisma.card.createMany({ data: cardDataArray });
-            newCardCount += cardDataArray.length;
-            console.log(`${newCardCount} new cards imported successfully.`);
-            cardDataArray = [];
-          }
-        }
+      if (cardDataArray.length === 1000) {
+        await prisma.card.createMany({ data: cardDataArray });
+        cardDataArray = [];
       }
     }
 
     if (cardDataArray.length > 0) {
-      // insert any remaining cards
       await prisma.card.createMany({ data: cardDataArray });
-      newCardCount += cardDataArray.length;
     }
 
     console.log(
-      `Import complete: ${newCardCount} new cards imported successfully.`
+      `Import complete: ${newCards.length} new cards imported successfully.`
     );
   } catch (error) {
     console.error("Error importing cards", error);
