@@ -39,7 +39,7 @@ export default function DeckFilter({
             </svg>
           </span>
         </div>
-        {data.length < 25 && (
+        {data && data.length < 25 && (
           <Link
             href="decks/new"
             className="transition-text rounded px-4 py-2 text-white-normal underline duration-1000 hover:text-white-bright"
