@@ -48,6 +48,10 @@ const avgCmc = (cardData: DeckCard[]) => {
     }
   });
 
+  if (count === 0) {
+    return "0.00";
+  }
+
   return (totalCmc / count).toFixed(2);
 };
 
