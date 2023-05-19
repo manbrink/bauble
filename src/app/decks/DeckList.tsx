@@ -21,23 +21,22 @@ const DeckList = ({ data }: DeckListProps) => {
       )}
 
       {(data.length > 0 && (
-        <div className="grid gap-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="grid justify-items-center gap-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {data.map((deck: Deck) => (
-            <div key={deck.id} className="p-4">
+            <div key={deck.id} className="w-[285px] p-4">
               <Link href={`/decks/${deck.id}/gallery`}>
-                <div className="rounded bg-white-normal shadow-lg">
-                  <div className="relative" style={{ height: "250px" }}>
-                    <div className="absolute inset-0">
-                      <Image
-                        src={deck.featuredCardScryfallArtCropUrl}
-                        alt={deck.name}
-                        sizes="(max-width: 1000px) 100vw, (max-width: 1000px) 50vw, 33vw"
-                        fill={true}
-                        style={{ objectFit: "cover" }}
-                        className="rounded-t"
-                      />
-                    </div>
+                <div className="w-[285px] rounded bg-white-normal shadow-lg">
+                  <div className="relative h-[356.25px] w-[285px] overflow-hidden">
+                    <Image
+                      src={deck.featuredCardScryfallArtCropUrl}
+                      alt={deck.name}
+                      fill={true}
+                      className="rounded-t"
+                      sizes="(max-width: 285px) 100vw, (max-width: 285px) 50vw, 33vw"
+                      style={{ objectFit: "cover" }}
+                    />
                   </div>
+
                   <div className="p-4">
                     <h2 className="text-l text-gray-dark">{deck.name}</h2>
                     <p className="text-sm text-gray-dark opacity-70">

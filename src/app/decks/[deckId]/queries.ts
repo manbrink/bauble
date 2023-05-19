@@ -1,7 +1,7 @@
 export async function getDeckData(deckId: string) {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/decks/${deckId}`,
-    { cache: "no-store", next: { tags: ["deck"] } }
+    { next: { tags: ["deck"] } }
   );
 
   if (!res.ok) {
@@ -14,7 +14,7 @@ export async function getDeckData(deckId: string) {
 export async function getCardData(deckId: string) {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/deck-cards/deck/${deckId}`,
-    { cache: "no-store", next: { tags: ["cards"] } }
+    { next: { tags: ["cards"] } }
   );
 
   if (!res.ok) {

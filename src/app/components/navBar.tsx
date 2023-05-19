@@ -22,12 +22,14 @@ export default function NavBar() {
             title="Support us on Patreon"
             rel="noopener noreferrer"
           >
-            <Image
-              src="/patreon-logo-white.png"
-              alt="Patreon"
-              width={25}
-              height={25}
-            />
+            <div className="h-[25px] w-[25px]">
+              <Image
+                src="/patreon-logo-white.png"
+                alt="Patreon"
+                width={25}
+                height={25}
+              />
+            </div>
           </Link>
           <SignedIn>
             <UserButton />
