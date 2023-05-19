@@ -8,8 +8,9 @@ import NavBar from "./components/navBar";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Bauble",
-  description: "Minimalist Magic the Gathering deck builder.",
+  title: "Bauble | Minimalist Magic the Gathering Deck Builder",
+  description:
+    "The zen garden of deck builders. Our platform prioritizes speed, simplicity, and aesthetics, enabling quick card search, efficient deck creation, and an immersive brewing experience. Dive into the art of deck building today.",
 };
 
 export default function RootLayout({

@@ -20,18 +20,14 @@ const DecksPage = () => {
     retry: 5,
   });
 
-  if (isLoading) {
-    return <Loading />;
-  }
-
   if (isError) {
     return <div>Error</div>;
   }
 
   return (
     <div className="relative mt-[60px]">
-      <DeckFilter data={data.data} search={search} setSearch={setSearch} />
-      <DeckList data={data.data} />
+      <DeckFilter data={data?.data} search={search} setSearch={setSearch} />
+      {isLoading ? <Loading /> : <DeckList data={data.data} />}
     </div>
   );
 };

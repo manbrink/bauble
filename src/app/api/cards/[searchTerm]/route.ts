@@ -33,7 +33,7 @@ export async function GET(
         scryfallBorderCropUrl: true,
         scryfallArtCropUrl: true,
       },
-      take: 10,
+      take: 15,
     });
 
     return NextResponse.json({ data });
