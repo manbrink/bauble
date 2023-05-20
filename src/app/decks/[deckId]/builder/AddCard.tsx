@@ -76,6 +76,8 @@ const AddCard = ({ deckId }: AddCardProps) => {
         try {
           values = { ...values, ...{ deckId: deckId } };
 
+          resetForm();
+
           const mutationResult = await mutation.mutateAsync({
             deckId: deckId,
             cardId: values.featuredCardId,
@@ -88,8 +90,6 @@ const AddCard = ({ deckId }: AddCardProps) => {
             toast.error(mutationResult.error);
             return;
           }
-
-          resetForm();
         } catch (error) {
           // console.error(error);
         }

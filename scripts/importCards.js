@@ -5,7 +5,7 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient({
   datasources: {
     db: {
-      url: process.env.POSTGRES_PRISMA_URL, // uses connection pooling
+      url: process.env.POSTGRES_PRISMA_URL_PROD, // uses connection pooling
     },
   },
 });
