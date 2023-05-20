@@ -5,6 +5,8 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend } from "recharts";
 
 interface ManaCurveProps {
   cardData: DeckCard[];
+  width: number;
+  height: number;
 }
 
 interface chartData {
@@ -63,7 +65,7 @@ const prepareData = (cardData: DeckCard[]): chartData[] => {
   return data;
 };
 
-export default function ManaCurve({ cardData }: ManaCurveProps) {
+export default function ManaCurve({ cardData, width, height }: ManaCurveProps) {
   const data = prepareData(cardData);
 
   return (
@@ -72,8 +74,8 @@ export default function ManaCurve({ cardData }: ManaCurveProps) {
       {data && data.length > 0 && (
         <BarChart
           className=""
-          width={600}
-          height={300}
+          width={width}
+          height={height}
           data={data}
           margin={{
             top: 20,

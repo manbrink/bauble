@@ -5,8 +5,10 @@ import { redirect } from "next/navigation";
 import { getCardData, getDeckData } from "../queries";
 import { useQuery } from "@tanstack/react-query";
 import withQueryClientProvider from "../../../components/withQueryClientProvider";
-import Loading from "../../../components/Loading";
 
+import { useMediaQuery } from "react-responsive";
+
+import Loading from "../../../components/Loading";
 import DeckHeader from "../DeckHeader";
 import ManaCurve from "./ManaCurve";
 import ManaProduction from "./ManaProduction";
@@ -18,6 +20,24 @@ interface DeckBuilderProps {
 }
 
 const DeckBuilder = ({ params: { deckId } }: DeckBuilderProps) => {
+  const isMediumScreen = useMediaQuery({ minWidth: 769 });
+  const isSmallScreen = useMediaQuery({ minWidth: 376, maxWidth: 768 });
+  const isVerySmallScreen = useMediaQuery({ maxWidth: 375 });
+
+  let width = 600;
+  let height = 300;
+
+  if (isVerySmallScreen) {
+    width = 300;
+    height = 200;
+  } else if (isSmallScreen) {
+    width = 400;
+    height = 200;
+  } else if (isMediumScreen) {
+    width = 600;
+    height = 300;
+  }
+
   const {
     isLoading: isLoadingCardData,
     isError: isErrorCardData,
@@ -57,7 +77,7 @@ const DeckBuilder = ({ params: { deckId } }: DeckBuilderProps) => {
 
           {cardData && cardData.length > 0 && (
             <>
-              <ManaCurve cardData={cardData} />
+              <ManaCurve cardData={cardData} width={width} height={height} />
               <ManaProduction cardData={cardData} />
             </>
           )}
