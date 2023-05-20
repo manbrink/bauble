@@ -73,7 +73,9 @@ const Gallery = ({ params: { deckId } }: DeckDetailProps) => {
       <main className="m-4 h-screen">
         {hasMainCards && (
           <div className="p-2">
-            <h1 className="pl-1 text-2xl text-white-normal">Mainboard</h1>
+            <h1 className="pl-1 text-center text-2xl text-white-normal">
+              Mainboard
+            </h1>
             <MasonryContainer
               cardData={mainCardData}
               groupBy={groupBy}
@@ -84,7 +86,9 @@ const Gallery = ({ params: { deckId } }: DeckDetailProps) => {
 
         {hasSideCards && (
           <div className="p-2">
-            <h1 className="pl-1 text-2xl text-white-normal">{sideString}</h1>
+            <h1 className="pl-1 text-center text-2xl text-white-normal">
+              {sideString}
+            </h1>
             <MasonryContainer
               cardData={sideCardData}
               groupBy={groupBy}

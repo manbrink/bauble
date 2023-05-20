@@ -48,7 +48,7 @@ export default function CardStack({ cardData, name }: Props) {
   };
 
   return (
-    <div className="card-stack mx-1 w-[225px] p-4">
+    <div className="card-stack m-auto w-[225px] p-4">
       {modalOpen && (
         <Modal onClose={closeModal}>
           <Image
@@ -61,7 +61,7 @@ export default function CardStack({ cardData, name }: Props) {
         </Modal>
       )}
 
-      <h1 className="mb-1 text-xl text-white-normal">{name}</h1>
+      <h1 className="mb-1 text-center text-xl text-white-normal">{name}</h1>
       {cardData ? (
         <div
           className="relative"

@@ -35,6 +35,16 @@ interface FormValues {
   quantity: number;
 }
 
+const validationSchema = Yup.object({
+  featuredCard: Yup.string().required("Required"),
+  featuredCardScryfallArtCropUrl: Yup.string().required(
+    "Please choose a valid card"
+  ),
+  quantity: Yup.number()
+    .min(1, "Must be at least 1")
+    .max(100, "Must be 100 or less"),
+});
+
 const AddCard = ({ deckId }: AddCardProps) => {
   const queryClient = useQueryClient();
 
@@ -60,15 +70,7 @@ const AddCard = ({ deckId }: AddCardProps) => {
       board: "main",
       quantity: 1,
     },
-    validationSchema: Yup.object({
-      featuredCard: Yup.string().required("Required"),
-      featuredCardScryfallArtCropUrl: Yup.string().required(
-        "Please choose a valid card"
-      ),
-      quantity: Yup.number()
-        .min(1, "Must be at least 1")
-        .max(100, "Must be 100 or less"),
-    }),
+    validationSchema: validationSchema,
     onSubmit: useCallback(
       async (values: FormValues, { resetForm }: FormikHelpers<FormValues>) => {
         try {
@@ -89,7 +91,7 @@ const AddCard = ({ deckId }: AddCardProps) => {
 
           resetForm();
         } catch (error) {
-          console.error(error);
+          // console.error(error);
         }
       },
       [mutation, deckId]

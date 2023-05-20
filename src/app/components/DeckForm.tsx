@@ -24,22 +24,24 @@ interface Props {
   editing: boolean;
 }
 
+const validationSchema = Yup.object({
+  name: Yup.string().required("Required"),
+  featuredCard: Yup.string().required("Required"),
+  featuredCardScryfallArtCropUrl: Yup.string().required(
+    "Please choose a valid card"
+  ),
+  description: Yup.string().max(999, "Must be 1000 characters or less"),
+  format: Yup.string().required("Required"),
+  groupBy: Yup.string().required("Required"),
+  sortBy: Yup.string().required("Required"),
+});
+
 export default function DeckForm({ initialValues, editing }: Props) {
   const router = useRouter();
 
   const formik = useFormik({
     initialValues: initialValues,
-    validationSchema: Yup.object({
-      name: Yup.string().required("Required"),
-      featuredCard: Yup.string().required("Required"),
-      featuredCardScryfallArtCropUrl: Yup.string().required(
-        "Please choose a valid card"
-      ),
-      description: Yup.string().max(999, "Must be 1000 characters or less"),
-      format: Yup.string().required("Required"),
-      groupBy: Yup.string().required("Required"),
-      sortBy: Yup.string().required("Required"),
-    }),
+    validationSchema: validationSchema,
     onSubmit: async (values) => {
       let postRoute = editing
         ? `/api/decks/${initialValues.deckId}`
@@ -70,7 +72,7 @@ export default function DeckForm({ initialValues, editing }: Props) {
           toast.error(data.error);
         }
       } catch (error) {
-        console.error("Error submitting form:", error);
+        // console.error("Error submitting form:", error);
       }
     },
   });
