@@ -9,6 +9,7 @@ export default function HomePage() {
   return (
     <>
       <div
+        id="splash"
         className="relative h-screen bg-cover bg-center"
         style={{
           backgroundImage: `url(${imageUrl})`,
