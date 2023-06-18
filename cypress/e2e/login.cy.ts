@@ -4,13 +4,11 @@ describe("User Log In", () => {
 
     cy.contains("button", "Sign In").click();
 
-    cy.contains("h1", "Sign In");
+    cy.get("input[id=identifier-field]").type(Cypress.env("TEST_USER_EMAIL"));
 
-    cy.get("input[id=identifier-field]").type(process.env.TEST_USER_EMAIL!);
+    cy.contains("button", /^Continue$/).click(); // use exact match
 
-    cy.contains("button", "Continue").click();
-
-    cy.get("input[id=password-field]").type(process.env.TEST_USER_PASSWORD!);
+    cy.get("input[id=password-field]").type(Cypress.env("TEST_USER_PASSWORD"));
 
     cy.contains("button", "Continue").click();
 

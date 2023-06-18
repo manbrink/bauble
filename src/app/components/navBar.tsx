@@ -10,13 +10,14 @@ export default function NavBar() {
     <nav className="absolute right-0 top-0 z-50 w-screen bg-neutral-dark px-5 py-1 opacity-50">
       <div className="flex items-center justify-between">
         <div className="flex items-center">
-          <Link href="/decks">
+          <Link id="decks-link" href="/decks">
             <BaubleIcon />
           </Link>
         </div>
 
         <div className="flex items-center space-x-4">
           <Link
+            id="patreon-link"
             href={`${process.env.PATREON_URL}`}
             target="_blank"
             title="Support us on Patreon"
