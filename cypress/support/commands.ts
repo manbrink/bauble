@@ -35,3 +35,37 @@
 //     }
 //   }
 // }
+
+declare namespace Cypress {
+  interface Chainable<Subject = any> {
+    login(): Chainable<any>;
+  }
+}
+
+Cypress.Commands.add("login", () => {
+  cy.session(
+    Cypress.env("TEST_USER_EMAIL"),
+    () => {
+      cy.visit("/", { failOnStatusCode: false });
+
+      cy.contains("button", "Sign In").click();
+
+      cy.get("input[id=identifier-field]").type(Cypress.env("TEST_USER_EMAIL"));
+
+      cy.contains("button", /^Continue$/).click(); // use exact match
+
+      cy.get("input[id=password-field]").type(
+        Cypress.env("TEST_USER_PASSWORD")
+      );
+
+      cy.contains("button", "Continue").click();
+
+      cy.url().should("include", "/decks");
+    },
+    {
+      validate: () => {
+        // cy.getCookie("__session", { timeout: 30000 }).should("exist"); timeouts don't work?
+      },
+    }
+  );
+});

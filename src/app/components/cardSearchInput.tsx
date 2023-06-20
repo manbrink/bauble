@@ -105,7 +105,10 @@ const CardSearchInput = ({ formik }: Props) => {
       ) : null}
 
       {data && showResults && (
-        <div className="absolute z-10 max-h-[550px] w-full overflow-y-auto bg-neutral-darkest">
+        <div
+          id="card-search-input-select"
+          className="absolute z-10 max-h-[550px] w-full overflow-y-auto bg-neutral-darkest"
+        >
           {data.data.map((card: Card) => (
             <div
               key={card.id}
