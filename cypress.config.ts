@@ -6,5 +6,6 @@ export default defineConfig({
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },
+    testIsolation: false, // prevent loading blank page after log in command before next test
   },
 });
