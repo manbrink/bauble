@@ -111,6 +111,7 @@ const CardSearchInput = ({ formik }: Props) => {
         >
           {data.data.map((card: Card) => (
             <div
+              id={card.id}
               key={card.id}
               className="duration-800 flex cursor-pointer items-center p-2 transition-colors hover:bg-neutral-medium"
               onClick={() => handleCardClick(card)}
