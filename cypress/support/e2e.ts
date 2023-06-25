@@ -14,7 +14,14 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import './commands'
+import "./commands";
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+
+beforeEach(() => {
+  // now this runs prior to every test
+  // across all files no matter what
+  cy.resetTestDb();
+  cy.logout();
+});

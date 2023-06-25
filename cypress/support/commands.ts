@@ -39,6 +39,8 @@
 declare namespace Cypress {
   interface Chainable<Subject = any> {
     login(): Chainable<any>;
+    resetTestDb(): Chainable<any>;
+    logout(): Chainable<any>;
   }
 }
 
@@ -68,4 +70,13 @@ Cypress.Commands.add("login", () => {
       },
     }
   );
+});
+
+Cypress.Commands.add("logout", () => {
+  cy.log(`sign out by clearing all cookies.`);
+  cy.clearCookies({ domain: undefined });
+});
+
+Cypress.Commands.add("resetTestDb", () => {
+  cy.exec("npm run resetTestDb");
 });

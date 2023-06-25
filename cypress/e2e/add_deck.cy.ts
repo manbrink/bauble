@@ -1,5 +1,5 @@
-describe("Adding a Deck", () => {
-  it("successfully loads", () => {
+describe("Deck Builder", () => {
+  it("allows the user to create a deck", () => {
     cy.login();
 
     cy.contains("a", "Add Deck").click();
