@@ -63,6 +63,7 @@ const CardTable = ({ cardData }: CardTableProps) => {
           {board === "main" ? "Main board" : "Side board"}
         </h1>
         <HiSwitchHorizontal
+          data-cy="switch-board"
           className="ml-2 cursor-pointer text-lg text-white-normal hover:text-white-bright"
           onClick={() => setBoard(board === "main" ? "side" : "main")}
         />
@@ -86,7 +87,7 @@ const CardTable = ({ cardData }: CardTableProps) => {
 
       {filteredCardData.length > 0 && (
         <>
-          <table className="w-full table-fixed">
+          <table data-cy="card-table" className="w-full table-fixed">
             <thead>
               <tr>
                 <th className="w-2/5">Card Name</th>

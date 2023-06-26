@@ -121,6 +121,7 @@ const AddCard = ({ deckId }: AddCardProps) => {
               Quantity
             </label>
             <input
+              data-cy="card-quantity"
               id="quantity"
               name="quantity"
               type="number"
@@ -142,6 +143,7 @@ const AddCard = ({ deckId }: AddCardProps) => {
               Board
             </label>
             <select
+              data-cy="card-board"
               id="board"
               name="board"
               className="border-white h-[42px] w-full rounded border bg-white-normal px-3 py-2 text-gray-dark"

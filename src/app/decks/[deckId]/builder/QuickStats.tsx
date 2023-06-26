@@ -87,7 +87,9 @@ export default function QuickStats({ cardData }: QuickStatsProps) {
             </thead>
             <tbody>
               <tr className="hover:bg-neutral-darkest">
-                <td className="truncate">{numCards}</td>
+                <td data-cy="card-count" className="truncate">
+                  {numCards}
+                </td>
               </tr>
             </tbody>
           </table>
@@ -100,7 +102,7 @@ export default function QuickStats({ cardData }: QuickStatsProps) {
             </thead>
             <tbody>
               <tr className="hover:bg-neutral-darkest">
-                <td>{averageCmc}</td>
+                <td data-cy="avg-cmc">{averageCmc}</td>
               </tr>
             </tbody>
           </table>
@@ -119,7 +121,9 @@ export default function QuickStats({ cardData }: QuickStatsProps) {
                   Object.keys(typeCount).map((key) => (
                     <tr className="hover:bg-neutral-darkest" key={key}>
                       <td className="truncate">{key}</td>
-                      <td className="w-1/6">{typeCount[key]}</td>
+                      <td data-cy={`${key}-count`} className="w-1/6">
+                        {typeCount[key]}
+                      </td>
                     </tr>
                   ))}
               </tbody>
