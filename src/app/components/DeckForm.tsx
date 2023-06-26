@@ -89,6 +89,7 @@ export default function DeckForm({ initialValues, editing }: Props) {
             Name
           </label>
           <input
+            data-cy="deck-name-input"
             type="text"
             id="name"
             className="border-white w-full rounded border bg-white-normal px-3 py-2 text-gray-dark"
@@ -119,6 +120,7 @@ export default function DeckForm({ initialValues, editing }: Props) {
             Description
           </label>
           <textarea
+            data-cy="deck-description-input"
             id="description"
             rows={4}
             className="border-white w-full rounded border bg-white-normal px-3 py-2 text-gray-dark"
@@ -139,6 +141,7 @@ export default function DeckForm({ initialValues, editing }: Props) {
             Format
           </label>
           <select
+            data-cy="deck-format-input"
             id="format"
             className="border-white w-full rounded border bg-white-normal px-3 py-2 text-gray-dark"
             onChange={formik.handleChange}
@@ -206,6 +209,7 @@ export default function DeckForm({ initialValues, editing }: Props) {
 
         <div className="flex justify-between">
           <button
+            data-cy="create-deck-button"
             type="submit"
             className="rounded bg-neutral-darkest px-4 py-2 text-white-normal transition-colors duration-1000 hover:bg-black hover:text-white-bright"
           >

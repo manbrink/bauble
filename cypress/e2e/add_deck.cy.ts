@@ -1,24 +1,34 @@
 describe("Deck Builder", () => {
-  it("allows the user to create a deck", () => {
+  before(() => {
     cy.login();
+    cy.get('[data-cy="add-deck-link"]').click();
+  });
 
-    cy.contains("a", "Add Deck").click();
+  it("allows decks to be created with valid info", () => {
+    cy.get('[data-cy="create-deck-button"]').click();
 
-    cy.get("input[id=name]").type("Test Deck");
+    cy.url().should("include", "/decks/new");
+    cy.contains("div", "Required");
+    cy.contains("div", "Please choose a valid card");
 
-    cy.get("input[id=featuredCard]").type("Norin the Wary");
-    cy.get("#cbc94b02-ea21-4207-86fa-b45cc8dbdf61").click();
+    cy.get('[data-cy="deck-name-input"]').type("Test");
 
-    cy.get("textarea[id=description]").type("Test Description");
+    cy.get('[data-cy="featured-card"]').type("Norin the Wary (Time Spiral)");
 
-    cy.get("select[id=format]").select("commander");
+    cy.get('[data-cy="deck-description-input"]').type("Test Description");
 
-    cy.contains("button", "Create Deck").click();
+    cy.get('[data-cy="deck-format-input"]').select("commander");
+
+    cy.get('[data-cy="create-deck-button"]').click();
 
     cy.url().should("include", "/gallery");
-    cy.contains("div", "Test Deck");
+    cy.contains("div", "Test");
     cy.contains("div", "Commander (EDH)");
     cy.contains("div", "Test Description");
     cy.contains("a", "Add Cards");
+
+    cy.get('[data-cy="navbar-decks-link"]').click();
+    cy.contains("h2", "Test");
+    cy.contains("p", "Commander (EDH)");
   });
 });

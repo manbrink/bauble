@@ -23,7 +23,11 @@ const DeckList = ({ data }: DeckListProps) => {
       {(data.length > 0 && (
         <div className="grid justify-items-center gap-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {data.map((deck: Deck) => (
-            <div key={deck.id} className="w-[285px] p-4">
+            <div
+              data-cy={`deckListItem${deck.name}`}
+              key={deck.id}
+              className="w-[285px] p-4"
+            >
               <Link href={`/decks/${deck.id}/gallery`}>
                 <div className="w-[285px] rounded bg-white-normal shadow-lg">
                   <div className="relative h-[356.25px] w-[285px] overflow-hidden">

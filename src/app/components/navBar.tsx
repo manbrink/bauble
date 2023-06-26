@@ -10,7 +10,7 @@ export default function NavBar() {
     <nav className="absolute right-0 top-0 z-50 w-screen bg-neutral-dark px-5 py-1 opacity-50">
       <div className="flex items-center justify-between">
         <div className="flex items-center">
-          <Link id="decks-link" href="/decks">
+          <Link data-cy="navbar-decks-link" href="/decks">
             <BaubleIcon />
           </Link>
         </div>

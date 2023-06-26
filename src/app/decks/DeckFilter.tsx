@@ -41,6 +41,7 @@ export default function DeckFilter({
         </div>
         {data && data.length < 25 && (
           <Link
+            data-cy="add-deck-link"
             href="decks/new"
             className="transition-text rounded px-4 py-2 text-white-normal underline duration-1000 hover:text-white-bright"
           >

@@ -9,7 +9,7 @@ const db = new pg.Client({
 });
 
 async function deleteRecord() {
-  const sql = `DELETE FROM decks WHERE name = 'Test Deck'`;
+  const sql = `DELETE FROM decks WHERE name = 'Test'`;
   const result = await db.query(sql);
 
   if (result.rowCount === 1) {

@@ -79,6 +79,7 @@ const CardSearchInput = ({ formik }: Props) => {
     <div className="relative">
       <div className="relative">
         <input
+          data-cy="featured-card"
           type="text"
           id="featuredCard"
           name="featuredCard"
@@ -111,6 +112,7 @@ const CardSearchInput = ({ formik }: Props) => {
         >
           {data.data.map((card: Card) => (
             <div
+              data-cy="card-search-input-select-option"
               id={card.id}
               key={card.id}
               className="duration-800 flex cursor-pointer items-center p-2 transition-colors hover:bg-neutral-medium"

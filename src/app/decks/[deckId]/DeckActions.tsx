@@ -22,22 +22,35 @@ export default function DeckActions({ deckId }: Props) {
         >
           <div className="absolute bottom-0 left-0 mx-4 grid grid-cols-4 p-2">
             <div className="mr-2 pb-2 pr-2 pt-2">
-              <Link href={`/decks/${deckId}/gallery`} title="View cards">
+              <Link
+                data-cy="galleryLink"
+                href={`/decks/${deckId}/gallery`}
+                title="View cards"
+              >
                 <TbCards />
               </Link>
             </div>
             <div className="mr-2 pb-2 pr-2 pt-2">
-              <Link href={`/decks/${deckId}/builder`} title="Deck builder">
+              <Link
+                data-cy="deckBuilderLink"
+                href={`/decks/${deckId}/builder`}
+                title="Deck builder"
+              >
                 <BsVectorPen />
               </Link>
             </div>
             <div className="mr-2 pb-2 pr-2 pt-2">
-              <Link href={`/decks/${deckId}/stats`} title="Deck statistics">
+              <Link
+                data-cy="deckStatsLink"
+                href={`/decks/${deckId}/stats`}
+                title="Deck statistics"
+              >
                 <AiOutlinePieChart />
               </Link>
             </div>
             <div className="mr-2 pb-2 pr-2 pt-2">
               <Link
+                data-cy="deckInfoLink"
                 href={`/decks/${deckId}/edit`}
                 title="Edit general information"
               >
