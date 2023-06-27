@@ -1,4 +1,4 @@
-describe("Deck Builder", () => {
+describe("Adding a deck", () => {
   before(() => {
     cy.login();
     cy.get('[data-cy="add-deck-link"]').click();

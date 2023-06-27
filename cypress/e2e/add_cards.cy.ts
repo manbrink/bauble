@@ -1,4 +1,4 @@
-describe("Deck Builder", () => {
+describe("Adding cards", () => {
   before(() => {
     cy.login();
     cy.get('[data-cy="deckListItemTest"]').click();
